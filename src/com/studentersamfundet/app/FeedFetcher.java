@@ -80,29 +80,24 @@ public class FeedFetcher {
 	        return itemNodes;
 	}
 	
-	void saveFile(InputStream in, Context c) {
+	void saveFile(InputStream in, Context c) throws IOException, FileNotFoundException {
+		final String FILENAME = "dns_events";
+		final int BUFFER_SIZE = 2000;
+		
 		InputStreamReader isr = new InputStreamReader(in);
-		int charRead;
-		int BUFFER_SIZE = 2000;
-		String FILENAME = "dns_events";
-		String str = "";
+		
 		char[] inputBuffer = new char[BUFFER_SIZE];
-		
-		try {
-			while ((charRead = isr.read(inputBuffer))>0) {
-				String readString = String.copyValueOf(inputBuffer, 0, charRead);
-				str += readString;
-				inputBuffer = new char[BUFFER_SIZE];
-			}
-			in.close();
-		} catch (IOException e) {}
-	
-		try {
-			FileOutputStream fos = c.openFileOutput(FILENAME, Context.MODE_PRIVATE);
-			fos.write(str.getBytes());
-			fos.close();
-		} catch (FileNotFoundException e) {
-		} catch (IOException e){} 
-		
+		StringBuilder outputStr = new StringBuilder();
+
+		int charRead;
+		while ((charRead = isr.read(inputBuffer)) > 0) {
+			outputStr.append(charRead);
+			inputBuffer = new char[BUFFER_SIZE];
+		}
+		in.close();
+
+		FileOutputStream fos = c.openFileOutput(FILENAME, Context.MODE_PRIVATE);
+		fos.write(outputStr.toString().getBytes());
+		fos.close();
 	}
 }
