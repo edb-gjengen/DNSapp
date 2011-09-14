@@ -1,29 +1,24 @@
 package com.studentersamfundet.app;
 
-public class DataHandler {
-	Event events;
+import java.util.LinkedList;
 
-	void insert(String id, String title, String description, String date, String location, String category) {
+public class DataHandler {
+	private LinkedList<Event> events = new LinkedList<Event>();
+
+	public void insert(String id, String title, String description, String date, String location, String category) {
 		int intId = Integer.parseInt(id);
 		if (get(intId) != null)
 			return;
 		
 		Event e = new Event(intId, title, description, date, location, category);
-		
-		if (events == null)
-			events = e;
-		else {
-			Event tmp = events;
-			while (tmp.next != null)
-				tmp = tmp.next;
-			tmp.next = e;
-		}
+		events.add(e);
 	}
 	
-	Event get(int id) {
-		Event e = events;
-		while (e != null && e.id != id)
-			e = e.next;
-		return e;
+	public Event get(int id) {
+		for (Event e : events) {
+			if (e.id == id)
+				return e;
+		}
+		return null;
 	}
 }

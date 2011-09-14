@@ -1,4 +1,6 @@
-package com.studentersamfundet.app;
+package com.studentersamfundet.app.ui;
+
+import com.studentersamfundet.app.R;
 
 import android.app.ListActivity;
 import android.os.Bundle;

@@ -1,6 +1,11 @@
-package com.studentersamfundet.app;
+package com.studentersamfundet.app.ui;
 
 import org.w3c.dom.NodeList;
+
+import com.studentersamfundet.app.DataHandler;
+import com.studentersamfundet.app.FeedFetcher;
+import com.studentersamfundet.app.R;
+import com.studentersamfundet.app.XmlParser;
 
 import android.app.Activity;
 import android.content.Context;
