@@ -7,7 +7,6 @@ public class Event {
 	String date;
 	String location;
 	String category;
-	Event next;
 	
 	Event(int id, String title, String description, String date, String location, String category) {
 		this.id = id;
