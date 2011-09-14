@@ -12,7 +12,6 @@ import android.widget.ImageView;
 import com.studentersamfundet.app.R;
 
 public class DnsActivity extends Activity {
-	Context context = null;
 	
     /** Called when the activity is first created. */
     @Override
@@ -20,14 +19,13 @@ public class DnsActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         
-        
         View tmp = this.findViewById(R.id.join_us_textview);
         tmp.setVisibility(View.INVISIBLE);
     }
     
     public void clickHandler(View v) {
     	if (v.getId() == R.id.program_button) {
-    		startActivity(new Intent(context, ProgramList.class));
+    		startActivity(new Intent(this, ProgramList.class));
     	} else if (v.getId() == R.id.bli_med_button) {
     		View j = this.findViewById(R.id.bli_med_button);
     		ImageView p = (ImageView)this.findViewById(R.id.paragraph);
@@ -36,8 +34,6 @@ public class DnsActivity extends Activity {
     		j.setClickable(false);
     		p.setVisibility(View.INVISIBLE);
     		t.setVisibility(View.VISIBLE);
-    		
-    		// FIX ON BACK PRESSED!
     	}
     }
     
@@ -53,7 +49,6 @@ public class DnsActivity extends Activity {
     	} else {
     		finish();
     	}
-    	
     }
     
     /* Check for Internet connection. */
