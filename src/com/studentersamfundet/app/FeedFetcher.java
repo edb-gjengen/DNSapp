@@ -21,7 +21,6 @@ import org.xml.sax.SAXException;
 import android.content.Context;
 
 public class FeedFetcher {
-	String curLastBuild = "";
 	
 	private InputStream OpenHttpConnection(String URL) throws IOException {
 		InputStream in = null;

@@ -1,30 +1,17 @@
 package com.studentersamfundet.app.ui;
 
-import org.w3c.dom.NodeList;
-
-import com.studentersamfundet.app.DataHandler;
-import com.studentersamfundet.app.FeedFetcher;
-import com.studentersamfundet.app.R;
-import com.studentersamfundet.app.XmlParser;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
+
+import com.studentersamfundet.app.R;
 
 public class DnsActivity extends Activity {
-	public static final String PREFS_NAME = "DnsPrefs";
-	public static final String feedURL = "http://folk.uio.no/larsjeng/test.xml";
-	public static final String localURL = "/data/com.studentersamfundet.app/files/dns_events";
-	public static FeedFetcher feed = new FeedFetcher(); 
-	public static XmlParser parser = new XmlParser();
-	public DataHandler dh;
 	Context context = null;
 	
     /** Called when the activity is first created. */
@@ -36,35 +23,6 @@ public class DnsActivity extends Activity {
         
         View tmp = this.findViewById(R.id.join_us_textview);
         tmp.setVisibility(View.INVISIBLE);
-        
-		context = getApplicationContext();
-        SharedPreferences prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-        boolean firstStart = prefs.getBoolean("firstStart", false);
-        
-        // Is it the first time the app is started?
-        if (!firstStart) {
-        	// Do we have intarwebs?
-        	// YAY = Fetch the feed.
-        	// NAY = Inform about no connection.
-        	if (checkConnection()) {
-        		NodeList itemNodes = feed.fetch(feedURL, this, true);
-        		dh = parser.parse(itemNodes);
-        	} else {
-        		Toast toast = Toast.makeText(context, R.string.error_noconnection_firstart, Toast.LENGTH_LONG);
-        		toast.show();
-        	}
-        } else {     	
-        	if (checkConnection()) {
-        		NodeList itemNodes = feed.fetch(feedURL, this, true);
-        		dh = parser.parse(itemNodes);
-        	} else {
-        		NodeList itemNodes = feed.fetch(localURL, this, false);
-        		dh = parser.parse(itemNodes);
-
-        		Toast toast = Toast.makeText(context, R.string.error_noconnection_noupdate, Toast.LENGTH_LONG);
-        		toast.show();
-        	}
-        }
     }
     
     public void clickHandler(View v) {
@@ -99,9 +57,9 @@ public class DnsActivity extends Activity {
     }
     
     /* Check for Internet connection. */
-    boolean checkConnection() {
+    static boolean checkConnection(Context context) {
     	ConnectivityManager conMan
-    	= (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+    	= (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
     	NetworkInfo netInfo = conMan.getActiveNetworkInfo();
     	return netInfo != null;
     }
