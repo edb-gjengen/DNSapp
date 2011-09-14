@@ -9,6 +9,7 @@ import android.widget.ListAdapter;
 import android.widget.Toast;
 
 import com.studentersamfundet.app.DataHandler;
+import com.studentersamfundet.app.Event;
 import com.studentersamfundet.app.FeedFetcher;
 import com.studentersamfundet.app.R;
 import com.studentersamfundet.app.XmlParser;
@@ -47,24 +48,21 @@ public class ProgramList extends ListActivity {
     }
     
     protected ListAdapter createAdapter() {
-    	String[] vals = populateList();
-    	ListAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, vals);
+    	Event[] events = dh.populateList();
+    	String[] titles = new String[events.length];
+    	
+    	for (int i = 0; i < events.length; i++) {
+    		Event e = events[i];
+    		String date = e.date;
+    		String month = date.substring(5, 7);
+    		String day = date.substring(8, 10);
+    		titles[i] = day + ". " + dh.toMonth(month) + ": " + e.title;
+    	}
+    	
+    	// TODO: Lag en fin liste med litt mer informasjon og slik.
+    	ListAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, titles);
     	 
     	return adapter;
-    }
-    
-    public String[] populateList() {
-    	String[] val = new String[10];
-    	val[0] = "test!";
-    	val[1] = "test2";
-    	val[2] = "test3";
-    	val[3] = "test3";
-    	val[4] = "test3";
-    	val[5] = "test3";
-    	val[6] = "test3";
-    	val[7] = "test3";
-    	val[8] = "test3";
-    	val[9] = "test3";
-    	return val;
+    	
     }
 }
