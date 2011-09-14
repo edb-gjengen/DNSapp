@@ -2,13 +2,13 @@ package com.studentersamfundet.app.ui;
 
 import org.w3c.dom.NodeList;
 
-import android.app.ListActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,7 +19,7 @@ import com.studentersamfundet.app.R;
 import com.studentersamfundet.app.Utils;
 import com.studentersamfundet.app.XmlParser;
 
-public class ProgramList extends ListActivity {
+public class ProgramListActivity extends BaseDnsActivity {
 	public static final String feedURL = "http://folk.uio.no/larsjeng/test.xml";
 	public static final String localURL = "/data/com.studentersamfundet.app/files/dns_events";
 	public static FeedFetcher feed = new FeedFetcher(); 
@@ -30,9 +30,6 @@ public class ProgramList extends ListActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.event_list);
-        
-        View v = this.findViewById(R.id.program_button);
-        v.setClickable(false);
         
         // Do we have intarwebs?
         // YAY = Fetch the feed.
@@ -48,8 +45,10 @@ public class ProgramList extends ListActivity {
         	toast.show();
         }
   
+        ListView list = (ListView)findViewById(R.id.event_list);
+        
         ListAdapter adapter = createAdapter();
-        setListAdapter(adapter);
+        list.setAdapter(adapter);
     }
     
     protected ListAdapter createAdapter() {

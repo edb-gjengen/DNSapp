@@ -4,7 +4,6 @@
     
     <!-- Header -->
     <include layout="@layout/header" 
-    	android:id="@+id/header"
 		android:layout_height="wrap_content" 
 		android:layout_width="fill_parent" 
 		android:layout_alignParentTop="true"/>
@@ -24,17 +23,5 @@
 		android:layout_below="@id/header"
 		android:layout_above="@id/footer"
 		android:src="@drawable/partest" />
-		
-	<!-- Bli med-tekst -->
-		<TextView
-		android:id="@+id/join_us_textview"
-		android:layout_marginTop="10px"
-        android:layout_height="wrap_content"
-        android:layout_width="fill_parent"
-        android:layout_below="@id/header"
-        android:layout_above="@id/footer"
-        android:layout_weight="1"
-        android:layout_marginLeft="20dip"
-        android:text="@string/join_us" />
 	
 </RelativeLayout>

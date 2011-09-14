@@ -15,7 +15,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.ProgramList"></activity>
+        <activity android:name=".ui.JoinUsActivity"></activity>
+        <activity android:name=".ui.ProgramListActivity"></activity>
 
     </application>
 </manifest>
