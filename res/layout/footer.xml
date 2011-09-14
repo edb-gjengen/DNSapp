@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:id="@+id/bottom_buttons" android:layout_width="fill_parent"
-	android:layout_height="wrap_content" >
+	android:id="@+id/footer" 
+	android:layout_height="wrap_content"
+	android:layout_width="fill_parent">
+	
 	<TextView
 		android:id="@+id/program_button"
         android:layout_height="wrap_content"
@@ -18,7 +20,7 @@
     	android:id="@+id/bli_med_button"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:layout_weight="0"
+        android:layout_weight="1"
         android:layout_gravity="right"
         android:textSize="40px"
         android:textStyle="bold"

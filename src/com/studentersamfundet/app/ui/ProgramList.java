@@ -4,6 +4,7 @@ import org.w3c.dom.NodeList;
 
 import android.app.ListActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.Toast;
@@ -26,8 +27,8 @@ public class ProgramList extends ListActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.event_list);
         
-        // View v = this.findViewById(R.id.program_button);
-        // v.setClickable(false);
+        View v = this.findViewById(R.id.program_button);
+        v.setClickable(false);
         
         // Do we have intarwebs?
         // YAY = Fetch the feed.
