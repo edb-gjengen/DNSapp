@@ -1,10 +1,7 @@
 package com.studentersamfundet.app.ui;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -49,13 +46,5 @@ public class DnsActivity extends Activity {
     	} else {
     		finish();
     	}
-    }
-    
-    /* Check for Internet connection. */
-    static boolean checkConnection(Context context) {
-    	ConnectivityManager conMan
-    	= (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-    	NetworkInfo netInfo = conMan.getActiveNetworkInfo();
-    	return netInfo != null;
     }
 }

@@ -16,6 +16,7 @@ import com.studentersamfundet.app.DataHandler;
 import com.studentersamfundet.app.Event;
 import com.studentersamfundet.app.FeedFetcher;
 import com.studentersamfundet.app.R;
+import com.studentersamfundet.app.Utils;
 import com.studentersamfundet.app.XmlParser;
 
 public class ProgramList extends ListActivity {
@@ -36,7 +37,7 @@ public class ProgramList extends ListActivity {
         // Do we have intarwebs?
         // YAY = Fetch the feed.
         // NAY = Inform about no connection.
-        if (DnsActivity.checkConnection(this)) {
+        if (Utils.checkConnection(this)) {
         	NodeList itemNodes = feed.fetch(feedURL, this, true);
         	dh = parser.parse(itemNodes);
         } else {

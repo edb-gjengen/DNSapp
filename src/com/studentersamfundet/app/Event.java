@@ -8,7 +8,13 @@ public class Event {
 	public String location;
 	public String category;
 	
-	public Event(int id, String title, String description, String date, String location, String category) {
+	public Event(
+			int id, 
+			String title, 
+			String description, 
+			String date, 
+			String location, 
+			String category) {
 		this.id = id;
 		this.title = title;
 		this.description = description;
@@ -26,6 +32,6 @@ public class Event {
 		
 		String month = date.substring(5, 7);
 		String day = date.substring(8, 10);
-		return day + ". " + DataHandler.toMonth(month);
+		return day + ". " + Utils.intToMonthStr(Integer.parseInt(month));
 	}
 }
