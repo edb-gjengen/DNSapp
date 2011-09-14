@@ -2,18 +2,16 @@ package com.studentersamfundet.app.ui;
 
 import org.w3c.dom.NodeList;
 
+import android.app.ListActivity;
+import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
+import android.widget.Toast;
+
 import com.studentersamfundet.app.DataHandler;
 import com.studentersamfundet.app.FeedFetcher;
 import com.studentersamfundet.app.R;
 import com.studentersamfundet.app.XmlParser;
-
-import android.app.ListActivity;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
-import android.widget.ListView;
-import android.widget.Toast;
 
 public class ProgramList extends ListActivity {
 	public static final String feedURL = "http://folk.uio.no/larsjeng/test.xml";
@@ -25,7 +23,7 @@ public class ProgramList extends ListActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // setContentView(R.layout.event_list);
+        setContentView(R.layout.event_list);
         
         // View v = this.findViewById(R.id.program_button);
         // v.setClickable(false);
@@ -43,14 +41,7 @@ public class ProgramList extends ListActivity {
         	Toast toast = Toast.makeText(this, R.string.error_noconnection_noupdate, Toast.LENGTH_LONG);
         	toast.show();
         }
-        
-        View header = getLayoutInflater().inflate(R.layout.header, null);
-        View footer = getLayoutInflater().inflate(R.layout.footer, null);
-        
-        ListView listView = getListView();
-        listView.addHeaderView(header);
-        listView.addFooterView(footer);
-        
+  
         ListAdapter adapter = createAdapter();
         setListAdapter(adapter);
     }
