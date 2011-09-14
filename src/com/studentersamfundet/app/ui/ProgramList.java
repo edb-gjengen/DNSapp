@@ -4,9 +4,12 @@ import org.w3c.dom.NodeList;
 
 import android.app.ListActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.studentersamfundet.app.DataHandler;
@@ -49,7 +52,24 @@ public class ProgramList extends ListActivity {
     
     protected ListAdapter createAdapter() {
     	String[] vals = populateList();
-    	ListAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, vals);
+    	ListAdapter adapter = new ArrayAdapter<String>(this, R.layout.event_list_row, R.id.event_list_row_text, vals) {
+    		@Override
+    		public View getView(int position, View convertView, ViewGroup parent) {
+    			View row;
+    			
+    			if (null == convertView) {
+    				LayoutInflater inflater = getLayoutInflater();
+    				row = inflater.inflate(R.layout.event_list_row, null);
+    			} else {
+    				row = convertView;
+    			}
+    	 
+    			TextView tv = (TextView) row.findViewById(R.id.event_list_row_text);
+    			tv.setText(getItem(position));
+    	 
+    			return row;
+    		}
+    	};
     	 
     	return adapter;
     }
