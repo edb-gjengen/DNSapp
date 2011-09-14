@@ -2,10 +2,12 @@ package com.studentersamfundet.app.ui;
 
 import org.w3c.dom.NodeList;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -66,13 +68,23 @@ public class ProgramListActivity extends BaseDnsActivity {
     				row = convertView;
     			}
     	 
-    			Event e = getItem(position);
+    			final Event e = getItem(position);
     			
     			TextView titleView = (TextView) row.findViewById(R.id.event_list_row_text);
     			titleView.setText(e.title);
     	 
     			TextView dateView = (TextView) row.findViewById(R.id.event_list_row_date);
     			dateView.setText(e.getDateString());
+    			
+    			row.setOnClickListener(new OnClickListener() {
+					
+					public void onClick(View v) {
+						Intent intent = new Intent(ProgramListActivity.this, EventViewActivity.class);
+						intent.putExtra("event", e);
+						
+						startActivity(intent);
+					}
+				});
     			
     			return row;
     		}
