@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.studentersamfundet.app.DataHandler;
+import com.studentersamfundet.app.Event;
 import com.studentersamfundet.app.FeedFetcher;
 import com.studentersamfundet.app.R;
 import com.studentersamfundet.app.XmlParser;
@@ -51,8 +52,9 @@ public class ProgramList extends ListActivity {
     }
     
     protected ListAdapter createAdapter() {
-    	String[] vals = populateList();
-    	ListAdapter adapter = new ArrayAdapter<String>(this, R.layout.event_list_row, R.id.event_list_row_text, vals) {
+    	Event[] events = dh.populateList();
+    	
+    	ListAdapter adapter = new ArrayAdapter<Event>(this, R.layout.event_list_row, R.id.event_list_row_text, events) {
     		@Override
     		public View getView(int position, View convertView, ViewGroup parent) {
     			View row;
@@ -64,28 +66,19 @@ public class ProgramList extends ListActivity {
     				row = convertView;
     			}
     	 
-    			TextView tv = (TextView) row.findViewById(R.id.event_list_row_text);
-    			tv.setText(getItem(position));
+    			Event e = getItem(position);
+    			
+    			TextView titleView = (TextView) row.findViewById(R.id.event_list_row_text);
+    			titleView.setText(e.title);
     	 
+    			TextView dateView = (TextView) row.findViewById(R.id.event_list_row_date);
+    			dateView.setText(e.getDateString());
+    			
     			return row;
     		}
     	};
     	 
     	return adapter;
-    }
-    
-    public String[] populateList() {
-    	String[] val = new String[10];
-    	val[0] = "test!";
-    	val[1] = "test2";
-    	val[2] = "test3";
-    	val[3] = "test3";
-    	val[4] = "test3";
-    	val[5] = "test3";
-    	val[6] = "test3";
-    	val[7] = "test3";
-    	val[8] = "test3";
-    	val[9] = "test3";
-    	return val;
+    	
     }
 }
