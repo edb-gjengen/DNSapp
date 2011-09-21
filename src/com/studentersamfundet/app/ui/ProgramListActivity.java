@@ -22,7 +22,7 @@ import com.studentersamfundet.app.Utils;
 import com.studentersamfundet.app.XmlParser;
 
 public class ProgramListActivity extends BaseDnsActivity {
-	public static final String feedURL = "http://folk.uio.no/larsjeng/test.xml";
+	public static final String feedURL = "http://dl.dropbox.com/u/293287/test.xml";
 	public static final String localURL = "/data/com.studentersamfundet.app/files/dns_events";
 	public static FeedFetcher feed = new FeedFetcher(); 
 	public static XmlParser parser = new XmlParser();
