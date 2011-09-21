@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="BigHeader">
+        <item name="android:textSize">20sp</item>
+        <item name="android:gravity">center</item>
+    </style>
+    
+    <style name="SmallHeader">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">#aaaaaa</item>
+        <item name="android:background">#303030</item>
+        <item name="android:paddingBottom">5px</item>
+    </style>
+    
+    <style name="ListItem">
+    	<item name="android:textSize">12sp</item>
+    </style>
+    
+    <color name="ListItemEven">#202020</color>
+    <color name="ListItemOdd">#000000</color>
+</resources>

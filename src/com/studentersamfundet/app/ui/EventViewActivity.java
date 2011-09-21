@@ -1,7 +1,11 @@
 package com.studentersamfundet.app.ui;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.studentersamfundet.app.Event;
@@ -14,16 +18,35 @@ public class EventViewActivity extends BaseDnsActivity {
         setContentView(R.layout.event_view);
         
         Intent intent = getIntent();
-        Event e = (Event)intent.getSerializableExtra("event");
+        final Event e = (Event)intent.getSerializableExtra("event");
         
         if (e == null) {
         	throw new Error("This should NEVER happen");
         }
         
         TextView title = (TextView) findViewById(R.id.event_view_title);
-        TextView desc = (TextView) findViewById(R.id.event_view_decription);
+        TextView description = (TextView) findViewById(R.id.event_view_description);
+        TextView location = (TextView) findViewById(R.id.event_view_location);
+        TextView datetime = (TextView) findViewById(R.id.event_view_datetime);
+        Button link = (Button) findViewById(R.id.event_view_link);
         
         title.setText(e.title);
-        desc.setText(e.description);
+        description.setText(e.description);
+        location.setText(e.location);
+        datetime.setText(e.date);
+        
+        if (e.id > 0) { // if id exists and seems legit
+        	link.setVisibility(View.VISIBLE);
+        	link.setOnClickListener(new OnClickListener() {
+				
+				public void onClick(View v) {
+					String webAdress = "http://studentersamfundet.no/vis.php?ID=" + e.id;
+					Uri webDestination = Uri.parse(webAdress);
+					
+					Intent webIntent = new Intent(Intent.ACTION_VIEW, webDestination);
+					startActivity(webIntent);
+				}
+			});
+        }
     }
 }

@@ -68,6 +68,12 @@ public class ProgramListActivity extends BaseDnsActivity {
     				row = convertView;
     			}
     	 
+    			/* Apply styles: */
+    			if (position % 2 == 0) 
+    				row.setBackgroundResource(R.color.ListItemEven);
+    			else
+    				row.setBackgroundResource(R.color.ListItemOdd);
+    			
     			final Event e = getItem(position);
     			
     			TextView titleView = (TextView) row.findViewById(R.id.event_list_row_text);
