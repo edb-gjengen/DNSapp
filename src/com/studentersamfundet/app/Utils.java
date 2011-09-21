@@ -1,9 +1,5 @@
 package com.studentersamfundet.app;
 
-import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-
 public class Utils {
 	public static String intToMonthStr(int monthInt) {
 		String monthString;
@@ -24,13 +20,5 @@ public class Utils {
 		default: monthString = "NA"; 	   break;
 		}
 		return monthString;
-	}
-
-	/* Check for Internet connection. */
-	public static boolean checkConnection(Context context) {
-		ConnectivityManager conMan
-		= (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-		NetworkInfo netInfo = conMan.getActiveNetworkInfo();
-		return netInfo != null;
 	}
 }

@@ -1,5 +1,7 @@
 package com.studentersamfundet.app.ui;
 
+import java.io.IOException;
+
 import org.w3c.dom.NodeList;
 
 import android.content.Intent;
@@ -18,7 +20,6 @@ import com.studentersamfundet.app.DataHandler;
 import com.studentersamfundet.app.Event;
 import com.studentersamfundet.app.FeedFetcher;
 import com.studentersamfundet.app.R;
-import com.studentersamfundet.app.Utils;
 import com.studentersamfundet.app.XmlParser;
 
 public class ProgramListActivity extends BaseDnsActivity {
@@ -36,13 +37,11 @@ public class ProgramListActivity extends BaseDnsActivity {
         // Do we have intarwebs?
         // YAY = Fetch the feed.
         // NAY = Inform about no connection.
-        if (Utils.checkConnection(this)) {
-        	NodeList itemNodes = feed.fetch(feedURL, this, true);
-        	dh = parser.parse(itemNodes);
-        } else {
-        	NodeList itemNodes = feed.fetch(localURL, this, false);
-        	dh = parser.parse(itemNodes);
-
+        try {
+	        NodeList itemNodes = feed.fetch(feedURL, this);
+	        dh = parser.parse(itemNodes);
+	        
+        } catch (IOException e) {
         	Toast toast = Toast.makeText(this, R.string.error_noconnection_noupdate, Toast.LENGTH_LONG);
         	toast.show();
         }

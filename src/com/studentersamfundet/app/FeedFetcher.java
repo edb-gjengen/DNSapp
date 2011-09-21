@@ -1,6 +1,5 @@
 package com.studentersamfundet.app;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -21,8 +20,9 @@ import org.xml.sax.SAXException;
 import android.content.Context;
 
 public class FeedFetcher {
+	private final String LOCAL_FILENAME = "dns_events";
 	
-	private InputStream OpenHttpConnection(String URL) throws IOException {
+	private InputStream openHttpConnection(String URL) throws IOException {
 		InputStream in = null;
 		int response = -1;
 		URL url = new URL(URL);
@@ -49,39 +49,50 @@ public class FeedFetcher {
 		return in;
 	}
 	
-	public NodeList fetch(String URL, Context c, boolean con) {
+	/**
+	 * Fetches list of events from the web.
+	 * @param URL String containing address to the rss-feed.
+	 * @param c Context from which this function is called.
+	 * @return Returns list of events as a XML NodeList
+	 * @throws IOException Is thrown if the app cannot download the file from
+	 * the internet and there is no local copy.
+	 */
+	public NodeList fetch(String URL, Context c) throws IOException {
 	       InputStream in = null;
 	       NodeList itemNodes = null;
 	       
-	        try {
-	        	if (con) {
-	        		in = OpenHttpConnection(URL);
-	            	saveFile(in, c);
-	            	in = OpenHttpConnection(URL);
-	        	} else
-	        		in = new FileInputStream(URL);
-	            Document doc = null;
-	            DocumentBuilderFactory dbf = 
-	                DocumentBuilderFactory.newInstance();
-	            DocumentBuilder db;
-	            
-	            try {
-	                db = dbf.newDocumentBuilder();
-	                doc = db.parse(in);
-	            } catch (ParserConfigurationException e) {
-	            } catch (SAXException e) {}        
-	            
-	            doc.getDocumentElement().normalize(); 
-	            
-	            // Retrieve all the <item> nodes.
-	            itemNodes = doc.getElementsByTagName("item");
-	            in.close();
-	        } catch (IOException e) {}
+        	/* Update the local file if possible. */
+        	try {
+            	saveFile(openHttpConnection(URL), c);
+            	
+        	} catch(IOException e) {
+        		/* OK, so we failed to update it. It doesn't matter yet, because we can try to... */
+        	}
+        	
+    		/* ...load local file: */
+        	in = loadFile(c); // if we fail here, we fail ultimately. Throw the Exception! 
+    	
+        	
+            Document doc = null;
+            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            DocumentBuilder db;
+            
+            try {
+                db = dbf.newDocumentBuilder();
+                doc = db.parse(in);
+            } catch (ParserConfigurationException e) {
+            } catch (SAXException e) {}        
+            
+            doc.getDocumentElement().normalize(); 
+            
+            // Retrieve all the <item> nodes.
+            itemNodes = doc.getElementsByTagName("item");
+            in.close();
+
 	        return itemNodes;
 	}
 	
-	void saveFile(InputStream in, Context c) throws IOException, FileNotFoundException {
-		final String FILENAME = "dns_events";
+	private void saveFile(InputStream in, Context c) throws IOException, FileNotFoundException {
 		final int BUFFER_SIZE = 2000;
 		
 		InputStreamReader isr = new InputStreamReader(in);
@@ -89,15 +100,18 @@ public class FeedFetcher {
 		char[] inputBuffer = new char[BUFFER_SIZE];
 		StringBuilder outputStr = new StringBuilder();
 
-		int charRead;
-		while ((charRead = isr.read(inputBuffer)) > 0) {
-			outputStr.append(charRead);
+		while (isr.read(inputBuffer) > 0) {
+			outputStr.append(inputBuffer);
 			inputBuffer = new char[BUFFER_SIZE];
 		}
 		in.close();
 
-		FileOutputStream fos = c.openFileOutput(FILENAME, Context.MODE_PRIVATE);
+		FileOutputStream fos = c.openFileOutput(LOCAL_FILENAME, Context.MODE_PRIVATE);
 		fos.write(outputStr.toString().getBytes());
 		fos.close();
+	}
+	
+	private InputStream loadFile(Context c) throws FileNotFoundException {
+		return c.openFileInput(LOCAL_FILENAME);
 	}
 }
