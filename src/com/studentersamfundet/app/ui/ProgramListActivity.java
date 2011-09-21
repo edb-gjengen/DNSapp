@@ -6,6 +6,7 @@ import org.w3c.dom.NodeList;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,24 +24,27 @@ import com.studentersamfundet.app.R;
 import com.studentersamfundet.app.XmlParser;
 
 public class ProgramListActivity extends BaseDnsActivity {
-	public static final String feedURL = "http://dl.dropbox.com/u/293287/test.xml";
-	//public static final String feedURL = "http://studentersamfundet.no/";
-	public static final String localURL = "/data/com.studentersamfundet.app/files/dns_events";
-	public static FeedFetcher feed = new FeedFetcher(); 
-	public static XmlParser parser = new XmlParser();
-	public DataHandler dh;
+	//public static final String feedURL = "http://dl.dropbox.com/u/293287/test.xml";
+	public static final String feedURL = "http://studentersamfundet.no/rss/lars_program_feed.php";
+	
+	private FeedFetcher feed;
+	private XmlParser parser;
+	private DataHandler dataHandler;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.event_list);
         
+        this.feed = new FeedFetcher(this, feedURL);
+        this.parser = new XmlParser();
+        
         // Do we have intarwebs?
         // YAY = Fetch the feed.
         // NAY = Inform about no connection.
         try {
-	        NodeList itemNodes = feed.fetch(feedURL, this);
-	        dh = parser.parse(itemNodes);
+	        NodeList itemNodes = feed.fetch();
+	        dataHandler = parser.parse(itemNodes);
 	        
         } catch (IOException e) {
         	Toast toast = Toast.makeText(this, R.string.error_noconnection_noupdate, Toast.LENGTH_LONG);
@@ -54,7 +58,7 @@ public class ProgramListActivity extends BaseDnsActivity {
     }
     
     protected ListAdapter createAdapter() {
-    	Event[] events = dh.populateList();
+    	Event[] events = dataHandler.populateList();
     	
     	ListAdapter adapter = new ArrayAdapter<Event>(this, R.layout.event_list_row, R.id.event_list_row_text, events) {
     		@Override
@@ -71,10 +75,10 @@ public class ProgramListActivity extends BaseDnsActivity {
     			final Event e = getItem(position);
     			
     			TextView titleView = (TextView) row.findViewById(R.id.event_list_row_text);
-    			titleView.setText(e.title);
+    			titleView.setText(Html.fromHtml(e.title));
     	 
     			TextView dateView = (TextView) row.findViewById(R.id.event_list_row_date);
-    			dateView.setText(e.getDateString());
+    			dateView.setText(Html.fromHtml(e.getDateString()));
     			
     			row.setOnClickListener(new OnClickListener() {
 					

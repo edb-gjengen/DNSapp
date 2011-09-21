@@ -22,10 +22,18 @@ import android.content.Context;
 public class FeedFetcher {
 	private final String LOCAL_FILENAME = "dns_events";
 	
-	private InputStream openHttpConnection(String URL) throws IOException {
+	private Context context;
+	private String url;
+	
+	public FeedFetcher(Context context, String url) {
+		this.context = context;
+		this.url = url;
+	}
+	
+	private InputStream openHttpConnection() throws IOException {
 		InputStream in = null;
 		int response = -1;
-		URL url = new URL(URL);
+		URL url = new URL(this.url);
 		URLConnection con = url.openConnection();
 		
 		if (!(con instanceof HttpURLConnection))       
@@ -53,20 +61,20 @@ public class FeedFetcher {
 	 * @throws IOException Is thrown if the app cannot download the file from
 	 * the internet and there is no local copy.
 	 */
-	public NodeList fetch(String URL, Context c) throws IOException {
+	public NodeList fetch() throws IOException {
 	       InputStream in = null;
 	       NodeList itemNodes = null;
 	       
         	/* Update the local file if possible. */
         	try {
-            	saveFile(openHttpConnection(URL), c);
+            	saveFile(openHttpConnection(), context);
             	
         	} catch(IOException e) {
         		/* OK, so we failed to update it. It doesn't matter yet, because we can try to... */
         	}
         	
     		/* ...load local file: */
-        	in = loadFile(c); // if we fail here, we fail ultimately. Throw the Exception! 
+        	in = loadFile(context); // if we fail here, we fail ultimately. Throw the Exception! 
     	
         	
             Document doc = null;

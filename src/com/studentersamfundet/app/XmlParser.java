@@ -34,7 +34,7 @@ public class XmlParser {
                     NodeList descriptionNodes = (itemElement).getElementsByTagName("description");
                     NodeList dateNodes = (itemElement).getElementsByTagName("date");
                     NodeList locationNodes = (itemElement).getElementsByTagName("location");
-                    NodeList textNodes = (itemElement).getElementsByTagName("text");
+                    NodeList textNodes = (itemElement).getElementsByTagName("content");
                     NodeList categoryNodes = (itemElement).getElementsByTagName("category");
                     
                     // Convert a Node into an Element.
