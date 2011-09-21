@@ -35,11 +35,19 @@ public class EventViewActivity extends BaseDnsActivity {
         location.setText(Html.fromHtml(e.location));
         datetime.setText(Html.fromHtml(e.date));
         
-        if (e.text.length() > 0) {
-        	description.setText(Html.fromHtml(e.text));
-        } else if (e.description.length() > 0) {
-        	description.setText(Html.fromHtml(e.description));
+        StringBuilder sb = new StringBuilder();
+        
+        if (e.description.length() > 0) {
+        	sb.append("<b>");
+        	sb.append(e.description);
+        	sb.append("</b><br/><br/>");
         }
+        
+        if (e.text.length() > 0) {
+        	sb.append(e.text);
+        }
+        
+        description.setText(Html.fromHtml(sb.toString()));
         
         if (e.id > 0) { // if id exists and seems legit
         	link.setVisibility(View.VISIBLE);
