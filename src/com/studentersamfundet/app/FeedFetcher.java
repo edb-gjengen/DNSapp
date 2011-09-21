@@ -31,20 +31,16 @@ public class FeedFetcher {
 		if (!(con instanceof HttpURLConnection))       
 			throw new IOException("Not an HTTP connection!");
 		
-		try {
-			HttpURLConnection httpCon = (HttpURLConnection) con;
-			httpCon.setAllowUserInteraction(false);
-			httpCon.setInstanceFollowRedirects(true);
-			httpCon.setRequestMethod("GET");
-			httpCon.connect();
-			
-			response = httpCon.getResponseCode();
-			
-			if (response == HttpURLConnection.HTTP_OK)
-				in = httpCon.getInputStream();
-		} catch (Exception e) {
-			throw new IOException("Error connecting.");
-		}
+		HttpURLConnection httpCon = (HttpURLConnection) con;
+		httpCon.setAllowUserInteraction(false);
+		httpCon.setInstanceFollowRedirects(true);
+		httpCon.setRequestMethod("GET");
+		httpCon.connect();
+		
+		response = httpCon.getResponseCode();
+		
+		if (response == HttpURLConnection.HTTP_OK)
+			in = httpCon.getInputStream();
 		
 		return in;
 	}
