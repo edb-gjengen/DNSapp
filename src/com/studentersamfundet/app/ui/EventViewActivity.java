@@ -3,6 +3,7 @@ package com.studentersamfundet.app.ui;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -31,9 +32,19 @@ public class EventViewActivity extends BaseDnsActivity {
         Button link = (Button) findViewById(R.id.event_view_link);
         
         title.setText(e.title);
-        description.setText(e.description);
         location.setText(e.location);
         datetime.setText(e.date);
+        
+        StringBuilder sb = new StringBuilder();
+        if (e.description.length() > 0) {
+        	sb.append("<b>");
+        	sb.append(e.description);
+        	sb.append("</b><br/><br/>");
+        }
+        if (e.text.length() > 0) {
+        	sb.append(e.text);
+        }
+        description.setText(Html.fromHtml(sb.toString()));
         
         if (e.id > 0) { // if id exists and seems legit
         	link.setVisibility(View.VISIBLE);

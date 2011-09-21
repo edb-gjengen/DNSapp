@@ -17,6 +17,7 @@ public class XmlParser {
             String description = "";
             String date = "";
             String location = "";
+            String text = "";
             String category = "";
             // String pictureUrl = ""; Necessary?
             
@@ -33,6 +34,7 @@ public class XmlParser {
                     NodeList descriptionNodes = (itemElement).getElementsByTagName("description");
                     NodeList dateNodes = (itemElement).getElementsByTagName("date");
                     NodeList locationNodes = (itemElement).getElementsByTagName("location");
+                    NodeList textNodes = (itemElement).getElementsByTagName("text");
                     NodeList categoryNodes = (itemElement).getElementsByTagName("category");
                     
                     // Convert a Node into an Element.
@@ -41,6 +43,7 @@ public class XmlParser {
                     Node descriptionElement = descriptionNodes.item(0);
                     Node dateElement = dateNodes.item(0);
                     Node locationElement = locationNodes.item(0);
+                    Node textElement = textNodes.item(0);
                     Node categoryElement = categoryNodes.item(0);
                     
                     // Get all the child nodes.
@@ -49,16 +52,19 @@ public class XmlParser {
                     NodeList descriptionTextNodes = descriptionElement.getChildNodes();
                     NodeList dateTextNodes = dateElement.getChildNodes();
                     NodeList locationTextNodes = locationElement.getChildNodes();
+                    NodeList textTextNodes = textElement.getChildNodes();
                     NodeList categoryTextNodes = categoryElement.getChildNodes();
                     
                     // Retrieve the text.
-                    id = idTextNodes.item(0).getNodeValue();
-                    title = titleTextNodes.item(0).getNodeValue();
-                    description = descriptionTextNodes.item(0).getNodeValue();
-                    date = dateTextNodes.item(0).getNodeValue();
-                    location = locationTextNodes.item(0).getNodeValue();
-                    category = categoryTextNodes.item(0).getNodeValue();
-                    dh.insert(id, title, description, date, location, category);
+                    id = idTextNodes.item(0).getNodeValue(); // mandatory
+                    title = titleTextNodes.item(0).getNodeValue(); // mandatory
+                    if (descriptionTextNodes.getLength() > 0) 	description = descriptionTextNodes.item(0).getNodeValue();
+                    if (dateTextNodes.getLength() > 0) 			date = dateTextNodes.item(0).getNodeValue();
+                    if (locationTextNodes.getLength() > 0) 		location = locationTextNodes.item(0).getNodeValue();
+                    if (textTextNodes.getLength() > 0) 			text = textTextNodes.item(0).getNodeValue();
+                    if (categoryTextNodes.getLength() > 0) 		category = categoryTextNodes.item(0).getNodeValue();
+                    
+                    dh.insert(id, title, description, date, location, text, category);
                 }
             }
             return dh;

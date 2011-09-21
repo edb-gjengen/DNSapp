@@ -9,6 +9,7 @@ public class Event implements Serializable {
 	public String description;
 	public String date;
 	public String location;
+	public String text;
 	public String category;
 	
 	public Event(
@@ -16,13 +17,15 @@ public class Event implements Serializable {
 			String title, 
 			String description, 
 			String date, 
-			String location, 
+			String location,
+			String text,
 			String category) {
 		this.id = id;
 		this.title = title;
 		this.description = description;
 		this.date = date;
 		this.location = location;
+		this.text = text;
 		this.category = category;
 	}
 	
