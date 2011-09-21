@@ -81,7 +81,15 @@ public class FeedFetcher {
                 db = dbf.newDocumentBuilder();
                 doc = db.parse(in);
             } catch (ParserConfigurationException e) {
-            } catch (SAXException e) {}        
+            	/* This should never happen. */
+            } catch (SAXException e) {
+            	/* This shouldn't happen unless the feed returned by the server
+            	 * is somehow incompatible with the what the application expects.
+            	 * If it happens, the best course of action is to pretend we failed
+            	 * to download the event list (it's close enough and it simplifies
+            	 * exception-handling). */
+            	throw new IOException("Bad response from server.");
+            }        
             
             doc.getDocumentElement().normalize(); 
             
