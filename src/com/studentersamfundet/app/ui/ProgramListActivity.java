@@ -67,12 +67,6 @@ public class ProgramListActivity extends BaseDnsActivity {
     			} else {
     				row = convertView;
     			}
-    	 
-    			/* Apply styles: */
-    			if (position % 2 == 0) 
-    				row.setBackgroundResource(R.color.ListItemEven);
-    			else
-    				row.setBackgroundResource(R.color.ListItemOdd);
     			
     			final Event e = getItem(position);
     			
@@ -91,6 +85,17 @@ public class ProgramListActivity extends BaseDnsActivity {
 						startActivity(intent);
 					}
 				});
+    			
+    			/* Apply styles: */
+    			if (position % 2 == 0) {
+    				row.setBackgroundResource(R.color.ListItemBackgroundEven);
+    				titleView.setTextAppearance(ProgramListActivity.this, R.style.ListItemTextEven);
+    				dateView.setTextAppearance(ProgramListActivity.this, R.style.ListItemTextEven);
+    			} else {
+    				row.setBackgroundResource(R.color.ListItemBackgroundOdd);
+    				titleView.setTextAppearance(ProgramListActivity.this, R.style.ListItemTextOdd);
+    				dateView.setTextAppearance(ProgramListActivity.this, R.style.ListItemTextOdd);
+    			}
     			
     			return row;
     		}

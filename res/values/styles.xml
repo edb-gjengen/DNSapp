@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<!-- EVENT VIEW STYLES: -->
     <style name="BigHeader">
         <item name="android:textSize">20sp</item>
         <item name="android:gravity">center</item>
@@ -12,10 +13,16 @@
         <item name="android:paddingBottom">5px</item>
     </style>
     
-    <style name="ListItem">
-    	<item name="android:textSize">12sp</item>
+    
+    
+    <!-- EVENT LIST STYLES: -->
+    <color name="ListItemBackgroundEven">#202020</color>
+    <style name="ListItemTextEven" parent="@android:style/TextAppearance">
+    	<item name="android:textColor">#cccccc</item>
     </style>
     
-    <color name="ListItemEven">#202020</color>
-    <color name="ListItemOdd">#000000</color>
+    <color name="ListItemBackgroundOdd">#000000</color>
+    <style name="ListItemTextOdd" parent="@android:style/TextAppearance">
+    	<item name="android:textColor">#cccccc</item>
+    </style>
 </resources>
