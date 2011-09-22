@@ -24,7 +24,6 @@ import com.studentersamfundet.app.R;
 import com.studentersamfundet.app.XmlParser;
 
 public class ProgramListActivity extends BaseDnsActivity {
-	//public static final String feedURL = "http://dl.dropbox.com/u/293287/test.xml";
 	public static final String feedURL = "http://studentersamfundet.no/rss/lars_program_feed.php";
 	
 	private FeedFetcher feed;
@@ -49,6 +48,7 @@ public class ProgramListActivity extends BaseDnsActivity {
         } catch (IOException e) {
         	Toast toast = Toast.makeText(this, R.string.error_noconnection_noupdate, Toast.LENGTH_LONG);
         	toast.show();
+        	return;
         }
   
         ListView list = (ListView)findViewById(R.id.event_list);
