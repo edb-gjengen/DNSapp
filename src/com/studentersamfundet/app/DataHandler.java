@@ -22,7 +22,19 @@ public class DataHandler {
 		return null;
 	}
 	
-    public Event[] populateList() {
-    	return events.toArray(new Event[events.size()]);
+	public Event[] populateList(String category) {
+		LinkedList<Event> sorted = new LinkedList<Event>();
+
+		if (category == "all") {
+			return events.toArray(new Event[events.size()]);
+		} else {
+			for (int i = 0; i < events.size(); i++) {
+				Event tmp = events.get(i);
+
+				if (category.equals(tmp.category))
+					sorted.add(tmp);
+			}
+			return sorted.toArray(new Event[sorted.size()]);
+		}
     }
 }
