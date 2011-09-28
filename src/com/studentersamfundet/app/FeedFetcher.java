@@ -1,10 +1,9 @@
 package com.studentersamfundet.app;
 
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
@@ -67,15 +66,18 @@ public class FeedFetcher {
 	       
         	/* Update the local file if possible. */
         	try {
-            	saveFile(openHttpConnection(), context);
+        		in = openHttpConnection();
+            	saveFile(in, context);
             	
         	} catch(IOException e) {
         		/* OK, so we failed to update it. It doesn't matter yet, because we can try to... */
+        	} finally {
+        		if (in != null) 
+        			in.close();
         	}
         	
     		/* ...load local file: */
         	in = loadFile(context); // if we fail here, we fail ultimately. Throw the Exception! 
-    	
         	
             Document doc = null;
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -87,11 +89,10 @@ public class FeedFetcher {
             } catch (ParserConfigurationException e) {
             	/* This should never happen. */
             } catch (SAXException e) {
-            	/* This shouldn't happen unless the feed returned by the server
-            	 * is somehow incompatible with the what the application expects.
-            	 * If it happens, the best course of action is to pretend we failed
-            	 * to download the event list (it's close enough and it simplifies
-            	 * exception-handling). */
+            	/* This shouldn't happen unless the xml returned by the server
+            	 * is somehow invalid. If it happens, the best course of action 
+            	 * is to pretend we failed to download the event list (it's 
+            	 * close enough and it simplifies exception-handling). */
             	throw new IOException("Bad response from server.");
             }        
             
@@ -105,22 +106,16 @@ public class FeedFetcher {
 	}
 	
 	private void saveFile(InputStream in, Context c) throws IOException, FileNotFoundException {
-		final int BUFFER_SIZE = 2000;
+		final int BUFFER_SIZE = 128;
 		
-		InputStreamReader isr = new InputStreamReader(in);
+		OutputStream os = c.openFileOutput(LOCAL_FILENAME, Context.MODE_PRIVATE);
+		byte[] inputBuffer = new byte[BUFFER_SIZE];
 		
-		char[] inputBuffer = new char[BUFFER_SIZE];
-		StringBuilder outputStr = new StringBuilder();
-
-		while (isr.read(inputBuffer) > 0) {
-			outputStr.append(inputBuffer);
-			inputBuffer = new char[BUFFER_SIZE];
+		while (in.read(inputBuffer) > 0) {
+			os.write(inputBuffer);
+			inputBuffer = new byte[BUFFER_SIZE];
 		}
-		in.close();
-
-		FileOutputStream fos = c.openFileOutput(LOCAL_FILENAME, Context.MODE_PRIVATE);
-		fos.write(outputStr.toString().getBytes());
-		fos.close();
+		os.close();
 	}
 	
 	private InputStream loadFile(Context c) throws FileNotFoundException {
