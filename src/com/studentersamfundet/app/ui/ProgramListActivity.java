@@ -1,11 +1,17 @@
 package com.studentersamfundet.app.ui;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import org.w3c.dom.NodeList;
 
 import android.app.Dialog;
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -15,6 +21,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -120,6 +127,31 @@ public class ProgramListActivity extends BaseDnsActivity {
 						intent.putExtra("event", e);
 						
 						startActivity(intent);
+					}
+				});
+    			
+    			row.setOnLongClickListener(new OnLongClickListener() {
+					
+					@Override
+					public boolean onLongClick(View v) {
+						long startDate = 0;
+						try {
+							SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+							startDate = sdf.parse(e.date).getTime();
+						} catch (ParseException e) {
+							return false;
+						}
+						
+						Intent intent = new Intent(Intent.ACTION_EDIT);
+						intent.setType("vnd.android.cursor.item/event");
+						intent.putExtra("title", e.title);
+						intent.putExtra("beginTime", startDate);
+						intent.putExtra("endTime", startDate + (2*60*60*1000)); // Two hours
+						intent.putExtra("allDay", false);
+						intent.putExtra("eventLocation", e.location);
+						intent.putExtra("reminder", false);
+						startActivity(intent);
+						return true;
 					}
 				});
     			
