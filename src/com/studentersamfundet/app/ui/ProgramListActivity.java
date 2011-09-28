@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import org.w3c.dom.NodeList;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
@@ -58,6 +59,12 @@ public class ProgramListActivity extends BaseDnsActivity {
         case R.id.menu_refresh:
             this.createList(Event.ALL, true);
             return true;
+        
+        case R.id.menu_categories:
+        	String category = chooseCategory();
+        	this.createList(category, false);
+        	return true;
+            
         default:
             return super.onOptionsItemSelected(item);
         }
@@ -133,5 +140,14 @@ public class ProgramListActivity extends BaseDnsActivity {
     	 
     	return adapter;
     	
+    }
+    
+    protected String chooseCategory() {
+    	Dialog dialog = new Dialog(this);
+    	dialog.setContentView(R.layout.choose_category_dialog);
+    	
+    	dialog.setTitle("Choose category");
+    	dialog.show();
+    	return Event.ALL;
     }
 }
