@@ -1,5 +1,6 @@
 package com.studentersamfundet.app;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -66,8 +67,10 @@ public class FeedFetcher {
 	       
         	/* Update the local file if possible. */
         	try {
-        		in = openHttpConnection();
-            	saveFile(in, context);
+        		if (doesFileNeedUpdate(context)) {
+	        		in = openHttpConnection();
+	            	saveFile(in, context);
+        		}
             	
         	} catch(IOException e) {
         		/* OK, so we failed to update it. It doesn't matter yet, because we can try to... */
@@ -103,6 +106,19 @@ public class FeedFetcher {
             in.close();
 
 	        return itemNodes;
+	}
+	
+	private boolean doesFileNeedUpdate(Context c) throws IOException {
+		/** Maximum amount of time before the file needs updating, in ms: */
+		final long maxInterval = 1000 * 60 * 60 * 24 * 7; // one week
+			
+		File file = c.getFileStreamPath(LOCAL_FILENAME);
+		if (! file.exists()) return true;
+		
+		long now = System.currentTimeMillis();
+		long lastMod = file.lastModified();
+		
+		return now - lastMod > maxInterval;
 	}
 	
 	private void saveFile(InputStream in, Context c) throws IOException, FileNotFoundException {
