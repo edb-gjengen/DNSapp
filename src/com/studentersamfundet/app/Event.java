@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Event implements Serializable {
 	private static final long serialVersionUID = 1L;
-	public static final String ALL = "all";
+	public static final String ALL = "Alle";
 	
 	public int id;
 	public String title;

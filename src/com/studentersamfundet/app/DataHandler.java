@@ -42,6 +42,14 @@ public class DataHandler {
     }
 	
 	public String[] getCategories() {
-		return categories.toArray(new String[categories.size()]);
+		String[] result = new String[categories.size() + 1];
+		result[0] = Event.ALL;
+		
+		int counter = 1;
+		for (String c : categories) {
+			result[counter++] = c;
+		}
+		
+		return result;
 	}
 }

@@ -37,7 +37,7 @@ public class ChooseCategoryDialog extends Dialog {
 		this.callback = callback;
 		
 		setContentView(R.layout.choose_category_dialog);
-    	setTitle("Choose category");
+    	setTitle(R.string.choose_category);
     	setOnDismissListener(new OnDismiss());
     	populateList(context, categories);
 	}
