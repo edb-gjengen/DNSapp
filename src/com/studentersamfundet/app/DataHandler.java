@@ -25,16 +25,14 @@ public class DataHandler {
 	public Event[] populateList(String category) {
 		LinkedList<Event> sorted = new LinkedList<Event>();
 
-		if (category == "all") {
+		if (category.equals("all")) {
 			return events.toArray(new Event[events.size()]);
-		} else {
-			for (int i = 0; i < events.size(); i++) {
-				Event tmp = events.get(i);
-
-				if (category.equals(tmp.category))
-					sorted.add(tmp);
-			}
-			return sorted.toArray(new Event[sorted.size()]);
 		}
+
+		for (Event event : events) {
+			if (category.equals(event.category))
+				sorted.add(event);
+		}
+		return sorted.toArray(new Event[sorted.size()]);
     }
 }
