@@ -8,6 +8,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
@@ -38,11 +41,34 @@ public class ProgramListActivity extends BaseDnsActivity {
         this.feed = new FeedFetcher(this, feedURL);
         this.parser = new XmlParser();
         
-        // Do we have intarwebs?
+        createList(false);
+    }
+    
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+    	MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.layout.menu, menu);
+        return true;
+    }
+    
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+        case R.id.menu_refresh:
+            this.createList(true);
+            return true;
+        default:
+            return super.onOptionsItemSelected(item);
+        }
+    }
+    
+    protected void createList(boolean forcedUpdate) {
+    	// Do we have intarwebs?
         // YAY = Fetch the feed.
         // NAY = Inform about no connection.
         try {
-	        NodeList itemNodes = feed.fetch();
+	        NodeList itemNodes = feed.fetch(forcedUpdate);
 	        dataHandler = parser.parse(itemNodes);
 	        
         } catch (IOException e) {

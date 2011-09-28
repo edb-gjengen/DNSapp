@@ -55,19 +55,19 @@ public class FeedFetcher {
 	
 	/**
 	 * Fetches list of events from the web.
-	 * @param URL String containing address to the rss-feed.
-	 * @param c Context from which this function is called.
+	 * @param forcedUpdate specifies if we HAVE TO update local file, or let 
+	 * the function decide.
 	 * @return Returns list of events as a XML NodeList
 	 * @throws IOException Is thrown if the app cannot download the file from
 	 * the internet and there is no local copy.
 	 */
-	public NodeList fetch() throws IOException {
+	public NodeList fetch(boolean forcedUpdate) throws IOException {
 	       InputStream in = null;
 	       NodeList itemNodes = null;
 	       
         	/* Update the local file if possible. */
         	try {
-        		if (doesFileNeedUpdate(context)) {
+        		if (forcedUpdate || doesFileNeedUpdate(context)) {
 	        		in = openHttpConnection();
 	            	saveFile(in, context);
         		}
