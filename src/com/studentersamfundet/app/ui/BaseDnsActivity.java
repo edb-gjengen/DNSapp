@@ -4,9 +4,12 @@ import com.studentersamfundet.app.R;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Handler;
 import android.view.View;
 
 public abstract class BaseDnsActivity extends Activity {
+	protected Handler handler = new Handler();
+	
     public void clickHandler(View v) {
     	Intent intent = new Intent();
     	
