@@ -7,24 +7,22 @@
 	<TextView
 		android:id="@+id/program_button"
         android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_weight="1"
-        android:ellipsize="end"
+        android:gravity="center"
         android:textSize="40px"
         android:textStyle="bold"
-        android:layout_marginLeft="20dip"
         android:onClick="clickHandler"
         android:clickable="true"
         android:text="@string/program_button" />
     <TextView
     	android:id="@+id/bli_med_button"
         android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_weight="1"
-        android:layout_gravity="right"
+        android:gravity="center"
         android:textSize="40px"
         android:textStyle="bold"
-        android:layout_marginRight="20dip"
         android:onClick="clickHandler"
         android:clickable="true"
         android:text="@string/bli_med_button" />
