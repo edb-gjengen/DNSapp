@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
+import android.text.util.Linkify;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -48,6 +49,7 @@ public class EventViewActivity extends BaseDnsActivity {
         }
         
         description.setText(Html.fromHtml(sb.toString()));
+        Linkify.addLinks(description, Linkify.ALL);
         
         if (e.id > 0) { // if id exists and seems legit
         	link.setVisibility(View.VISIBLE);
