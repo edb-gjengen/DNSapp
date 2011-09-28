@@ -41,7 +41,7 @@ public class ProgramListActivity extends BaseDnsActivity {
         this.feed = new FeedFetcher(this, feedURL);
         this.parser = new XmlParser();
         
-        createList(false);
+        createList(Event.ALL, false);
     }
     
     @Override
@@ -56,14 +56,14 @@ public class ProgramListActivity extends BaseDnsActivity {
 
         switch (item.getItemId()) {
         case R.id.menu_refresh:
-            this.createList(true);
+            this.createList(Event.ALL, true);
             return true;
         default:
             return super.onOptionsItemSelected(item);
         }
     }
     
-    protected void createList(boolean forcedUpdate) {
+    protected void createList(String category, boolean forcedUpdate) {
     	// Do we have intarwebs?
         // YAY = Fetch the feed.
         // NAY = Inform about no connection.
@@ -79,12 +79,12 @@ public class ProgramListActivity extends BaseDnsActivity {
   
         ListView list = (ListView)findViewById(R.id.event_list);
         
-        ListAdapter adapter = createAdapter();
+        ListAdapter adapter = createAdapter(category);
         list.setAdapter(adapter);
     }
     
-    protected ListAdapter createAdapter() {
-    	Event[] events = dataHandler.populateList("all");
+    protected ListAdapter createAdapter(String category) {
+    	Event[] events = dataHandler.populateList(category);
     	
     	ListAdapter adapter = new ArrayAdapter<Event>(this, R.layout.event_list_row, R.id.event_list_row_text, events) {
     		@Override

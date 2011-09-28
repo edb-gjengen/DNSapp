@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 public class Event implements Serializable {
 	private static final long serialVersionUID = 1L;
+	public static final String ALL = "all";
+	
 	public int id;
 	public String title;
 	public String description;
