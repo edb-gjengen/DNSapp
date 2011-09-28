@@ -21,8 +21,27 @@
     	<item name="android:textColor">#cccccc</item>
     </style>
     
+    <style name="ListItemTextEvenTilte" parent="@style/ListItemTextEven">
+    	<item name="android:textSize">12sp</item>
+    </style>
+    
+    <style name="ListItemTextEvenDate" parent="@style/ListItemTextEven">
+    	<item name="android:textSize">9sp</item>
+    	<item name="android:textColor">#aaaaaa</item>
+    </style>
+    
+    
     <color name="ListItemBackgroundOdd">#000000</color>
     <style name="ListItemTextOdd" parent="@android:style/TextAppearance">
     	<item name="android:textColor">#cccccc</item>
+    </style>
+    
+    <style name="ListItemTextOddTilte" parent="@style/ListItemTextOdd">
+    	<item name="android:textSize">12sp</item>
+    </style>
+    
+    <style name="ListItemTextOddDate" parent="@style/ListItemTextOdd">
+    	<item name="android:textSize">9sp</item>
+    	<item name="android:textColor">#aaaaaa</item>
     </style>
 </resources>

@@ -119,12 +119,12 @@ public class ProgramListActivity extends BaseDnsActivity {
     			/* Apply styles: */
     			if (position % 2 == 0) {
     				row.setBackgroundResource(R.color.ListItemBackgroundEven);
-    				titleView.setTextAppearance(ProgramListActivity.this, R.style.ListItemTextEven);
-    				dateView.setTextAppearance(ProgramListActivity.this, R.style.ListItemTextEven);
+    				titleView.setTextAppearance(ProgramListActivity.this, R.style.ListItemTextEvenTilte);
+    				dateView.setTextAppearance(ProgramListActivity.this, R.style.ListItemTextEvenDate);
     			} else {
     				row.setBackgroundResource(R.color.ListItemBackgroundOdd);
-    				titleView.setTextAppearance(ProgramListActivity.this, R.style.ListItemTextOdd);
-    				dateView.setTextAppearance(ProgramListActivity.this, R.style.ListItemTextOdd);
+    				titleView.setTextAppearance(ProgramListActivity.this, R.style.ListItemTextOddTilte);
+    				dateView.setTextAppearance(ProgramListActivity.this, R.style.ListItemTextOddDate);
     			}
     			
     			return row;

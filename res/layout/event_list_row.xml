@@ -2,7 +2,9 @@
 <RelativeLayout	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:orientation="vertical"
 	android:layout_width="match_parent"
-	android:layout_height="wrap_content">
+	android:layout_height="wrap_content"
+	android:paddingTop="3px"
+	android:paddingBottom="3px">
     
     <TextView android:id="@+id/event_list_row_text"
     	android:layout_height="wrap_content" 
