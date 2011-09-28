@@ -127,8 +127,9 @@ public class FeedFetcher {
 		OutputStream os = c.openFileOutput(LOCAL_FILENAME, Context.MODE_PRIVATE);
 		byte[] inputBuffer = new byte[BUFFER_SIZE];
 		
-		while (in.read(inputBuffer) > 0) {
-			os.write(inputBuffer);
+		int bytes = 0;
+		while ((bytes = in.read(inputBuffer)) > 0) {
+			os.write(inputBuffer, 0, bytes);
 			inputBuffer = new byte[BUFFER_SIZE];
 		}
 		os.close();
