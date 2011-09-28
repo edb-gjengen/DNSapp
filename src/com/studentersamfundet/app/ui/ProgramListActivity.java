@@ -26,6 +26,7 @@ import com.studentersamfundet.app.Event;
 import com.studentersamfundet.app.FeedFetcher;
 import com.studentersamfundet.app.R;
 import com.studentersamfundet.app.XmlParser;
+import com.studentersamfundet.app.ui.ChooseCategoryDialog.Callback;
 
 public class ProgramListActivity extends BaseDnsActivity {
 	public static final String feedURL = "http://studentersamfundet.no/rss/lars_program_feed.php";
@@ -61,8 +62,7 @@ public class ProgramListActivity extends BaseDnsActivity {
             return true;
         
         case R.id.menu_categories:
-        	String category = chooseCategory();
-        	this.createList(category, false);
+        	createCategoryDialog();
         	return true;
             
         default:
@@ -142,12 +142,16 @@ public class ProgramListActivity extends BaseDnsActivity {
     	
     }
     
-    protected String chooseCategory() {
-    	Dialog dialog = new Dialog(this);
-    	dialog.setContentView(R.layout.choose_category_dialog);
+    protected void createCategoryDialog() {
+    	Dialog dialog = new ChooseCategoryDialog(this, new Callback() {
+			public void run(String... message) {
+				if (message.length < 1) 
+					message = new String[] { Event.ALL };
+				
+				ProgramListActivity.this.createList(message[0], false);
+			}
+		});
     	
-    	dialog.setTitle("Choose category");
     	dialog.show();
-    	return Event.ALL;
     }
 }
