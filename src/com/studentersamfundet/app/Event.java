@@ -38,6 +38,6 @@ public class Event implements Serializable {
 		
 		String month = date.substring(5, 7);
 		String day = date.substring(8, 10);
-		return day + ". " + Utils.intToMonthStr(Integer.parseInt(month));
+		return Utils.stripNullFromDay(day) + ". " + Utils.intToMonthStr(Integer.parseInt(month));
 	}
 }
