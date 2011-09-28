@@ -28,7 +28,7 @@ public class ChooseCategoryDialog extends Dialog {
 		}
 	}
 	
-	public ChooseCategoryDialog(Context context, Callback callback) {
+	public ChooseCategoryDialog(Context context, Callback callback, String[] categories) {
 		super(context);
 		
 		if (callback == null)
@@ -39,15 +39,10 @@ public class ChooseCategoryDialog extends Dialog {
 		setContentView(R.layout.choose_category_dialog);
     	setTitle("Choose category");
     	setOnDismissListener(new OnDismiss());
-    	populateList(context);
+    	populateList(context, categories);
 	}
 	
-	private void populateList(Context context) {
-		final String[] categories = new String[] {
-			Event.ALL,
-			"film"
-		};
-		
+	private void populateList(Context context, final String[] categories) {
 		ListView list = (ListView)findViewById(R.id.choose_category_list);
 		list.setAdapter(new ArrayAdapter<String>(context, R.layout.choose_category_list_row, R.id.choose_category_list_row_text, categories));
 		list.setOnItemClickListener(new OnItemClickListener() {

@@ -143,15 +143,16 @@ public class ProgramListActivity extends BaseDnsActivity {
     }
     
     protected void createCategoryDialog() {
-    	Dialog dialog = new ChooseCategoryDialog(this, new Callback() {
+    	Callback callback = new Callback() {
 			public void run(String... message) {
 				if (message.length < 1) 
 					message = new String[] { Event.ALL };
 				
 				ProgramListActivity.this.createList(message[0], false);
 			}
-		});
+		};
     	
+    	Dialog dialog = new ChooseCategoryDialog(this, callback, dataHandler.getCategories());
     	dialog.show();
     }
 }
