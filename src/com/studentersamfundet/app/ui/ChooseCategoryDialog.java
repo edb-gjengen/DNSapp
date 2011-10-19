@@ -2,7 +2,6 @@ package com.studentersamfundet.app.ui;
 
 import java.security.InvalidParameterException;
 
-import com.studentersamfundet.app.Event;
 import com.studentersamfundet.app.R;
 
 import android.app.Dialog;
@@ -45,7 +44,7 @@ public class ChooseCategoryDialog extends Dialog {
 	}
 	
 	private void populateList(Context context, final String[] categories) {
-		ListView list = (ListView)findViewById(R.id.choose_category_list);
+		ListView list = (ListView)findViewById(R.id.choose_category_list);	
 		list.setAdapter(new ArrayAdapter<String>(context, R.layout.choose_category_list_row, R.id.choose_category_list_row_text, categories));
 		list.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View view, int position,
