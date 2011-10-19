@@ -1,5 +1,7 @@
 package com.studentersamfundet.app.ui;
 
+import java.text.SimpleDateFormat;
+
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -34,7 +36,9 @@ public class EventViewActivity extends BaseDnsActivity {
         
         title.setText(Html.fromHtml(e.title));
         location.setText(Html.fromHtml(e.location));
-        datetime.setText(Html.fromHtml(e.date));
+        
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        datetime.setText(e.date != null ? dateFormat.format(e.date) : "");
         
         StringBuilder sb = new StringBuilder();
         

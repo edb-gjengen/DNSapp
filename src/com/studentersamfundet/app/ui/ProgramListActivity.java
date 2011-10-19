@@ -1,12 +1,12 @@
 package com.studentersamfundet.app.ui;
 
 import java.io.IOException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import org.w3c.dom.NodeList;
 
 import android.app.Dialog;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -98,8 +98,9 @@ public class ProgramListActivity extends BaseDnsActivity {
     			TextView titleView = (TextView) row.findViewById(R.id.event_list_row_text);
     			titleView.setText(Html.fromHtml(e.title));
     	 
+    			SimpleDateFormat dateFormat = new SimpleDateFormat("d. MMMM");
     			TextView dateView = (TextView) row.findViewById(R.id.event_list_row_date);
-    			dateView.setText(Html.fromHtml(e.getDateString()));
+    			dateView.setText(dateFormat.format(e.date));
     			
     			row.setOnClickListener(new OnClickListener() {
 					
@@ -114,24 +115,26 @@ public class ProgramListActivity extends BaseDnsActivity {
     			row.setOnLongClickListener(new OnLongClickListener() {
 					
 					public boolean onLongClick(View v) {
-						long startDate = 0;
+						if (e.date == null)
+							return false;
+						
+						long startDate = e.date.getTime();
+						
 						try {
-							SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-							startDate = sdf.parse(e.date).getTime();
-						} catch (ParseException e) {
+							Intent intent = new Intent(Intent.ACTION_EDIT);
+							intent.setType("vnd.android.cursor.item/event");
+							intent.putExtra("title", e.title);
+							intent.putExtra("beginTime", startDate);
+							intent.putExtra("endTime", startDate + (2*60*60*1000)); // Two hours
+							intent.putExtra("allDay", false);
+							intent.putExtra("eventLocation", e.location);
+							intent.putExtra("reminder", false);
+						
+							startActivity(intent);
+							return true;
+						} catch (ActivityNotFoundException e) {
 							return false;
 						}
-						
-						Intent intent = new Intent(Intent.ACTION_EDIT);
-						intent.setType("vnd.android.cursor.item/event");
-						intent.putExtra("title", e.title);
-						intent.putExtra("beginTime", startDate);
-						intent.putExtra("endTime", startDate + (2*60*60*1000)); // Two hours
-						intent.putExtra("allDay", false);
-						intent.putExtra("eventLocation", e.location);
-						intent.putExtra("reminder", false);
-						startActivity(intent);
-						return true;
 					}
 				});
     			

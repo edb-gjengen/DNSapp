@@ -110,7 +110,7 @@ public class FeedFetcher {
 	
 	private boolean doesFileNeedUpdate(Context c) throws IOException {
 		/** Maximum amount of time before the file needs updating, in ms: */
-		final long maxInterval = 1000 * 60 * 60 * 24 * 7; // one week
+		final long maxInterval = 1000 * 60 * 60; // one hour
 			
 		File file = c.getFileStreamPath(LOCAL_FILENAME);
 		if (! file.exists()) return true;
