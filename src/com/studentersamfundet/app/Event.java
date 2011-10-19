@@ -23,12 +23,12 @@ public class Event implements Serializable {
 			String text,
 			String category) {
 		this.id = id;
-		this.title = title;
-		this.description = (description == null) ? "" : description;
-		this.date = (date == null) ? "" : date;
-		this.location = (location == null) ? "" : location;
-		this.text = (text == null) ? "" : text;
-		this.category = (category == null) ? "" : category;
+		this.title = title.trim();
+		this.description = (description == null) ? "" : description.trim();
+		this.date = (date == null) ? "" : date.trim();
+		this.location = (location == null) ? "" : location.trim();
+		this.text = (text == null) ? "" : text.trim();
+		this.category = (category == null) ? "" : category.trim();
 	}
 	
 	public String toString() {

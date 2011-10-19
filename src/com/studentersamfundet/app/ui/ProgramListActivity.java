@@ -3,15 +3,11 @@ package com.studentersamfundet.app.ui;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 import org.w3c.dom.NodeList;
 
 import android.app.Dialog;
-import android.content.ContentResolver;
-import android.content.ContentValues;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -132,7 +128,6 @@ public class ProgramListActivity extends BaseDnsActivity {
     			
     			row.setOnLongClickListener(new OnLongClickListener() {
 					
-					@Override
 					public boolean onLongClick(View v) {
 						long startDate = 0;
 						try {
