@@ -8,6 +8,7 @@ import org.w3c.dom.NodeList;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -21,6 +22,7 @@ import android.view.View.OnLongClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,7 +48,8 @@ public class ProgramListActivity extends BaseDnsActivity {
         this.feed = new FeedFetcher(this, feedURL);
         this.parser = new XmlParser();
         
-        createList(Event.ALL, false);
+        ListCreator lc = new ListCreator(Event.ALL, false);
+        lc.execute();
     }
     
     @Override
@@ -61,7 +64,8 @@ public class ProgramListActivity extends BaseDnsActivity {
 
         switch (item.getItemId()) {
         case R.id.menu_refresh:
-            this.createList(Event.ALL, true);
+            ListCreator lc = new ListCreator(Event.ALL, true);
+            lc.execute();
             return true;
         
         case R.id.menu_categories:
@@ -73,25 +77,6 @@ public class ProgramListActivity extends BaseDnsActivity {
         }
     }
     
-    protected void createList(String category, boolean forcedUpdate) {
-    	// Do we have intarwebs?
-        // YAY = Fetch the feed.
-        // NAY = Inform about no connection.
-        try {
-	        NodeList itemNodes = feed.fetch(forcedUpdate);
-	        dataHandler = parser.parse(itemNodes);
-	        
-        } catch (IOException e) {
-        	Toast toast = Toast.makeText(this, R.string.error_noconnection_noupdate, Toast.LENGTH_LONG);
-        	toast.show();
-        	return;
-        }
-  
-        ListView list = (ListView)findViewById(R.id.event_list);
-        
-        ListAdapter adapter = createAdapter(category);
-        list.setAdapter(adapter);
-    }
     
     protected ListAdapter createAdapter(String category) {
     	Event[] events = dataHandler.populateList(category);
@@ -175,11 +160,62 @@ public class ProgramListActivity extends BaseDnsActivity {
 				if (message.length < 1) 
 					message = new String[] { Event.ALL };
 				
-				ProgramListActivity.this.createList(message[0], false);
+				ListCreator lc = new ListCreator(message[0], false);
+				lc.execute();
 			}
 		};
     	
     	Dialog dialog = new ChooseCategoryDialog(this, callback, dataHandler.getCategories());
     	dialog.show();
+    }
+
+    protected class ListCreator extends AsyncTask<Void, Void, Boolean> {
+    	protected String category;
+    	protected boolean forcedUpdate;
+    	
+    	public ListCreator(String category, boolean forcedUpdate) {
+    		this.category = category;
+    		this.forcedUpdate = forcedUpdate;
+    	}
+    	
+    	@Override 
+    	protected void onPreExecute() {
+    		ListView list = (ListView)findViewById(R.id.event_list);
+	        list.setVisibility(View.GONE);
+	        
+	        ProgressBar pb = (ProgressBar)findViewById(R.id.event_list_progress_bar);
+	        pb.setVisibility(View.VISIBLE);
+    	}
+    	
+		@Override
+		protected Boolean doInBackground(Void ... v) {
+			// Do we have intarwebs?
+	        // YAY = Fetch the feed.
+	        // NAY = Inform about no connection.
+	        try {
+		        NodeList itemNodes = feed.fetch(this.forcedUpdate);
+		        dataHandler = parser.parse(itemNodes);
+		        return true;
+		        
+	        } catch (IOException e) {
+	        	return false;
+	        }
+		}
+    	
+		@Override
+		protected void onPostExecute(Boolean result) {
+			if (result) {
+				ListView list = (ListView)findViewById(R.id.event_list);
+		        ListAdapter adapter = createAdapter(this.category);
+		        list.setAdapter(adapter);
+		        list.setVisibility(View.VISIBLE);
+		        
+		        ProgressBar pb = (ProgressBar)findViewById(R.id.event_list_progress_bar);
+		        pb.setVisibility(View.GONE);
+			} else {
+				Toast toast = Toast.makeText(ProgramListActivity.this, R.string.error_noconnection_noupdate, Toast.LENGTH_LONG);
+	        	toast.show();
+			}
+		}
     }
 }

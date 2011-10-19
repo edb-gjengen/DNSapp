@@ -1,11 +1,13 @@
 package com.studentersamfundet.app;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class DataHandler {
+public class DataHandler implements Serializable {
+	private static final long serialVersionUID = 6697543939807512231L;
 	private List<Event> events = new LinkedList<Event>();
 	private Set<String> categories = new TreeSet<String>();
 	

@@ -18,10 +18,22 @@
 		android:layout_alignParentBottom="true" />
 
 	<!-- Program list -->
-	<ListView android:id="@+id/event_list"
-               android:layout_width="match_parent"
-               android:layout_height="match_parent"
-               android:layout_below="@id/header"
-               android:layout_above="@id/footer" />
+	<FrameLayout
+		android:layout_width="match_parent"
+        android:layout_height="match_parent" 
+		android:layout_below="@id/header"
+        android:layout_above="@id/footer">
+        
+		<ProgressBar android:id="@+id/event_list_progress_bar" 
+			android:layout_width="40px"
+	        android:layout_height="40px"
+	        android:layout_gravity="center"
+	        android:visibility="visible" />
+	        
+        <ListView android:id="@+id/event_list"
+			android:layout_width="match_parent"
+	        android:layout_height="match_parent" 
+	        android:visibility="invisible" />
+    </FrameLayout>
 
 </RelativeLayout>
