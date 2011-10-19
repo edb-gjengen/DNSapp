@@ -10,4 +10,5 @@
     <string name="menu_refresh">Oppdater</string>
     <string name="menu_categories">Kategorier</string>
     <string name="choose_category">Velg kategori</string>
+    <string name="error_loading">Vent til oppdateringen fullfører</string>
 </resources>

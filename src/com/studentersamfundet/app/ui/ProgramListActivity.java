@@ -167,9 +167,13 @@ public class ProgramListActivity extends BaseDnsActivity {
 				lc.execute();
 			}
 		};
-    	
-    	Dialog dialog = new ChooseCategoryDialog(this, callback, dataHandler.getCategories());
-    	dialog.show();
+		
+    	if (dataHandler != null) {
+	    	Dialog dialog = new ChooseCategoryDialog(this, callback, dataHandler.getCategories());
+	    	dialog.show();
+    	} else {
+    		Toast.makeText(this, R.string.error_loading, Toast.LENGTH_SHORT);
+    	}
     }
 
     protected class ListCreator extends AsyncTask<Void, Void, Boolean> {
@@ -183,6 +187,10 @@ public class ProgramListActivity extends BaseDnsActivity {
     	
     	@Override 
     	protected void onPreExecute() {
+    		if (forcedUpdate) {
+    			dataHandler = null;
+    		}
+    	
     		ListView list = (ListView)findViewById(R.id.event_list);
 	        list.setVisibility(View.GONE);
 	        
@@ -196,9 +204,11 @@ public class ProgramListActivity extends BaseDnsActivity {
 	        // YAY = Fetch the feed.
 	        // NAY = Inform about no connection.
 	        try {
-		        NodeList itemNodes = feed.fetch(this.forcedUpdate);
-		        dataHandler = parser.parse(itemNodes);
-		        return true;
+	        	if (dataHandler == null) {
+			        NodeList itemNodes = feed.fetch(this.forcedUpdate);
+			        dataHandler = parser.parse(itemNodes);
+	        	}
+			    return true;
 		        
 	        } catch (IOException e) {
 	        	return false;

@@ -16,7 +16,7 @@ import android.widget.AdapterView.OnItemClickListener;
 
 public class ChooseCategoryDialog extends Dialog {
 	private final Callback callback;
-	private String chosenCategory = Event.ALL;
+	private String chosenCategory = null;
 	
 	public interface Callback {
 		public void run(String ... message);
@@ -24,7 +24,9 @@ public class ChooseCategoryDialog extends Dialog {
 	
 	private class OnDismiss implements OnDismissListener {
 		public void onDismiss(DialogInterface dialog) {
-			callback.run(chosenCategory);
+			if (chosenCategory != null) {
+				callback.run(chosenCategory);
+			}
 		}
 	}
 	
