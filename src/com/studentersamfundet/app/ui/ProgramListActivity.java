@@ -40,6 +40,8 @@ public class ProgramListActivity extends BaseDnsActivity {
 	private XmlParser parser;
 	private DataHandler dataHandler;
 	
+	private String currentCategory = Event.ALL; 
+	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,6 +77,16 @@ public class ProgramListActivity extends BaseDnsActivity {
         default:
             return super.onOptionsItemSelected(item);
         }
+    }
+    
+    @Override
+    public void onBackPressed() {
+    	if (currentCategory.equals(Event.ALL)) {
+    		super.onBackPressed();
+    	} else {
+    		ListCreator lc = new ListCreator(Event.ALL, false);
+    		lc.execute();
+    	}
     }
     
     
@@ -225,6 +237,8 @@ public class ProgramListActivity extends BaseDnsActivity {
 		        
 		        ProgressBar pb = (ProgressBar)findViewById(R.id.event_list_progress_bar);
 		        pb.setVisibility(View.GONE);
+		        
+		        currentCategory = category;
 			} else {
 				Toast toast = Toast.makeText(ProgramListActivity.this, R.string.error_noconnection_noupdate, Toast.LENGTH_LONG);
 	        	toast.show();
