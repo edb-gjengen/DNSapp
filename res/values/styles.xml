@@ -28,4 +28,9 @@
     	<item name="android:textSize">11sp</item>
     	<item name="android:textColor">#aaaaaa</item>
     </style>
+    
+    <!-- 'JOIN US' TEXT STYLE: -->
+    <style name="JoinUsTextStyle" parent="@android:style/TextAppearance">
+    </style>
+        
 </resources>

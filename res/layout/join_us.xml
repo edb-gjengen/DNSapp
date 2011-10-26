@@ -26,8 +26,10 @@
 			android:layout_marginTop="10px"
 	        android:layout_height="wrap_content"
 	        android:layout_width="fill_parent" 
-	        android:layout_marginLeft="20dip"
-	        android:text="@string/join_us" />
+	        android:paddingLeft="10dip"
+	        android:paddingRight="10dip"
+	        android:text="@string/join_us" 
+	        android:textAppearance="@style/JoinUsTextStyle" />
 	</ScrollView>
 	
 </RelativeLayout>

@@ -12,6 +12,6 @@ public class JoinUsActivity extends BaseDnsActivity {
 	        setContentView(R.layout.join_us);
 	        
 	        TextView tv = (TextView)findViewById(R.id.join_us_textview);
-	        Linkify.addLinks(tv, Linkify.EMAIL_ADDRESSES);
+	        Linkify.addLinks(tv, Linkify.ALL);
 	    }
 }
