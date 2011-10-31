@@ -3,6 +3,7 @@ package com.studentersamfundet.app.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.studentersamfundet.app.R;
@@ -14,6 +15,14 @@ public class DnsActivity extends BaseDnsActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
+		
+		/* Set opening hours: */
+		TextView openingHours = (TextView)findViewById(R.id.main_menu_openinghours);
+		openingHours.setText(
+				   "Huset      13.00-01.00"
+				+"\nKjøkkenet       -19.00"
+				+"\nBokCaféen  19.00-00.00");
+
 	}
 
 	public void programButton(View v) {

@@ -60,8 +60,7 @@ public class EventViewActivity extends BaseDnsActivity {
         	link.setOnClickListener(new OnClickListener() {
 				
 				public void onClick(View v) {
-					String webAdress = "http://studentersamfundet.no/vis.php?ID=" + e.id;
-					Uri webDestination = Uri.parse(webAdress);
+					Uri webDestination = e.getUri();
 					
 					Intent webIntent = new Intent(Intent.ACTION_VIEW, webDestination);
 					startActivity(webIntent);

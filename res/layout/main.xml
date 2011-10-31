@@ -32,50 +32,93 @@
 			android:layout_weight="1"
 			android:gravity="center">
 			
-		    <Button android:id="@+id/main_menu_program"
+		    <RelativeLayout android:id="@+id/main_menu_program"
 		        style="@style/MetroTile"
             	android:layout_margin="5px"
 		        android:layout_height="fill_parent"
 	        	android:layout_width="fill_parent"
 	        	android:layout_weight="1"
-		        android:onClick="programButton"
-		        android:text="Button 1" />
+		        android:onClick="programButton">
+				
+				<TextView 
+		            style="@style/MetroTileText_bg"
+		            android:layout_height="wrap_content"
+		            android:layout_width="fill_parent"
+		            android:layout_alignParentBottom="true"
+		            android:text="@string/program_button" />
+	        </RelativeLayout>
 		    
 		    
-		    <Button android:id="@+id/main_menu_tickets"
+		    <RelativeLayout
 		        style="@style/MetroTile"
             	android:layout_margin="5px"
 		        android:layout_height="fill_parent"
 		        android:layout_width="fill_parent"
-		        android:layout_weight="1"
-		        android:onClick="ticketButton"
-		        android:text="Button 2" />
+		        android:layout_weight="1">
+		        
+		        <TextView android:id="@+id/main_menu_openinghours_header"
+		            style="@style/MetroTileText"
+		            android:layout_height="wrap_content"
+		            android:layout_width="fill_parent"
+		            android:layout_alignParentTop="true"
+		            android:text="Text 1" />
+		        
+		        <!-- This is set in Java: -->
+		        <TextView android:id="@+id/main_menu_openinghours"
+		            style="@style/MetroTileText" 
+		            android:textSize="10sp"
+		            android:typeface="monospace"
+		            android:gravity="left"
+		            
+		            android:layout_marginTop="20px"
+		            android:layout_marginBottom="20px"
+		            android:layout_marginLeft="5px"
+		            android:layout_marginRight="5px"
+		            android:layout_height="wrap_content"
+		            android:layout_width="wrap_content"
+		            android:layout_below="@id/main_menu_openinghours_header" />
+		            
+		    </RelativeLayout>
 	    </LinearLayout>
 	    
 	    <LinearLayout
-	        android:layout_height="fill_parent"
-			android:layout_width="fill_parent" 
+	        android:layout_height="match_parent"
+			android:layout_width="match_parent" 
 			android:orientation="horizontal"
 			android:layout_weight="1"
 			android:gravity="center">
 		    
-		    <Button android:id="@+id/main_menu_stream"
+		    <RelativeLayout android:id="@+id/main_menu_tickets"
 		        style="@style/MetroTile"
             	android:layout_margin="5px"
-		        android:layout_height="fill_parent"
-		        android:layout_width="fill_parent"
+		        android:layout_height="match_parent"
+		        android:layout_width="match_parent"
 		        android:layout_weight="1"
-		        android:onClick="streamButton"
-		        android:text="Button 3" />
+		        android:onClick="ticketButton">
+		        
+		        <TextView 
+		            style="@style/MetroTileText"
+		            android:layout_height="wrap_content"
+		            android:layout_width="fill_parent"
+		            android:layout_alignParentBottom="true"
+		            android:text="Billetter" />
+		    </RelativeLayout>
 		    
-		    <Button android:id="@+id/main_menu_join"
+		    <RelativeLayout android:id="@+id/main_menu_join"
 		        style="@style/MetroTile"
             	android:layout_margin="5px"
-		        android:layout_height="fill_parent"
-		        android:layout_width="fill_parent"
+		        android:layout_height="match_parent"
+		        android:layout_width="match_parent"
 		        android:layout_weight="1"
-		        android:onClick="joinButton"
-		        android:text="Button 4" />
+		        android:onClick="joinButton">
+				
+		        <TextView 
+		            style="@style/MetroTileText"
+		            android:layout_height="wrap_content"
+		            android:layout_width="fill_parent"
+		            android:layout_alignParentBottom="true"
+		            android:text="Button 4" />		        
+	        </RelativeLayout>
    	    </LinearLayout>
 	</LinearLayout>
 	
@@ -83,7 +126,7 @@
 	<!-- <ImageView 
 		android:id="@+id/paragraph"
 		android:layout_height="wrap_content"
-		android:layout_width="fill_parent" 
+		android:layout_width="match_parent" 
 		android:layout_alignParentTop="true"
 		android:layout_alignParentBottom="true"
 		android:src="@drawable/partest" />  -->
