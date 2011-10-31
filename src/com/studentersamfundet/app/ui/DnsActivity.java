@@ -1,5 +1,7 @@
 package com.studentersamfundet.app.ui;
 
+import java.util.Calendar;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,7 +11,24 @@ import android.widget.Toast;
 import com.studentersamfundet.app.R;
 
 public class DnsActivity extends BaseDnsActivity {
-
+	String[] openingHoursHouse = {
+		"13.00 - 01.00",
+		"13.00 - 01.00",
+		"      - 01.30",
+		"      - 03.00",
+		"      - 03.00",
+		"15.00 - 03.00",
+		"      - 19.00"};
+	
+	String[] openingHoursBC = {
+		"Stengt",
+		"19.00 - 00.00",
+		"19.00 - 00.00",
+		"19.00 - 00.00",
+		"19.00 - 03.00",
+		"19.00 - 03.00",
+		"20.00 - 03.00"};
+	
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -18,10 +37,12 @@ public class DnsActivity extends BaseDnsActivity {
 		
 		/* Set opening hours: */
 		TextView openingHours = (TextView)findViewById(R.id.main_menu_openinghours);
+		int day = (Calendar.getInstance().get(Calendar.DAY_OF_WEEK) + 5) % 7;
+		
 		openingHours.setText(
-				   "Huset      13.00-01.00"
-				+"\nKjøkkenet       -19.00"
-				+"\nBokCaféen  19.00-00.00");
+				   "Huset      "+openingHoursHouse[day]
+				+"\nKjøkkenet        - 19.00"
+				+"\nBokCaféen  "+openingHoursBC[day]);
 
 	}
 
