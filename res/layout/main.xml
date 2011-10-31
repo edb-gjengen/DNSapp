@@ -9,18 +9,19 @@
 		android:layout_alignParentTop="true"/>
 	
 	<!-- Footer -->
-	<!-- <include layout="@layout/footer" 
+	<include layout="@layout/footer" 
 		android:layout_height="wrap_content"
 		android:layout_width="fill_parent" 
-		android:layout_alignParentBottom="true" /> -->
+		android:layout_alignParentBottom="true" />
 	
 	<!-- MENU: --> 
 	<LinearLayout 
 	    android:layout_height="fill_parent"
 		android:layout_width="fill_parent" 
 		android:layout_below="@id/header"
-		android:layout_marginTop="20px"
-		android:layout_marginBottom="20px"
+		android:layout_above="@id/footer"
+		android:layout_marginTop="30px"
+		android:layout_marginBottom="30px"
 		android:orientation="vertical"
 		android:gravity="center">
 	    
@@ -32,13 +33,18 @@
 			android:gravity="center">
 			
 		    <Button android:id="@+id/main_menu_program"
+		        style="@style/MetroTile"
+            	android:layout_margin="5px"
 		        android:layout_height="fill_parent"
-		        android:layout_width="fill_parent"
-		        android:layout_weight="1"
+	        	android:layout_width="fill_parent"
+	        	android:layout_weight="1"
 		        android:onClick="programButton"
 		        android:text="Button 1" />
 		    
+		    
 		    <Button android:id="@+id/main_menu_tickets"
+		        style="@style/MetroTile"
+            	android:layout_margin="5px"
 		        android:layout_height="fill_parent"
 		        android:layout_width="fill_parent"
 		        android:layout_weight="1"
@@ -54,6 +60,8 @@
 			android:gravity="center">
 		    
 		    <Button android:id="@+id/main_menu_stream"
+		        style="@style/MetroTile"
+            	android:layout_margin="5px"
 		        android:layout_height="fill_parent"
 		        android:layout_width="fill_parent"
 		        android:layout_weight="1"
@@ -61,6 +69,8 @@
 		        android:text="Button 3" />
 		    
 		    <Button android:id="@+id/main_menu_join"
+		        style="@style/MetroTile"
+            	android:layout_margin="5px"
 		        android:layout_height="fill_parent"
 		        android:layout_width="fill_parent"
 		        android:layout_weight="1"

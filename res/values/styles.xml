@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- MAIN MENU STYLES: -->
+    <style name="MetroTile">
+        <item name="android:background">@drawable/metro_background</item>
+        <item name="android:textColor">#ffffff</item>
+    </style>
+    
 	<!-- EVENT VIEW STYLES: -->
     <style name="BigHeader">
         <item name="android:textSize">20sp</item>
