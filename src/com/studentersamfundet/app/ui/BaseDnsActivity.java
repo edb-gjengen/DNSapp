@@ -38,4 +38,8 @@ public abstract class BaseDnsActivity extends Activity {
     		startActivity(intent);
     	}
     }
+    
+    public void doNothing(View v) {
+    	/* As promised. */
+    }
 }

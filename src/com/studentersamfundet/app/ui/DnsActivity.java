@@ -36,13 +36,14 @@ public class DnsActivity extends BaseDnsActivity {
 		setContentView(R.layout.main);
 		
 		/* Set opening hours: */
-		TextView openingHours = (TextView)findViewById(R.id.main_menu_openinghours);
+		TextView tvNeuf = (TextView)findViewById(R.id.main_menu_hours_neuf);
+		TextView tvBC = (TextView)findViewById(R.id.main_menu_hours_bc);
 		int day = (Calendar.getInstance().get(Calendar.DAY_OF_WEEK) + 5) % 7;
 		
-		openingHours.setText(
-				   "Huset      "+openingHoursHouse[day]
-				+"\nKjøkkenet        - 19.00"
-				+"\nBokCaféen  "+openingHoursBC[day]);
+		tvNeuf.setText(openingHoursHouse[day]);
+		
+		//		+"\nKjøkkenet        - 19.00"
+		tvBC.setText(openingHoursBC[day]);
 
 	}
 

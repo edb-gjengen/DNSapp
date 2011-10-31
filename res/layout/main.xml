@@ -34,6 +34,7 @@
 			
 		    <RelativeLayout android:id="@+id/main_menu_program"
 		        style="@style/MetroTile"
+		        android:background="@drawable/ex1"
             	android:layout_margin="5px"
 		        android:layout_height="fill_parent"
 	        	android:layout_width="fill_parent"
@@ -51,33 +52,59 @@
 		    
 		    <RelativeLayout
 		        style="@style/MetroTile"
+		        android:background="@drawable/ex2"
             	android:layout_margin="5px"
 		        android:layout_height="fill_parent"
 		        android:layout_width="fill_parent"
+		        android:onClick="doNothing"
 		        android:layout_weight="1">
 		        
-		        <TextView android:id="@+id/main_menu_openinghours_header"
-		            style="@style/MetroTileText"
+		        <TextView
+		            style="@style/MetroTileText_bg"
+		            android:layout_height="wrap_content"
+		            android:layout_width="fill_parent"
+		            android:layout_alignParentBottom="true"
+		            android:text="@string/main_menu_opening_hours" />
+		        
+		        <!-- OPENING HOURS: -->
+		        <TextView android:id="@+id/main_menu_hours_neuf_header" 
+		            style="@style/MetroTileText_bg"
+		            android:textSize="12sp"
 		            android:layout_height="wrap_content"
 		            android:layout_width="fill_parent"
 		            android:layout_alignParentTop="true"
-		            android:text="Text 1" />
-		        
-		        <!-- This is set in Java: -->
-		        <TextView android:id="@+id/main_menu_openinghours"
-		            style="@style/MetroTileText" 
-		            android:textSize="10sp"
-		            android:typeface="monospace"
-		            android:gravity="left"
+		            android:layout_marginTop="10px"
+		            android:layout_marginBottom="10px"
+		            android:text="Chateau Neuf" />
 		            
-		            android:layout_marginTop="20px"
-		            android:layout_marginBottom="20px"
+		        <!-- This is set in Java: -->
+		        <TextView android:id="@+id/main_menu_hours_neuf"
+		            style="@style/MetroTileText"
+		            android:textSize="10sp" 
 		            android:layout_marginLeft="5px"
 		            android:layout_marginRight="5px"
 		            android:layout_height="wrap_content"
-		            android:layout_width="wrap_content"
-		            android:layout_below="@id/main_menu_openinghours_header" />
+		            android:layout_width="fill_parent"
+		            android:layout_below="@id/main_menu_hours_neuf_header" />
 		            
+		        
+		        <TextView android:id="@+id/main_menu_hours_bc_header" 
+		            style="@style/MetroTileText_bg"
+		            android:textSize="12sp"
+		            android:layout_height="wrap_content"
+		            android:layout_width="fill_parent"
+		            android:layout_marginTop="10px"
+		            android:layout_marginBottom="10px"
+		            android:layout_below="@id/main_menu_hours_neuf"
+		            android:text="Bokcaféen" />
+		            
+		        <!-- This is set in Java: -->
+		        <TextView android:id="@+id/main_menu_hours_bc"
+		            style="@style/MetroTileText" 
+		            android:textSize="10sp"
+		            android:layout_height="wrap_content"
+		            android:layout_width="fill_parent"
+		            android:layout_below="@id/main_menu_hours_bc_header" />
 		    </RelativeLayout>
 	    </LinearLayout>
 	    
@@ -90,6 +117,7 @@
 		    
 		    <RelativeLayout android:id="@+id/main_menu_tickets"
 		        style="@style/MetroTile"
+		        android:background="@drawable/ex3"
             	android:layout_margin="5px"
 		        android:layout_height="match_parent"
 		        android:layout_width="match_parent"
@@ -97,7 +125,7 @@
 		        android:onClick="ticketButton">
 		        
 		        <TextView 
-		            style="@style/MetroTileText"
+		            style="@style/MetroTileText_bg"
 		            android:layout_height="wrap_content"
 		            android:layout_width="fill_parent"
 		            android:layout_alignParentBottom="true"
@@ -106,6 +134,7 @@
 		    
 		    <RelativeLayout android:id="@+id/main_menu_join"
 		        style="@style/MetroTile"
+		        android:background="@drawable/ex4"
             	android:layout_margin="5px"
 		        android:layout_height="match_parent"
 		        android:layout_width="match_parent"
@@ -113,11 +142,11 @@
 		        android:onClick="joinButton">
 				
 		        <TextView 
-		            style="@style/MetroTileText"
+		            style="@style/MetroTileText_bg"
 		            android:layout_height="wrap_content"
 		            android:layout_width="fill_parent"
 		            android:layout_alignParentBottom="true"
-		            android:text="Button 4" />		        
+		            android:text="@string/bli_med_button" />		        
 	        </RelativeLayout>
    	    </LinearLayout>
 	</LinearLayout>
