@@ -9,18 +9,73 @@
 		android:layout_alignParentTop="true"/>
 	
 	<!-- Footer -->
-	<include layout="@layout/footer" 
+	<!-- <include layout="@layout/footer" 
 		android:layout_height="wrap_content"
 		android:layout_width="fill_parent" 
-		android:layout_alignParentBottom="true" />
+		android:layout_alignParentBottom="true" /> -->
+	
+	<!-- MENU: --> 
+	<LinearLayout 
+	    android:layout_height="fill_parent"
+		android:layout_width="fill_parent" 
+		android:layout_below="@id/header"
+		android:layout_marginTop="20px"
+		android:layout_marginBottom="20px"
+		android:orientation="vertical"
+		android:gravity="center">
+	    
+	    <LinearLayout
+	        android:layout_height="fill_parent"
+			android:layout_width="fill_parent" 
+			android:orientation="horizontal"
+			android:layout_weight="1"
+			android:gravity="center">
+			
+		    <Button android:id="@+id/main_menu_program"
+		        android:layout_height="fill_parent"
+		        android:layout_width="fill_parent"
+		        android:layout_weight="1"
+		        android:onClick="programButton"
+		        android:text="Button 1" />
+		    
+		    <Button android:id="@+id/main_menu_tickets"
+		        android:layout_height="fill_parent"
+		        android:layout_width="fill_parent"
+		        android:layout_weight="1"
+		        android:onClick="ticketButton"
+		        android:text="Button 2" />
+	    </LinearLayout>
+	    
+	    <LinearLayout
+	        android:layout_height="fill_parent"
+			android:layout_width="fill_parent" 
+			android:orientation="horizontal"
+			android:layout_weight="1"
+			android:gravity="center">
+		    
+		    <Button android:id="@+id/main_menu_stream"
+		        android:layout_height="fill_parent"
+		        android:layout_width="fill_parent"
+		        android:layout_weight="1"
+		        android:onClick="streamButton"
+		        android:text="Button 3" />
+		    
+		    <Button android:id="@+id/main_menu_join"
+		        android:layout_height="fill_parent"
+		        android:layout_width="fill_parent"
+		        android:layout_weight="1"
+		        android:onClick="joinButton"
+		        android:text="Button 4" />
+   	    </LinearLayout>
+	</LinearLayout>
 	
 	<!-- Formålsparagraf -->
-	<ImageView 
+	<!-- <ImageView 
 		android:id="@+id/paragraph"
 		android:layout_height="wrap_content"
 		android:layout_width="fill_parent" 
 		android:layout_alignParentTop="true"
 		android:layout_alignParentBottom="true"
-		android:src="@drawable/partest" />
+		android:src="@drawable/partest" />  -->
 	
 </RelativeLayout>
