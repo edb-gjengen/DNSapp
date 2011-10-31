@@ -11,17 +11,16 @@ public class XmlParser {
 			 dh = new DataHandler();
 		}
 	
-		public DataHandler parse(NodeList itemNodes) {
-			String id = "";
-            String title = "";
-            String description = "";
-            String date = "";
-            String location = "";
-            String text = "";
-            String category = "";
-            // String pictureUrl = ""; Necessary?
-            
-            for (int i = 0; i < itemNodes.getLength(); i++) { 
+		public DataHandler parse(NodeList itemNodes) {          
+            for (int i = 0; i < itemNodes.getLength(); i++) {
+    			String id = "";
+                String title = "";
+                String description = "";
+                String date = "";
+                String location = "";
+                String text = "";
+                String category = "";
+                
                 Node itemNode = itemNodes.item(i); 
                 
                 if (itemNode.getNodeType() == Node.ELEMENT_NODE) {            
