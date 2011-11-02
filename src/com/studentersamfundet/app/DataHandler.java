@@ -9,9 +9,9 @@ public class DataHandler {
 	private List<Event> events = new LinkedList<Event>();
 	private Set<String> categories = new TreeSet<String>();
 	
-	public void insert(String id, String title, String description, String date, String location, String text, String category) {
+	public void insertEvent(String id, String title, String description, String date, String location, String text, String category) {
 		int intId = Integer.parseInt(id);
-		if (get(intId) != null)
+		if (getEvent(intId) != null)
 			return;
 		
 		Event e = new Event(intId, title, description, date, location, text, category);
@@ -19,7 +19,7 @@ public class DataHandler {
 		categories.add(category);
 	}
 	
-	public Event get(int id) {
+	public Event getEvent(int id) {
 		for (Event e : events) {
 			if (e.id == id)
 				return e;
@@ -27,7 +27,7 @@ public class DataHandler {
 		return null;
 	}
 	
-	public Event[] populateList(String category) {
+	public Event[] populateEventList(String category) {
 		LinkedList<Event> sorted = new LinkedList<Event>();
 
 		if (category.equals(Event.ALL)) {
@@ -41,7 +41,7 @@ public class DataHandler {
 		return sorted.toArray(new Event[sorted.size()]);
     }
 	
-	public String[] getCategories() {
+	public String[] getEventCategories() {
 		String[] result = new String[categories.size() + 1];
 		result[0] = Event.ALL;
 		

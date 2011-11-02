@@ -42,8 +42,6 @@ public class DnsActivity extends BaseDnsActivity {
 		int day = (Calendar.getInstance().get(Calendar.DAY_OF_WEEK) + 5) % 7;
 		
 		tvNeuf.setText(openingHoursHouse[day]);
-		
-		//		+"\nKjøkkenet        - 19.00"
 		tvBC.setText(openingHoursBC[day]);
 
 	}
@@ -67,7 +65,7 @@ public class DnsActivity extends BaseDnsActivity {
 		startActivity(intent);
 	}
 
-	public void streamButton(View v) {
+	public void newsButton(View v) {
 		Toast.makeText(this, "Not implemented (yet!)", Toast.LENGTH_SHORT).show();
 	}
 

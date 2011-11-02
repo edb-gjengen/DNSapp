@@ -4,10 +4,10 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-public class XmlParser {
+public class RSSParserProgram {
 		private static DataHandler dh;
 		
-		public XmlParser() {
+		public RSSParserProgram() {
 			 dh = new DataHandler();
 		}
 	
@@ -64,7 +64,7 @@ public class XmlParser {
                     if (textTextNodes.getLength() > 0) 			text = textTextNodes.item(0).getNodeValue();
                     if (categoryTextNodes.getLength() > 0) 		category = categoryTextNodes.item(0).getNodeValue();
                     
-                    dh.insert(id, title, description, date, location, text, category);
+                    dh.insertEvent(id, title, description, date, location, text, category);
                 }
             }
             return dh;
