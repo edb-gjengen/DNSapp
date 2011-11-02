@@ -3,6 +3,7 @@ package com.studentersamfundet.app.ui;
 import java.util.Calendar;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -58,7 +59,12 @@ public class DnsActivity extends BaseDnsActivity {
 	}
 
 	public void ticketButton(View v) {
-		Toast.makeText(this, "Not implemented (yet!)", Toast.LENGTH_SHORT).show();
+		Intent intent = new Intent();
+
+		intent.setAction(Intent.ACTION_VIEW);
+		intent.setData(Uri.parse("http://m.billettservice.no/ticket/search.do?articles=tmno&query=studentersamfundet&submit=S%C3%B8k"));
+
+		startActivity(intent);
 	}
 
 	public void streamButton(View v) {
