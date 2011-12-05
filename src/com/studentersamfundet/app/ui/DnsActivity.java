@@ -76,7 +76,7 @@ public class DnsActivity extends BaseDnsActivity {
 				boolean pointerMoved = false;
 				
 				public boolean onTouch(View v, MotionEvent event) {
-					if (event.getAction() == MotionEvent.ACTION_DOWN) {
+					if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
 						for (int j = 0; j < buttons.length; j++) {
 							if (index != j) {								
 								Animation animation = new AlphaAnimation(1.0f, 0.6f);
@@ -92,13 +92,35 @@ public class DnsActivity extends BaseDnsActivity {
 						return true;
 					} 
 					
-					if (event.getAction() == MotionEvent.ACTION_UP) {
+					if (event.getActionMasked() == MotionEvent.ACTION_MOVE) {
+						if (this.pointerMoved)
+							return true;
+						
+						float x = event.getRawX();
+						float y = event.getRawY();
+						
+						int[] location = new int[2];
+						v.getLocationOnScreen(location);
+						
+						int width = v.getMeasuredWidth();
+						int height = v.getMeasuredHeight();
+						
+						if (x < location[0]
+							    || x > location[0]+width
+							    || y < location[1]
+							    || y > location[1]+height) {
+							this.pointerMoved = true;
+						}
+					}
+					
+					if (event.getActionMasked() == MotionEvent.ACTION_UP) {
 						/* Define the animation that makes elements opaque: */
 						Animation animation = new AlphaAnimation(0.6f, 1.0f);
 						animation.setDuration(50);
 						animation.setFillAfter(true);
 						
-						if (!this.pointerMoved) {					
+						if (!this.pointerMoved) {		
+							animation.setDuration(0);
 							v.performClick();
 						}
 						
@@ -107,10 +129,6 @@ public class DnsActivity extends BaseDnsActivity {
 						}
 						
 						return true;
-					}
-					
-					if (event.getAction() == MotionEvent.ACTION_MOVE) {
-						this.pointerMoved = true;
 					}
 					
 					return false;
