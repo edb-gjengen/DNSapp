@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-import android.net.Uri;
-
 public class DataHandler {
 	private List<Event> events = new LinkedList<Event>();
 	private List<News> news = new LinkedList<News>();
@@ -32,15 +30,9 @@ public class DataHandler {
 		try {
 			int regularPrice = Integer.parseInt(priceReg);
 			int memberPrice = Integer.parseInt(priceMem);
-			Uri ticketUri = null;
 			
-			if (ticketUriStr.startsWith("http://") && ticketUriStr.length() > 7) {
-				ticketUri = Uri.parse(ticketUriStr);
-			}
-			
-			event.setTicketsInfo(regularPrice, memberPrice, ticketUri);
-		} catch (NumberFormatException e1) { /* Do nothing. */
-		} catch (NullPointerException e2) { /* That's correct, catch NullPointerExceptions. */ }
+			event.setTicketsInfo(regularPrice, memberPrice, ticketUriStr);
+		} catch (NumberFormatException e1) { /* Do nothing. */ } 
 		
 		
 		events.add(event);

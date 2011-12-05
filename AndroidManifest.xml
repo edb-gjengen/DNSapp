@@ -19,7 +19,7 @@
         </activity>
         <activity android:name=".ui.EventViewActivity"></activity>
         <activity android:name=".ui.JoinUsActivity"></activity>
-        <activity android:name=".ui.ProgramListActivity"></activity>
+        <activity android:name=".ui.EventListActivity"></activity>
 
     </application>
 </manifest>

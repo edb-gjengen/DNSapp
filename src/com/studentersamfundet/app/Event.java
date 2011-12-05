@@ -24,7 +24,7 @@ public class Event implements Serializable {
 	
 	private int regularPrice;
 	private int memberPrice;
-	private Uri ticketUri;
+	private String ticketUriStr;
 	
 	public Event(
 			int id, 
@@ -98,12 +98,20 @@ public class Event implements Serializable {
 	}
 	
 	public Uri getTicketUri() {
-		return this.ticketUri;
+		Uri ticketUri = null;
+		
+		if (ticketUriStr != null 
+				&& ticketUriStr.startsWith("http://") 
+				&& ticketUriStr.length() > 7) {
+			ticketUri = Uri.parse(ticketUriStr);
+		}
+		
+		return ticketUri;
 	}
 	
-	public void setTicketsInfo(int regularPrice, int memberPrice, Uri ticketUri) {
+	public void setTicketsInfo(int regularPrice, int memberPrice, String ticketUri) {
 		this.regularPrice = regularPrice;
 		this.memberPrice = memberPrice;
-		this.ticketUri = ticketUri;
+		this.ticketUriStr = ticketUri;
 	}
 }

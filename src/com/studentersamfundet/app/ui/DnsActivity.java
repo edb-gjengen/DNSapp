@@ -142,7 +142,7 @@ public class DnsActivity extends BaseDnsActivity {
 
 		intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
 				| Intent.FLAG_ACTIVITY_SINGLE_TOP);
-		intent.setClass(this, ProgramListActivity.class);
+		intent.setClass(this, EventListActivity.class);
 
 		startActivity(intent);
 	}

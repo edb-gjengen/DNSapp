@@ -33,7 +33,7 @@ import com.studentersamfundet.app.R;
 import com.studentersamfundet.app.RSSParserProgram;
 import com.studentersamfundet.app.ui.ChooseCategoryDialog.Callback;
 
-public class ProgramListActivity extends BaseDnsActivity {
+public class EventListActivity extends BaseDnsActivity {
 	public static final String feedURL = "http://studentersamfundet.no/rss/lars_program_feed.php";
 	
 	private FeedFetcher feed;
@@ -124,15 +124,15 @@ public class ProgramListActivity extends BaseDnsActivity {
     			} else {
     				row.setBackgroundResource(R.color.ListItemBackgroundOdd);
     			}
-				titleView.setTextAppearance(ProgramListActivity.this, R.style.ListItemTextTitle);
-				dateView.setTextAppearance(ProgramListActivity.this, R.style.ListItemTextDate);
-				priceView.setTextAppearance(ProgramListActivity.this, R.style.ListItemTextDate);
+				titleView.setTextAppearance(EventListActivity.this, R.style.ListItemTextTitle);
+				dateView.setTextAppearance(EventListActivity.this, R.style.ListItemTextDate);
+				priceView.setTextAppearance(EventListActivity.this, R.style.ListItemTextDate);
     			
     			/* Add onClickListeners: */
     			row.setOnClickListener(new OnClickListener() {
 					
 					public void onClick(View v) {
-						Intent intent = new Intent(ProgramListActivity.this, EventViewActivity.class);
+						Intent intent = new Intent(EventListActivity.this, EventViewActivity.class);
 						intent.putExtra("event", e);
 						
 						startActivity(intent);
@@ -244,7 +244,7 @@ public class ProgramListActivity extends BaseDnsActivity {
 		        
 		        currentCategory = category;
 			} else {
-				Toast toast = Toast.makeText(ProgramListActivity.this, R.string.error_noconnection_noupdate, Toast.LENGTH_LONG);
+				Toast toast = Toast.makeText(EventListActivity.this, R.string.error_noconnection_noupdate, Toast.LENGTH_LONG);
 	        	toast.show();
 			}
 		}
