@@ -112,7 +112,7 @@ public class ProgramListActivity extends BaseDnsActivity {
     	 
     			SimpleDateFormat dateFormat = new SimpleDateFormat("d. MMMM");
     			TextView dateView = (TextView) row.findViewById(R.id.event_list_row_date);
-    			dateView.setText(dateFormat.format(e.date));
+    			dateView.setText(dateFormat.format(e.getDate()));
     			
     			row.setOnClickListener(new OnClickListener() {
 					
@@ -127,10 +127,10 @@ public class ProgramListActivity extends BaseDnsActivity {
     			row.setOnLongClickListener(new OnLongClickListener() {
 					
 					public boolean onLongClick(View v) {
-						if (e.date == null)
+						if (e.getDate() == null)
 							return false;
 						
-						long startDate = e.date.getTime();
+						long startDate = e.getDate().getTime();
 						
 						try {
 							Intent intent = new Intent(Intent.ACTION_EDIT);
@@ -139,7 +139,7 @@ public class ProgramListActivity extends BaseDnsActivity {
 							intent.putExtra("beginTime", startDate);
 							intent.putExtra("endTime", startDate + (2*60*60*1000)); // Two hours
 							intent.putExtra("allDay", false);
-							intent.putExtra("eventLocation", e.location);
+							intent.putExtra("eventLocation", e.getLocation());
 							intent.putExtra("reminder", false);
 						
 							startActivity(intent);

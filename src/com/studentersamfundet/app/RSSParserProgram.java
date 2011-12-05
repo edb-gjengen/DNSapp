@@ -20,16 +20,19 @@ public class RSSParserProgram {
 	}
 
 	public DataHandler parse(NodeList itemNodes) {
-		String id = "";
-        String title = "";
-        String description = "";
-        String date = "";
-        String location = "";
-        String text = "";
-        String category = "";
-        // String pictureUrl = ""; Necessary?
-        
-        for (int i = 0; i < itemNodes.getLength(); i++) { 
+        for (int i = 0; i < itemNodes.getLength(); i++) {
+        	String id = "";
+            String title = "";
+            String description = "";
+            String date = "";
+            String location = "";
+            String text = "";
+            String category = "";
+            String image = "";
+            String priceReg = "";
+            String priceMem = "";
+            String ticketUrl = "";
+            
             Node itemNode = itemNodes.item(i); 
             
             if (itemNode.getNodeType() == Node.ELEMENT_NODE) {            
@@ -44,6 +47,10 @@ public class RSSParserProgram {
                 NodeList locationNodes = (itemElement).getElementsByTagName("location");
                 NodeList textNodes = (itemElement).getElementsByTagName("content");
                 NodeList categoryNodes = (itemElement).getElementsByTagName("category");
+                NodeList imageNodes = (itemElement).getElementsByTagName("image");
+                NodeList priceRegNodes = (itemElement).getElementsByTagName("price-regular");
+                NodeList priceMemNodes = (itemElement).getElementsByTagName("price-member");
+                NodeList ticketUrlNodes = (itemElement).getElementsByTagName("ticket-url");
                 
                 // Convert a Node into an Element.
                 Node idElement = idNodes.item(0);
@@ -53,6 +60,10 @@ public class RSSParserProgram {
                 Node locationElement = locationNodes.item(0);
                 Node textElement = textNodes.item(0);
                 Node categoryElement = categoryNodes.item(0);
+                Node imageElement = imageNodes.item(0);
+                Node priceRegElement = priceRegNodes.item(0);
+                Node priceMemElement = priceMemNodes.item(0);
+                Node ticketUrlElement = ticketUrlNodes.item(0);
                 
                 // Get all the child nodes.
                 NodeList idTextNodes = idElement.getChildNodes();
@@ -62,6 +73,10 @@ public class RSSParserProgram {
                 NodeList locationTextNodes = locationElement.getChildNodes();
                 NodeList textTextNodes = textElement.getChildNodes();
                 NodeList categoryTextNodes = categoryElement.getChildNodes();
+                NodeList imageTextNodes = imageElement.getChildNodes();
+                NodeList priceRegTextNodes = priceRegElement.getChildNodes();
+                NodeList priceMemTextNodes = priceMemElement.getChildNodes();
+                NodeList ticketUrlTextNodes = ticketUrlElement.getChildNodes();
                 
                 // Retrieve the text.
                 id = idTextNodes.item(0).getNodeValue(); // mandatory
@@ -71,8 +86,23 @@ public class RSSParserProgram {
                 if (locationTextNodes.getLength() > 0) 		location = locationTextNodes.item(0).getNodeValue();
                 if (textTextNodes.getLength() > 0) 			text = textTextNodes.item(0).getNodeValue();
                 if (categoryTextNodes.getLength() > 0) 		category = categoryTextNodes.item(0).getNodeValue();
+                if (imageTextNodes.getLength() > 0)			image = imageTextNodes.item(0).getNodeValue();
+                if (priceRegTextNodes.getLength() > 0)		priceReg = priceRegTextNodes.item(0).getNodeValue();
+                if (priceMemTextNodes.getLength() > 0)			priceMem = priceMemTextNodes.item(0).getNodeValue();
+                if (ticketUrlTextNodes.getLength() > 0)			ticketUrl = ticketUrlTextNodes.item(0).getNodeValue();
                 
-                dh.insertEvent(id, title, description, date, location, text, category);
+                // This is as ugly as it gets. Refactor?
+                dh.insertEvent(id, 
+                		title, 
+                		description, 
+                		date, 
+                		location, 
+                		text, 
+                		category, 
+                		image,
+                		priceReg,
+                		priceMem,
+                		ticketUrl);
             }
         }
         return dh;

@@ -35,21 +35,21 @@ public class EventViewActivity extends BaseDnsActivity {
         Button link = (Button) findViewById(R.id.event_view_link);
         
         title.setText(Html.fromHtml(e.title));
-        location.setText(Html.fromHtml(e.location));
+        location.setText(Html.fromHtml(e.getLocation()));
         
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-        datetime.setText(e.date != null ? dateFormat.format(e.date) : "");
+        datetime.setText(e.getDate() != null ? dateFormat.format(e.getDate()) : "");
         
         StringBuilder sb = new StringBuilder();
         
-        if (e.description.length() > 0) {
+        if (e.getDescription().length() > 0) {
         	sb.append("<b>");
-        	sb.append(e.description);
+        	sb.append(e.getDescription());
         	sb.append("</b><br/><br/>");
         }
         
-        if (e.text.length() > 0) {
-        	sb.append(e.text);
+        if (e.getContent().length() > 0) {
+        	sb.append(e.getContent());
         }
         
         description.setText(Html.fromHtml(sb.toString()));
