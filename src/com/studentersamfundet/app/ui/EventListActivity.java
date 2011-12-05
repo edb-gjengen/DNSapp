@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 
 import org.w3c.dom.NodeList;
 
+import android.R.bool;
 import android.app.Dialog;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
@@ -44,9 +45,9 @@ public class EventListActivity extends BaseDnsActivity {
 	public static final String feedURL = "http://studentersamfundet.no/rss/lars_program_feed.php";
 	public static final int imageSize = 80;
 	
-	private FeedFetcher feed;
-	private RSSParserProgram parser;
-	private DataHandler dataHandler;
+	protected FeedFetcher feed;
+	protected RSSParserProgram parser;
+	protected DataHandler dataHandler;
 	
 	private String currentCategory = Event.ALL; 
 	
@@ -58,7 +59,7 @@ public class EventListActivity extends BaseDnsActivity {
         this.feed = new FeedFetcher(this, feedURL);
         this.parser = new RSSParserProgram();
         
-        ListCreator lc = new ListCreator(Event.ALL, false);
+        ListCreator lc = getListCreator(Event.ALL, false);
         lc.execute();
     }
     
@@ -74,7 +75,7 @@ public class EventListActivity extends BaseDnsActivity {
 
         switch (item.getItemId()) {
         case R.id.menu_refresh:
-            ListCreator lc = new ListCreator(Event.ALL, true);
+            ListCreator lc = getListCreator(Event.ALL, true);
             lc.execute();
             return true;
         
@@ -92,14 +93,13 @@ public class EventListActivity extends BaseDnsActivity {
     	if (currentCategory.equals(Event.ALL)) {
     		super.onBackPressed();
     	} else {
-    		ListCreator lc = new ListCreator(Event.ALL, false);
+    		ListCreator lc = getListCreator(Event.ALL, false);
     		lc.execute();
     	}
     }
     
     
-    protected ListAdapter createAdapter(String category) {
-    	Event[] events = dataHandler.getEvents(category);
+    protected ListAdapter createAdapter(Event[] events) {
     	
     	ListAdapter adapter = new ArrayAdapter<Event>(this, R.layout.event_list_row, R.id.event_list_row_text, events) {
     		@Override
@@ -154,41 +154,8 @@ public class EventListActivity extends BaseDnsActivity {
 				priceView.setTextAppearance(EventListActivity.this, R.style.ListItemTextDate);
     			
     			/* Add onClickListeners: */
-    			row.setOnClickListener(new OnClickListener() {
-					
-					public void onClick(View v) {
-						Intent intent = new Intent(EventListActivity.this, EventViewActivity.class);
-						intent.putExtra("event", e);
-						
-						startActivity(intent);
-					}
-				});
-    			
-    			row.setOnLongClickListener(new OnLongClickListener() {
-					
-					public boolean onLongClick(View v) {
-						if (e.getDate() == null)
-							return false;
-						
-						long startDate = e.getDate().getTime();
-						
-						try {
-							Intent intent = new Intent(Intent.ACTION_EDIT);
-							intent.setType("vnd.android.cursor.item/event");
-							intent.putExtra("title", e.title);
-							intent.putExtra("beginTime", startDate);
-							intent.putExtra("endTime", startDate + (2*60*60*1000)); // Two hours
-							intent.putExtra("allDay", false);
-							intent.putExtra("eventLocation", e.getLocation());
-							intent.putExtra("reminder", false);
-						
-							startActivity(intent);
-							return true;
-						} catch (ActivityNotFoundException e) {
-							return false;
-						}
-					}
-				});
+    			row.setOnClickListener(getShortClickListener(e));
+    			row.setOnLongClickListener(getLongClickListener(e));
     			
     			return row;
     		}
@@ -204,7 +171,7 @@ public class EventListActivity extends BaseDnsActivity {
 				if (message.length < 1) 
 					message = new String[] { Event.ALL };
 				
-				ListCreator lc = new ListCreator(message[0], false);
+				ListCreator lc = getListCreator(message[0], false);
 				lc.execute();
 			}
 		};
@@ -260,7 +227,8 @@ public class EventListActivity extends BaseDnsActivity {
 		protected void onPostExecute(Boolean result) {
 			if (result) {
 				ListView list = (ListView)findViewById(R.id.event_list);
-		        ListAdapter adapter = createAdapter(this.category);
+				Event[] events = getEvents();
+		        ListAdapter adapter = createAdapter(events);
 		        list.setAdapter(adapter);
 		        list.setVisibility(View.VISIBLE);
 		        
@@ -273,5 +241,53 @@ public class EventListActivity extends BaseDnsActivity {
 	        	toast.show();
 			}
 		}
+		
+		protected Event[] getEvents() {
+			return dataHandler.getEvents(this.category);
+		}
+    }
+    
+    protected ListCreator getListCreator(String category, boolean forcedUpdate) {
+    	return new ListCreator(category, forcedUpdate);
+    }
+    
+    protected OnClickListener getShortClickListener (final Event e) {
+    	return new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(EventListActivity.this, EventViewActivity.class);
+				intent.putExtra("event", e);
+				
+				startActivity(intent);
+			}
+		};
+	}
+    
+    protected OnLongClickListener getLongClickListener (final Event e) {
+		return new OnLongClickListener() {
+			public boolean onLongClick(View v) {
+				if (e.getDate() == null)
+					return false;
+				
+				long startDate = e.getDate().getTime();
+				
+				try {
+					Intent intent = new Intent(Intent.ACTION_EDIT);
+					intent.setType("vnd.android.cursor.item/event");
+					intent.putExtra("title", e.title);
+					intent.putExtra("beginTime", startDate);
+					intent.putExtra("endTime", startDate + (2*60*60*1000)); // Two hours
+					intent.putExtra("allDay", false);
+					intent.putExtra("eventLocation", e.getLocation());
+					intent.putExtra("reminder", false);
+				
+					startActivity(intent);
+					return true;
+				} catch (ActivityNotFoundException e) {
+					return false;
+				}
+			}
+		};
     }
 }

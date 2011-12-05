@@ -20,6 +20,7 @@
         <activity android:name=".ui.EventViewActivity"></activity>
         <activity android:name=".ui.JoinUsActivity"></activity>
         <activity android:name=".ui.EventListActivity"></activity>
+        <activity android:name=".ui.EventListTicketsActivity"></activity>
 
     </application>
 </manifest>

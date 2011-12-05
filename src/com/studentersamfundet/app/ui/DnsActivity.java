@@ -57,7 +57,7 @@ public class DnsActivity extends BaseDnsActivity {
 		
 		tvNeuf.setText(openingHoursHouse[day]);
 		tvBC.setText(openingHoursBC[day]);
-		tvGB.setText(openingHoursBC[day]);
+		tvGB.setText(openingHoursGB[day]);
 		
 		setupFocus();
 	}
@@ -150,8 +150,9 @@ public class DnsActivity extends BaseDnsActivity {
 	public void ticketButton(View v) {
 		Intent intent = new Intent();
 
-		intent.setAction(Intent.ACTION_VIEW);
-		intent.setData(Uri.parse("http://m.billettservice.no/ticket/search.do?articles=tmno&query=studentersamfundet&submit=S%C3%B8k"));
+		intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
+				| Intent.FLAG_ACTIVITY_SINGLE_TOP);
+		intent.setClass(this, EventListTicketsActivity.class);
 
 		startActivity(intent);
 	}
