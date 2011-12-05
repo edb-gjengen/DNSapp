@@ -28,8 +28,6 @@ public class EventListTicketsActivity extends EventListActivity {
 	
 	   protected OnClickListener getShortClickListener (final Event e) {
 	    	return new OnClickListener() {
-				
-				@Override
 				public void onClick(View v) {
 					Uri webDestination = e.getTicketUri();
 					
@@ -42,8 +40,6 @@ public class EventListTicketsActivity extends EventListActivity {
 	    
 	    protected OnLongClickListener getLongClickListener (final Event e) {
 	    	return new OnLongClickListener() {
-				
-				@Override
 				public boolean onLongClick(View v) {
 					return false;
 				}

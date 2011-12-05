@@ -9,7 +9,6 @@ import java.text.SimpleDateFormat;
 
 import org.w3c.dom.NodeList;
 
-import android.R.bool;
 import android.app.Dialog;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
@@ -253,8 +252,6 @@ public class EventListActivity extends BaseDnsActivity {
     
     protected OnClickListener getShortClickListener (final Event e) {
     	return new OnClickListener() {
-			
-			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(EventListActivity.this, EventViewActivity.class);
 				intent.putExtra("event", e);

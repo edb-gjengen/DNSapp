@@ -3,7 +3,6 @@ package com.studentersamfundet.app.ui;
 import java.util.Calendar;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;

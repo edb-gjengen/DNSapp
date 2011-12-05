@@ -14,7 +14,7 @@ public abstract class BaseDnsActivity extends Activity {
     	Intent intent = new Intent();
     	
     	/* Program button was pushed: */
-    	if (v.getId() == R.id.program_button) {
+    	if (v.getId() == R.id.main_menu_program) {
         	intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
         			| Intent.FLAG_ACTIVITY_SINGLE_TOP);
         	
@@ -22,7 +22,7 @@ public abstract class BaseDnsActivity extends Activity {
     		startActivity(intent);
     		
     	/* Join button was pushed: */
-    	} else if (v.getId() == R.id.bli_med_button) {
+    	} else if (v.getId() == R.id.main_menu_join) {
         	intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY
         			| Intent.FLAG_ACTIVITY_SINGLE_TOP);
         	

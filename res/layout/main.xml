@@ -8,19 +8,12 @@
 		android:layout_width="fill_parent" 
 		android:layout_alignParentTop="true"/>
 	
-	<!-- Footer (not needed right now) -->
-	<include layout="@layout/footer"
-	    android:visibility="gone"
-		android:layout_height="wrap_content"
-		android:layout_width="fill_parent" 
-		android:layout_alignParentBottom="true" />
-	
 	<!-- MENU: --> 
 	<LinearLayout 
 	    android:layout_height="fill_parent"
 		android:layout_width="fill_parent" 
 		android:layout_below="@id/header"
-		android:layout_above="@id/footer"
+		android:layout_alignParentBottom="true"
 		android:layout_marginTop="20px"
 		android:layout_marginBottom="20px"
 		android:orientation="vertical"

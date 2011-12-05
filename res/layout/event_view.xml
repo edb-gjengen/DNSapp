@@ -9,12 +9,6 @@
 		android:layout_height="wrap_content" 
 		android:layout_width="fill_parent" 
 		android:layout_alignParentTop="true"/>
-	
-	<!-- Footer -->
-	<include layout="@layout/footer" 
-		android:layout_height="wrap_content"
-		android:layout_width="fill_parent" 
-		android:layout_alignParentBottom="true" />
     
     <!-- The event -->
     <TextView android:id="@+id/event_view_title" 
@@ -47,7 +41,7 @@
 	<Button android:id="@+id/event_view_link"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:layout_above="@id/footer" 
+		android:layout_alignParentBottom="true"
 		android:layout_margin="10px"
 		android:text="@string/event_link_button"
 		android:visibility="gone" />
