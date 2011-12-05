@@ -57,7 +57,7 @@ public class DnsActivity extends BaseDnsActivity {
 		
 		tvNeuf.setText(openingHoursHouse[day]);
 		tvBC.setText(openingHoursBC[day]);
-		tvGB.setText(openingHoursBC[day]);
+		tvGB.setText(openingHoursGB[day]);
 		
 		setupFocus();
 	}
