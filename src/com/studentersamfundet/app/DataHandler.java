@@ -61,7 +61,7 @@ public class DataHandler {
 		return null;
 	}
 	
-	public Event[] populateEventList(String category) {
+	public Event[] getEvents(String category) {
 		if (category.equals(Event.ALL)) {
 			return events.toArray(new Event[events.size()]);
 		}
@@ -75,7 +75,7 @@ public class DataHandler {
 		return sorted.toArray(new Event[sorted.size()]);
     }
 	
-	public Event[] getAllEventsWithTickets() {
+	public Event[] getEventsWithTickets() {
 		LinkedList<Event> list = new LinkedList<Event>();
 		
 		for (Event event : events) {
@@ -87,7 +87,7 @@ public class DataHandler {
 		return list.toArray(new Event[list.size()]);
 	}
 	
-	public News[] populateNewsList() {
+	public News[] getNews() {
 		return this.news.toArray(new News[this.news.size()]);
 	}
 	

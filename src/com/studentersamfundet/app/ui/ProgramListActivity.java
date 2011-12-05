@@ -91,7 +91,7 @@ public class ProgramListActivity extends BaseDnsActivity {
     
     
     protected ListAdapter createAdapter(String category) {
-    	Event[] events = dataHandler.populateEventList(category);
+    	Event[] events = dataHandler.getEvents(category);
     	
     	ListAdapter adapter = new ArrayAdapter<Event>(this, R.layout.event_list_row, R.id.event_list_row_text, events) {
     		@Override
