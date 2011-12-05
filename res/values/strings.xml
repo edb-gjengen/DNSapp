@@ -11,4 +11,6 @@
     <string name="menu_categories">Kategorier</string>
     <string name="choose_category">Velg kategori</string>
     <string name="error_loading">Vent til oppdateringen fullfører</string>
+    <string name="main_menu_opening_hours">ÅPNINGSTIDER</string>
+    <string name="main_menu_tickets">BILLETTER</string>
 </resources>

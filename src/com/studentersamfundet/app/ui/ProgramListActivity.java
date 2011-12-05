@@ -30,14 +30,14 @@ import com.studentersamfundet.app.DataHandler;
 import com.studentersamfundet.app.Event;
 import com.studentersamfundet.app.FeedFetcher;
 import com.studentersamfundet.app.R;
-import com.studentersamfundet.app.XmlParser;
+import com.studentersamfundet.app.RSSParserProgram;
 import com.studentersamfundet.app.ui.ChooseCategoryDialog.Callback;
 
 public class ProgramListActivity extends BaseDnsActivity {
 	public static final String feedURL = "http://studentersamfundet.no/rss/lars_program_feed.php";
 	
 	private FeedFetcher feed;
-	private XmlParser parser;
+	private RSSParserProgram parser;
 	private DataHandler dataHandler;
 	
 	private String currentCategory = Event.ALL; 
@@ -48,7 +48,7 @@ public class ProgramListActivity extends BaseDnsActivity {
         setContentView(R.layout.event_list);
         
         this.feed = new FeedFetcher(this, feedURL);
-        this.parser = new XmlParser();
+        this.parser = new RSSParserProgram();
         
         ListCreator lc = new ListCreator(Event.ALL, false);
         lc.execute();
@@ -91,7 +91,7 @@ public class ProgramListActivity extends BaseDnsActivity {
     
     
     protected ListAdapter createAdapter(String category) {
-    	Event[] events = dataHandler.populateList(category);
+    	Event[] events = dataHandler.populateEventList(category);
     	
     	ListAdapter adapter = new ArrayAdapter<Event>(this, R.layout.event_list_row, R.id.event_list_row_text, events) {
     		@Override
@@ -181,7 +181,7 @@ public class ProgramListActivity extends BaseDnsActivity {
 		};
 		
     	if (dataHandler != null) {
-	    	Dialog dialog = new ChooseCategoryDialog(this, callback, dataHandler.getCategories());
+	    	Dialog dialog = new ChooseCategoryDialog(this, callback, dataHandler.getEventCategories());
 	    	dialog.show();
     	} else {
     		Toast.makeText(this, R.string.error_loading, Toast.LENGTH_SHORT);

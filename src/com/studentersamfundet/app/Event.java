@@ -5,6 +5,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import android.net.Uri;
+
 public class Event implements Serializable {
 	private static final long serialVersionUID = 1L;
 	public static final String ALL = "Alle";
@@ -43,5 +45,21 @@ public class Event implements Serializable {
 	
 	public String toString() {
 		return this.title;
+	}
+	
+	public Uri getUri() {
+		if (this.id <= 0)
+			return null;
+		
+		return Uri.parse("http://studentersamfundet.no/vis.php?ID=" + this.id);
+	}
+	
+	public Uri getImageUri() {
+		if (this.id <= 0) {
+			return null;
+		}
+		
+		String imageUri = "http://studentersamfundet.no/imageResize.php?pic=bilder/program/{id}.jpg&maxwidth=480";
+		return Uri.parse(imageUri.replaceAll("{id}", Integer.toString(this.id)));
 	}
 }
