@@ -25,7 +25,6 @@ public class RSSParserNews {
         String link = "";
         String content = "";
         String pubDate = "";
-        // String pictureUrl = ""; Necessary?
         
         for (int i = 0; i < itemNodes.getLength(); i++) { 
             Node itemNode = itemNodes.item(i); 

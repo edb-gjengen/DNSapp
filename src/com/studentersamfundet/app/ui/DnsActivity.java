@@ -5,7 +5,12 @@ import java.util.Calendar;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnTouchListener;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,9 +48,70 @@ public class DnsActivity extends BaseDnsActivity {
 		
 		tvNeuf.setText(openingHoursHouse[day]);
 		tvBC.setText(openingHoursBC[day]);
-
+		
+		setupFocus();
 	}
 
+	public void setupFocus() {
+		final View[] buttons = {
+			findViewById(R.id.main_menu_program),
+			findViewById(R.id.main_menu_hours),
+			findViewById(R.id.main_menu_tickets),
+			findViewById(R.id.main_menu_join),
+		};
+		
+		for (int i = 0; i < buttons.length; i++) {
+			final int index = i;
+			
+			buttons[index].setOnTouchListener(new OnTouchListener() {
+				public boolean onTouch(View v, MotionEvent event) {
+					if (event.getAction() == MotionEvent.ACTION_DOWN) {
+						for (int j = 0; j < buttons.length; j++) {
+							if (index != j) {
+								final int secondIndex = j;
+								
+								Animation animation = new AlphaAnimation(1.0f, 0.6f);
+								animation.setDuration(100);
+								animation.setFillAfter(true);
+								/*animation.setAnimationListener(new AnimationListener() {
+									public void onAnimationStart(Animation animation) {}
+									public void onAnimationRepeat(Animation animation) {}
+									public void onAnimationEnd(Animation animation) {
+										
+										buttons[secondIndex].getBackground().setAlpha((int)(255*0.6f));
+									}
+								});*/
+								buttons[j].startAnimation(animation);
+								
+							}
+						}
+						return true;
+					} 
+					
+					if (event.getAction() == MotionEvent.ACTION_UP) {
+						for (int j = 0; j < buttons.length; j++) {
+							final int secondIndex = j;
+							
+							Animation animation = new AlphaAnimation(0.6f, 1.0f);
+							animation.setDuration(50);
+							animation.setAnimationListener(new AnimationListener() {
+								public void onAnimationStart(Animation animation) {}
+								public void onAnimationRepeat(Animation animation) {}
+								public void onAnimationEnd(Animation animation) {
+									buttons[secondIndex].getBackground().setAlpha(255);
+								}
+							});
+							buttons[j].startAnimation(animation);
+						}
+						return true;
+					}
+					
+					return false;
+				}
+			});
+		}
+	}
+	
 	public void programButton(View v) {
 		Intent intent = new Intent();
 
