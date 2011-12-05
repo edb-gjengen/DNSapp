@@ -107,6 +107,7 @@ public class ProgramListActivity extends BaseDnsActivity {
     			
     			final Event e = getItem(position);
     			
+    			/* Set text: */
     			TextView titleView = (TextView) row.findViewById(R.id.event_list_row_text);
     			titleView.setText(Html.fromHtml(e.title));
     	 
@@ -114,6 +115,20 @@ public class ProgramListActivity extends BaseDnsActivity {
     			TextView dateView = (TextView) row.findViewById(R.id.event_list_row_date);
     			dateView.setText(dateFormat.format(e.getDate()));
     			
+    			TextView priceView = (TextView) row.findViewById(R.id.event_list_row_price);
+    			priceView.setText(e.getPriceString());
+    			
+    			/* Apply styles: */
+    			if (position % 2 == 0) {
+    				row.setBackgroundResource(R.color.ListItemBackgroundEven);
+    			} else {
+    				row.setBackgroundResource(R.color.ListItemBackgroundOdd);
+    			}
+				titleView.setTextAppearance(ProgramListActivity.this, R.style.ListItemTextTitle);
+				dateView.setTextAppearance(ProgramListActivity.this, R.style.ListItemTextDate);
+				priceView.setTextAppearance(ProgramListActivity.this, R.style.ListItemTextDate);
+    			
+    			/* Add onClickListeners: */
     			row.setOnClickListener(new OnClickListener() {
 					
 					public void onClick(View v) {
@@ -149,17 +164,6 @@ public class ProgramListActivity extends BaseDnsActivity {
 						}
 					}
 				});
-    			
-    			/* Apply styles: */
-    			if (position % 2 == 0) {
-    				row.setBackgroundResource(R.color.ListItemBackgroundEven);
-    				titleView.setTextAppearance(ProgramListActivity.this, R.style.ListItemTextTitle);
-    				dateView.setTextAppearance(ProgramListActivity.this, R.style.ListItemTextDate);
-    			} else {
-    				row.setBackgroundResource(R.color.ListItemBackgroundOdd);
-    				titleView.setTextAppearance(ProgramListActivity.this, R.style.ListItemTextTitle);
-    				dateView.setTextAppearance(ProgramListActivity.this, R.style.ListItemTextDate);
-    			}
     			
     			return row;
     		}

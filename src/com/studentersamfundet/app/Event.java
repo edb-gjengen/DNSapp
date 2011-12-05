@@ -91,7 +91,10 @@ public class Event implements Serializable {
 	}
 	
 	public String getPriceString() {
-		return "" +this.regularPrice +'/' +this.memberPrice;
+		if (this.regularPrice > 0 || this.memberPrice > 0)
+			return "" +this.regularPrice +'/' +this.memberPrice +"kr";
+	
+		return "";
 	}
 	
 	public Uri getTicketUri() {
