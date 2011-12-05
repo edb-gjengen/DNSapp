@@ -52,12 +52,12 @@ public class DnsActivity extends BaseDnsActivity {
 		/* Set opening hours: */
 		TextView tvNeuf = (TextView)findViewById(R.id.main_menu_hours_neuf);
 		TextView tvBC = (TextView)findViewById(R.id.main_menu_hours_bc);
-		// TextView tvGB = (TextView)findViewById(R.id.main_menu_hours_gb);
+		TextView tvGB = (TextView)findViewById(R.id.main_menu_hours_gb);
 		int day = (Calendar.getInstance().get(Calendar.DAY_OF_WEEK) + 5) % 7;
 		
 		tvNeuf.setText(openingHoursHouse[day]);
 		tvBC.setText(openingHoursBC[day]);
-		// 		tvGB.setText(openingHoursBC[day]);
+		tvGB.setText(openingHoursBC[day]);
 		
 		setupFocus();
 	}
