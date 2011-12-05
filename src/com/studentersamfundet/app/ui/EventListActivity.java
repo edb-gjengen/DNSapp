@@ -14,7 +14,6 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Html;
@@ -43,6 +42,7 @@ import com.studentersamfundet.app.ui.ChooseCategoryDialog.Callback;
 
 public class EventListActivity extends BaseDnsActivity {
 	public static final String feedURL = "http://studentersamfundet.no/rss/lars_program_feed.php";
+	public static final int imageSize = 80;
 	
 	private FeedFetcher feed;
 	private RSSParserProgram parser;
@@ -118,24 +118,14 @@ public class EventListActivity extends BaseDnsActivity {
     			/* Set images: */
     			ImageView imageView = (ImageView) row.findViewById(R.id.event_list_row_image);
     			try {
-    			    String urlStr = e.getImageUri(60).toString();
+    			    String urlStr = e.getImageUri(imageSize).toString();
     			    URL ulrn = new URL(urlStr);
     			    HttpURLConnection con = (HttpURLConnection)ulrn.openConnection();
     			    InputStream is = con.getInputStream();
     			    Bitmap bmp = BitmapFactory.decodeStream(is);
     			    
     			    if (null != bmp) {
-    			    	int width = bmp.getWidth();
-    			    	int height = bmp.getHeight();
-    			    	
-    			    	float scaleWidth = ((float)60) / width;
-    			    	float scaleHeight = ((float)60) / height;
-
-    			    	Matrix matrix = new Matrix();
-    			    	matrix.postScale(scaleWidth, scaleHeight);
-
-    			    	Bitmap resized = Bitmap.createBitmap(bmp, 0, 0, width, height, matrix, false);
-    			        imageView.setImageBitmap(resized);
+    			        imageView.setImageBitmap(bmp);
     			    }
 
 			    } catch (MalformedURLException ex1){ /* TODO: Default image */
