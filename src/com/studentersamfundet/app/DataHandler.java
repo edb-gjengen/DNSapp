@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
+import android.net.Uri;
+
 public class DataHandler {
 	private List<Event> events = new LinkedList<Event>();
 	private List<News> news = new LinkedList<News>();
@@ -20,13 +22,28 @@ public class DataHandler {
 			String imageUri,
 			String priceReg,
 			String priceMem,
-			String ticketUri) {
+			String ticketUriStr) {
 		int intId = Integer.parseInt(id);
 		if (getEvent(intId) != null)
 			return;
 		
-		Event e = new Event(intId, title, description, date, location, text, category, imageUri);
-		events.add(e);
+		Event event = new Event(intId, title, description, date, location, text, category, imageUri);
+		
+		try {
+			int regularPrice = Integer.parseInt(priceReg);
+			int memberPrice = Integer.parseInt(priceMem);
+			Uri ticketUri = null;
+			
+			if (ticketUriStr.startsWith("http://") && ticketUriStr.length() > 7) {
+				ticketUri = Uri.parse(ticketUriStr);
+			}
+			
+			event.setTicketsInfo(regularPrice, memberPrice, ticketUri);
+		} catch (NumberFormatException e1) { /* Do nothing. */
+		} catch (NullPointerException e2) { /* That's correct, catch NullPointerExceptions. */ }
+		
+		
+		events.add(event);
 		eventCategories.add(category);
 	}
 	
@@ -36,6 +53,7 @@ public class DataHandler {
 	}
 	
 	public Event getEvent(int id) {
+		/* TODO: This has linear time complexity. Fix needed? */
 		for (Event e : events) {
 			if (e.id == id)
 				return e;
@@ -44,11 +62,11 @@ public class DataHandler {
 	}
 	
 	public Event[] populateEventList(String category) {
-		LinkedList<Event> sorted = new LinkedList<Event>();
-
 		if (category.equals(Event.ALL)) {
 			return events.toArray(new Event[events.size()]);
 		}
+		
+		LinkedList<Event> sorted = new LinkedList<Event>();
 
 		for (Event event : events) {
 			if (category.equals(event.getCategory()))
@@ -56,6 +74,18 @@ public class DataHandler {
 		}
 		return sorted.toArray(new Event[sorted.size()]);
     }
+	
+	public Event[] getAllEventsWithTickets() {
+		LinkedList<Event> list = new LinkedList<Event>();
+		
+		for (Event event : events) {
+			if(event.getTicketUri() != null) {
+				list.add(event);
+			}
+		}
+		
+		return list.toArray(new Event[list.size()]);
+	}
 	
 	public News[] populateNewsList() {
 		return this.news.toArray(new News[this.news.size()]);

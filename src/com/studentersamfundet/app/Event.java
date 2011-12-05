@@ -97,4 +97,10 @@ public class Event implements Serializable {
 	public Uri getTicketUri() {
 		return this.ticketUri;
 	}
+	
+	public void setTicketsInfo(int regularPrice, int memberPrice, Uri ticketUri) {
+		this.regularPrice = regularPrice;
+		this.memberPrice = memberPrice;
+		this.ticketUri = ticketUri;
+	}
 }
