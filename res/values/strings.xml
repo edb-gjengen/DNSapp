@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Det Norske Studentersamfund</string>
+    <string name="app_name">Studentersamfundet</string>
     <string name="program_button">PROGRAM</string>
     <string name="bli_med_button">BLI MED</string>
     <string name="event_link_button">Gå til nettsiden</string>
