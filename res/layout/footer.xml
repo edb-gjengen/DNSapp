@@ -14,7 +14,7 @@
         android:textStyle="bold"
         android:onClick="clickHandler"
         android:clickable="true"
-        android:text="@string/program_button" />
+        android:text="@string/main_menu_program" />
     <TextView
     	android:id="@+id/bli_med_button"
         android:layout_height="wrap_content"
@@ -25,5 +25,5 @@
         android:textStyle="bold"
         android:onClick="clickHandler"
         android:clickable="true"
-        android:text="@string/bli_med_button" />
+        android:text="@string/main_menu_join" />
 </LinearLayout>

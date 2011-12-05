@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- MAIN MENU STYLES: -->
+    	<!-- Opening hours: -->
+    <style name="OpeningHoursHeaderText" parent="@android:style/TextAppearance">
+        <item name="android:background">#80303030</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:gravity">center</item>
+    </style>
+    
+    <style name="OpeningHoursText" parent="@android:style/TextAppearance">
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:gravity">left</item>
+    </style>
+    
+        
+        <!-- "Metro" tiles: -->
     <style name="MetroTile">
         <item name="android:background">@drawable/metro_background</item>
     </style>
