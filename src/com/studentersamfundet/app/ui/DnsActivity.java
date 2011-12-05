@@ -65,7 +65,6 @@ public class DnsActivity extends BaseDnsActivity {
 	public void setupFocus() {
 		final View[] buttons = {
 			findViewById(R.id.main_menu_program),
-			findViewById(R.id.main_menu_hours),
 			findViewById(R.id.main_menu_tickets),
 			findViewById(R.id.main_menu_join),
 		};
