@@ -26,13 +26,13 @@ public class DnsActivity extends BaseDnsActivity {
 		"      - 19.00"};
 	
 	String[] openingHoursBC = {
-		"Stengt",
 		"19.00 - 00.00",
 		"19.00 - 00.00",
 		"19.00 - 00.00",
 		"19.00 - 03.00",
 		"19.00 - 03.00",
-		"20.00 - 03.00"};
+		"20.00 - 03.00",
+		"Stengt"};
 	
 	/** Called when the activity is first created. */
 	@Override
@@ -54,7 +54,6 @@ public class DnsActivity extends BaseDnsActivity {
 	public void setupFocus() {
 		final View[] buttons = {
 			findViewById(R.id.main_menu_program),
-			findViewById(R.id.main_menu_hours),
 			findViewById(R.id.main_menu_tickets),
 			findViewById(R.id.main_menu_join),
 		};
