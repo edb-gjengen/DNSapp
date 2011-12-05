@@ -81,13 +81,16 @@ public class Event implements Serializable {
 		return Uri.parse("http://studentersamfundet.no/vis.php?ID=" + this.id);
 	}
 	
-	public Uri getImageUri() {
+	public Uri getImageUri(int width) {
 		if (this.id <= 0) {
 			return null;
 		}
 		
-		String imageUri = "http://studentersamfundet.no/imageResize.php?pic=bilder/program/{image}&maxwidth=480";
-		return Uri.parse(imageUri.replaceAll("{image}", this.image));
+		String imageUri = "http://studentersamfundet.no/imageResize.php?pic=bilder/program/{img}&maxwidth={width}";
+		imageUri = imageUri.replace("{img}", this.image);
+		imageUri = imageUri.replace("{width}", Integer.toString(width));
+
+		return Uri.parse(imageUri);
 	}
 	
 	public String getPriceString() {

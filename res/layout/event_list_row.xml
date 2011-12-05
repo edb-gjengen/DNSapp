@@ -6,21 +6,29 @@
 	android:paddingTop="3px"
 	android:paddingBottom="3px">
     
+    <ImageView android:id="@+id/event_list_row_image" 
+        android:layout_height="wrap_content" 
+    	android:layout_width="wrap_content"
+    	android:layout_alignParentLeft="true" 
+    	android:padding="5px"
+    	android:layout_marginRight="5px" />
+    
     <TextView android:id="@+id/event_list_row_text"
     	android:layout_height="wrap_content" 
     	android:layout_width="wrap_content" 
+    	android:layout_toRightOf="@id/event_list_row_image"
     	android:layout_alignParentTop="true" />
     	
     <TextView android:id="@+id/event_list_row_date"
      	android:layout_height="wrap_content" 
     	android:layout_width="wrap_content" 
-    	android:layout_alignParentLeft="true"
+    	android:layout_toRightOf="@id/event_list_row_image"
     	android:layout_below="@id/event_list_row_text" />
     
     <TextView android:id="@+id/event_list_row_price"
      	android:layout_height="wrap_content" 
     	android:layout_width="wrap_content" 
-    	android:layout_centerVertical="true"    	
+    	android:layout_below="@id/event_list_row_text"
     	android:layout_alignParentRight="true" />
     
 </RelativeLayout>

@@ -1,6 +1,10 @@
 package com.studentersamfundet.app.ui;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 
 import org.w3c.dom.NodeList;
@@ -8,6 +12,9 @@ import org.w3c.dom.NodeList;
 import android.app.Dialog;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Html;
@@ -20,6 +27,7 @@ import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -106,6 +114,33 @@ public class EventListActivity extends BaseDnsActivity {
     			}
     			
     			final Event e = getItem(position);
+    			
+    			/* Set images: */
+    			ImageView imageView = (ImageView) row.findViewById(R.id.event_list_row_image);
+    			try {
+    			    String urlStr = e.getImageUri(60).toString();
+    			    URL ulrn = new URL(urlStr);
+    			    HttpURLConnection con = (HttpURLConnection)ulrn.openConnection();
+    			    InputStream is = con.getInputStream();
+    			    Bitmap bmp = BitmapFactory.decodeStream(is);
+    			    
+    			    if (null != bmp) {
+    			    	int width = bmp.getWidth();
+    			    	int height = bmp.getHeight();
+    			    	
+    			    	float scaleWidth = ((float)60) / width;
+    			    	float scaleHeight = ((float)60) / height;
+
+    			    	Matrix matrix = new Matrix();
+    			    	matrix.postScale(scaleWidth, scaleHeight);
+
+    			    	Bitmap resized = Bitmap.createBitmap(bmp, 0, 0, width, height, matrix, false);
+    			        imageView.setImageBitmap(resized);
+    			    }
+
+			    } catch (MalformedURLException ex1){ /* TODO: Default image */
+			    } catch (IOException ex2) { /* TODO: Default image */ }
+    			
     			
     			/* Set text: */
     			TextView titleView = (TextView) row.findViewById(R.id.event_list_row_text);
