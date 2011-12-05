@@ -26,54 +26,39 @@
 		android:orientation="vertical"
 		android:gravity="center">
 	    
+	    <!-- Opening hours: -->
 	    <LinearLayout
-	        android:layout_height="fill_parent"
-			android:layout_width="fill_parent" 
+	        android:layout_height="wrap_content"
+			android:layout_width="fill_parent"
+			android:layout_marginBottom="30px" 
 			android:orientation="horizontal"
-			android:layout_weight="1"
-			android:gravity="center">
-			
-		    <RelativeLayout android:id="@+id/main_menu_program"
-		        style="@style/MetroTile"
-		        android:background="@drawable/ex1"
-            	android:layout_margin="5px"
-		        android:layout_height="fill_parent"
-	        	android:layout_width="fill_parent"
-	        	android:layout_weight="1"
-		        android:onClick="programButton">
-				
-				<TextView 
-		            style="@style/MetroTileText_bg"
-		            android:layout_height="wrap_content"
-		            android:layout_width="fill_parent"
-		            android:layout_alignParentBottom="true"
-		            android:text="@string/program_button" />
-	        </RelativeLayout>
+			android:gravity="center"
+			android:focusable="false"
+			android:clickable="false">
 		    
 		    
 		    <RelativeLayout android:id="@+id/main_menu_hours"
 		        style="@style/MetroTile"
-		        android:background="@drawable/ex2"
+		        android:background="#000000"
             	android:layout_margin="5px"
-		        android:layout_height="fill_parent"
+		        android:layout_height="wrap_content"
 		        android:layout_width="fill_parent"
-		        android:onClick="doNothing"
-		        android:layout_weight="1">
+		        android:layout_weight="0.5">
 		        
-		        <TextView
+		        <!-- OPENING HOURS: -->
+		        <TextView android:id="@+id/main_menu_hours_header"
 		            style="@style/MetroTileText_bg"
 		            android:layout_height="wrap_content"
 		            android:layout_width="fill_parent"
-		            android:layout_alignParentBottom="true"
+		            android:layout_alignParentTop="true"
 		            android:text="@string/main_menu_opening_hours" />
 		        
-		        <!-- OPENING HOURS: -->
-		        <TextView android:id="@+id/main_menu_hours_neuf_header" 
+		        <TextView android:id="@+id/main_menu_hours_neuf_header"
 		            style="@style/MetroTileText_bg"
 		            android:textSize="12sp"
 		            android:layout_height="wrap_content"
 		            android:layout_width="fill_parent"
-		            android:layout_alignParentTop="true"
+		            android:layout_below="@id/main_menu_hours_header"
 		            android:layout_marginTop="10px"
 		            android:layout_marginBottom="10px"
 		            android:text="Chateau Neuf" />
@@ -109,6 +94,7 @@
 		    </RelativeLayout>
 	    </LinearLayout>
 	    
+        <!-- Row nr 1: -->
 	    <LinearLayout
 	        android:layout_height="match_parent"
 			android:layout_width="match_parent" 
@@ -116,13 +102,30 @@
 			android:layout_weight="1"
 			android:gravity="center">
 		    
-		    <RelativeLayout android:id="@+id/main_menu_tickets"
+	        <RelativeLayout android:id="@+id/main_menu_program"
+		        style="@style/MetroTile"
+		        android:background="@drawable/ex1"
+            	android:layout_margin="5px"
+		        android:layout_height="fill_parent"
+	        	android:layout_width="fill_parent"
+	        	android:layout_weight="0.5"
+		        android:onClick="programButton">
+				
+				<TextView 
+		            style="@style/MetroTileText_bg"
+		            android:layout_height="wrap_content"
+		            android:layout_width="fill_parent"
+		            android:layout_alignParentBottom="true"
+		            android:text="@string/program_button" />
+	        </RelativeLayout>
+	        
+	        <RelativeLayout android:id="@+id/main_menu_tickets"
 		        style="@style/MetroTile"
 		        android:background="@drawable/ex3"
             	android:layout_margin="5px"
 		        android:layout_height="match_parent"
 		        android:layout_width="match_parent"
-		        android:layout_weight="1"
+		        android:layout_weight="0.5"
 		        android:onClick="ticketButton">
 		        
 		        <TextView 
@@ -132,6 +135,16 @@
 		            android:layout_alignParentBottom="true"
 		            android:text="@string/main_menu_tickets" />
 		    </RelativeLayout>
+        </LinearLayout>
+	        
+	    <!-- Row nr 2: -->
+	    <LinearLayout
+	        android:layout_height="match_parent"
+			android:layout_width="match_parent" 
+			android:orientation="horizontal"
+			android:layout_weight="1"
+			android:gravity="center">
+		    
 		    
 		    <RelativeLayout android:id="@+id/main_menu_join"
 		        style="@style/MetroTile"
@@ -139,7 +152,7 @@
             	android:layout_margin="5px"
 		        android:layout_height="match_parent"
 		        android:layout_width="match_parent"
-		        android:layout_weight="1"
+		        android:layout_weight="0.5"
 		        android:onClick="joinButton">
 				
 		        <TextView 
@@ -148,6 +161,24 @@
 		            android:layout_width="fill_parent"
 		            android:layout_alignParentBottom="true"
 		            android:text="@string/bli_med_button" />		        
+	        </RelativeLayout>
+	        
+  		    <RelativeLayout android:id="@+id/main_menu_unused"
+		        style="@style/MetroTile"
+		        android:visibility="invisible"
+		        android:background="#000000"
+            	android:layout_margin="5px"
+		        android:layout_height="match_parent"
+		        android:layout_width="match_parent"
+		        android:layout_weight="0.5"
+		        android:onClick="doNothing">
+				
+		        <TextView 
+		            style="@style/MetroTileText_bg"
+		            android:layout_height="wrap_content"
+		            android:layout_width="fill_parent"
+		            android:layout_alignParentBottom="true"
+		            android:text="INVALID" />		        
 	        </RelativeLayout>
    	    </LinearLayout>
 	</LinearLayout>
