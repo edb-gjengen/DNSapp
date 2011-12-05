@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
-import android.view.animation.Animation.AnimationListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -64,46 +63,44 @@ public class DnsActivity extends BaseDnsActivity {
 			final int index = i;
 			
 			buttons[index].setOnTouchListener(new OnTouchListener() {
+				boolean pointerMoved = false;
+				
 				public boolean onTouch(View v, MotionEvent event) {
 					if (event.getAction() == MotionEvent.ACTION_DOWN) {
 						for (int j = 0; j < buttons.length; j++) {
-							if (index != j) {
-								final int secondIndex = j;
-								
+							if (index != j) {								
 								Animation animation = new AlphaAnimation(1.0f, 0.6f);
 								animation.setDuration(100);
 								animation.setFillAfter(true);
-								/*animation.setAnimationListener(new AnimationListener() {
-									public void onAnimationStart(Animation animation) {}
-									public void onAnimationRepeat(Animation animation) {}
-									public void onAnimationEnd(Animation animation) {
-										
-										buttons[secondIndex].getBackground().setAlpha((int)(255*0.6f));
-									}
-								});*/
+
 								buttons[j].startAnimation(animation);
 								
 							}
 						}
+						
+						this.pointerMoved = false;
 						return true;
 					} 
 					
 					if (event.getAction() == MotionEvent.ACTION_UP) {
+						/* Define the animation that makes elements opaque: */
+						Animation animation = new AlphaAnimation(0.6f, 1.0f);
+						animation.setDuration(50);
+						animation.setFillAfter(true);
+						
+						if (!this.pointerMoved) {					
+							v.performClick();
+						}
+						
 						for (int j = 0; j < buttons.length; j++) {
-							final int secondIndex = j;
-							
-							Animation animation = new AlphaAnimation(0.6f, 1.0f);
-							animation.setDuration(50);
-							animation.setAnimationListener(new AnimationListener() {
-								public void onAnimationStart(Animation animation) {}
-								public void onAnimationRepeat(Animation animation) {}
-								public void onAnimationEnd(Animation animation) {
-									buttons[secondIndex].getBackground().setAlpha(255);
-								}
-							});
 							buttons[j].startAnimation(animation);
 						}
+						
 						return true;
+					}
+					
+					if (event.getAction() == MotionEvent.ACTION_MOVE) {
+						this.pointerMoved = true;
 					}
 					
 					return false;
