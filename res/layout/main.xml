@@ -130,7 +130,7 @@
 		            android:layout_height="wrap_content"
 		            android:layout_width="fill_parent"
 		            android:layout_alignParentBottom="true"
-		            android:text="Billetter" />
+		            android:text="@string/main_menu_tickets" />
 		    </RelativeLayout>
 		    
 		    <RelativeLayout android:id="@+id/main_menu_join"
