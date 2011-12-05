@@ -17,22 +17,31 @@ import com.studentersamfundet.app.R;
 
 public class DnsActivity extends BaseDnsActivity {
 	String[] openingHoursHouse = {
-		"13.00 - 01.00",
-		"13.00 - 01.00",
-		"      - 01.30",
-		"      - 03.00",
-		"      - 03.00",
-		"15.00 - 03.00",
-		"      - 19.00"};
+		"10.00 - 01.00",
+		"10.00 - 01.00",
+		"10.00 - 01.00",
+		"10.00 - 03.00",
+		"10.00 - 03.00",
+		"12.00 - 03.00",
+		"12.00 - 20.00"};
+	
+	String[] openingHoursGB = {
+			"13.00 - 01.00",
+			"13.00 - 01.00",
+			"13.00 - 01.00",
+			"13.00 - 03.00",
+			"13.00 - 03.00",
+			"16.00 - 03.00",
+			"Stengt"};	
 	
 	String[] openingHoursBC = {
-		"Stengt",
 		"19.00 - 00.00",
 		"19.00 - 00.00",
 		"19.00 - 00.00",
 		"19.00 - 03.00",
 		"19.00 - 03.00",
-		"20.00 - 03.00"};
+		"20.00 - 03.00",
+		"Stengt"};
 	
 	/** Called when the activity is first created. */
 	@Override
@@ -43,10 +52,12 @@ public class DnsActivity extends BaseDnsActivity {
 		/* Set opening hours: */
 		TextView tvNeuf = (TextView)findViewById(R.id.main_menu_hours_neuf);
 		TextView tvBC = (TextView)findViewById(R.id.main_menu_hours_bc);
+		// TextView tvGB = (TextView)findViewById(R.id.main_menu_hours_gb);
 		int day = (Calendar.getInstance().get(Calendar.DAY_OF_WEEK) + 5) % 7;
 		
 		tvNeuf.setText(openingHoursHouse[day]);
 		tvBC.setText(openingHoursBC[day]);
+		// 		tvGB.setText(openingHoursBC[day]);
 		
 		setupFocus();
 	}
