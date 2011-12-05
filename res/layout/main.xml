@@ -8,8 +8,9 @@
 		android:layout_width="fill_parent" 
 		android:layout_alignParentTop="true"/>
 	
-	<!-- Footer -->
-	<include layout="@layout/footer" 
+	<!-- Footer (not needed right now) -->
+	<include layout="@layout/footer"
+	    android:visibility="gone"
 		android:layout_height="wrap_content"
 		android:layout_width="fill_parent" 
 		android:layout_alignParentBottom="true" />
@@ -50,7 +51,7 @@
 	        </RelativeLayout>
 		    
 		    
-		    <RelativeLayout
+		    <RelativeLayout android:id="@+id/main_menu_hours"
 		        style="@style/MetroTile"
 		        android:background="@drawable/ex2"
             	android:layout_margin="5px"
@@ -150,14 +151,4 @@
 	        </RelativeLayout>
    	    </LinearLayout>
 	</LinearLayout>
-	
-	<!-- Formålsparagraf -->
-	<!-- <ImageView 
-		android:id="@+id/paragraph"
-		android:layout_height="wrap_content"
-		android:layout_width="match_parent" 
-		android:layout_alignParentTop="true"
-		android:layout_alignParentBottom="true"
-		android:src="@drawable/partest" />  -->
-	
 </RelativeLayout>
