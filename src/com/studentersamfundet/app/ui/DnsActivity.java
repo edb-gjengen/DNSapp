@@ -66,6 +66,7 @@ public class DnsActivity extends BaseDnsActivity {
 			findViewById(R.id.main_menu_program),
 			findViewById(R.id.main_menu_tickets),
 			findViewById(R.id.main_menu_join),
+			findViewById(R.id.main_menu_news),
 		};
 		
 		for (int i = 0; i < buttons.length; i++) {

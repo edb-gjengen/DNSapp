@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main_menu_program"
+    style="@style/MetroTile"
+    android:background="@drawable/ex1"
+    android:onClick="programButton" >
+
+    <TextView
+        style="@style/MetroTileText_bg"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="@string/main_menu_program" />
+
+</RelativeLayout>

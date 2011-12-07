@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:id="@+id/main_menu_hours"
+   	android:layout_marginBottom="20px"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:orientation="vertical">
+    
+    <!-- OPENING HOURS: -->
+    <TextView android:id="@+id/main_menu_hours_header"
+        style="@style/OpeningHoursHeaderText"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:text="@string/main_menu_opening_hours" />
+    
+    <LinearLayout android:id="@+id/main_menu_hours_neuf_header"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_marginTop="10px"
+        android:layout_marginBottom="10px"
+        android:orientation="horizontal">
+        
+        <TextView 
+            style="@style/OpeningHoursText"
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:layout_weight="0.5"
+            android:layout_marginLeft="20px"
+            android:text="Chateau Neuf" />
+            
+        <!-- This is set in Java: -->
+        <TextView android:id="@+id/main_menu_hours_neuf"
+            style="@style/OpeningHoursText"
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:layout_weight="0.5" />
+    </LinearLayout>
+    
+    <LinearLayout android:id="@+id/main_menu_hours_bc_header"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_marginTop="10px"
+        android:layout_marginBottom="10px"
+        android:orientation="horizontal">
+        
+        <TextView
+            style="@style/OpeningHoursText"
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:layout_weight="0.5"
+            android:layout_marginLeft="20px"
+            android:text="Bokcaféen" />
+            
+        <!-- This is set in Java: -->
+        <TextView android:id="@+id/main_menu_hours_bc"
+            style="@style/OpeningHoursText"
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:layout_weight="0.5" />
+    </LinearLayout>
+    
+    <LinearLayout android:id="@+id/main_menu_hours_gb_header"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_marginTop="10px"
+        android:layout_marginBottom="10px"
+        android:orientation="horizontal">
+        
+        <TextView
+            style="@style/OpeningHoursText"
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:layout_weight="0.5"
+            android:layout_marginLeft="20px"
+            android:text="Glassbaren" />
+            
+        <!-- This is set in Java: -->
+        <TextView android:id="@+id/main_menu_hours_gb"
+            style="@style/OpeningHoursText"
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:layout_weight="0.5" />
+    </LinearLayout>
+</LinearLayout>
