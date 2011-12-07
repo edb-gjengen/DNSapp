@@ -30,7 +30,6 @@
 	        android:layout_height="wrap_content"
 			android:layout_width="match_parent" 
 			android:orientation="horizontal"
-			android:layout_weight="1"
 			android:gravity="center">
 		    
        	    <include layout="@layout/main_tile_program" 
@@ -44,15 +43,6 @@
 				android:layout_height="wrap_content" 
 				android:layout_width="match_parent" 
 				android:layout_margin="5px" />
-        </LinearLayout>
-	        
-	    <!-- Row nr 2: -->
-	    <LinearLayout
-	        android:layout_height="match_parent"
-			android:layout_width="match_parent" 
-			android:orientation="horizontal"
-			android:layout_weight="1"
-			android:gravity="center">
 		    
          	<include layout="@layout/main_tile_tickets" 
       	        android:layout_weight="1"
@@ -64,10 +54,7 @@
       	        android:layout_weight="1"
 				android:layout_height="wrap_content" 
 				android:layout_width="match_parent" 
-				android:layout_margin="5px" />
-		    
-	        
-  		    
+				android:layout_margin="5px" />   
    	    </LinearLayout>
 	</LinearLayout>
 </RelativeLayout>
