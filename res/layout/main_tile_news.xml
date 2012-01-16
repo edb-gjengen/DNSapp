@@ -3,7 +3,7 @@
     android:id="@+id/main_menu_news"
     style="@style/MetroTile"
     android:background="@drawable/ex2"
-    android:onClick="doNothing" >
+    android:onClick="newsButton" >
 
     <TextView
         style="@style/MetroTileText_bg"
