@@ -10,7 +10,6 @@ import java.text.SimpleDateFormat;
 import org.w3c.dom.NodeList;
 
 import android.app.Dialog;
-import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -22,9 +21,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
-import android.view.View.OnLongClickListener;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
@@ -154,7 +152,6 @@ public class EventListActivity extends BaseDnsActivity {
     			
     			/* Add onClickListeners: */
     			row.setOnClickListener(getShortClickListener(e));
-    			row.setOnLongClickListener(getLongClickListener(e));
     			
     			return row;
     		}
@@ -260,31 +257,4 @@ public class EventListActivity extends BaseDnsActivity {
 			}
 		};
 	}
-    
-    protected OnLongClickListener getLongClickListener (final Event e) {
-		return new OnLongClickListener() {
-			public boolean onLongClick(View v) {
-				if (e.getDate() == null)
-					return false;
-				
-				long startDate = e.getDate().getTime();
-				
-				try {
-					Intent intent = new Intent(Intent.ACTION_EDIT);
-					intent.setType("vnd.android.cursor.item/event");
-					intent.putExtra("title", e.title);
-					intent.putExtra("beginTime", startDate);
-					intent.putExtra("endTime", startDate + (2*60*60*1000)); // Two hours
-					intent.putExtra("allDay", false);
-					intent.putExtra("eventLocation", e.getLocation());
-					intent.putExtra("reminder", false);
-				
-					startActivity(intent);
-					return true;
-				} catch (ActivityNotFoundException e) {
-					return false;
-				}
-			}
-		};
-    }
 }

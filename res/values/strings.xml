@@ -14,4 +14,5 @@
     <string name="main_menu_opening_hours">ÅPNINGSTIDER I DAG</string>
     <string name="main_menu_tickets">BILLETTER</string><string name="main_menu_join">BLI MED</string>
     <string name="main_menu_news">NYHETER</string>
+    <string name="calendar_not_found">Kunne ikke finne kalender-app. Avbryter.</string>
 </resources>
