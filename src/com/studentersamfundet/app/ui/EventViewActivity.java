@@ -55,14 +55,13 @@ public class EventViewActivity extends BaseDnsActivity {
         description.setText(Html.fromHtml(sb.toString()));
         Linkify.addLinks(description, Linkify.ALL);
         
-        if (e.id > 0) { // if id exists and seems legit
+        final Uri ticketUri = e.getTicketUri();
+        if (ticketUri != null) {
         	link.setVisibility(View.VISIBLE);
         	link.setOnClickListener(new OnClickListener() {
 				
-				public void onClick(View v) {
-					Uri webDestination = e.getUri();
-					
-					Intent webIntent = new Intent(Intent.ACTION_VIEW, webDestination);
+				public void onClick(View v) {			
+					Intent webIntent = new Intent(Intent.ACTION_VIEW, ticketUri);
 					startActivity(webIntent);
 				}
 			});
