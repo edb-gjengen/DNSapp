@@ -18,7 +18,7 @@
         
         <!-- "Metro" tiles: -->
     <style name="MetroTile">
-        <item name="android:background">@drawable/metro_background</item>
+
     </style>
     
     <style name="MetroTileText" parent="@android:style/TextAppearance">
@@ -41,6 +41,7 @@
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">#aaaaaa</item>
         <item name="android:background">#303030</item>
+        <item name="android:paddingTop">5px</item>
         <item name="android:paddingBottom">5px</item>
     </style>
     
