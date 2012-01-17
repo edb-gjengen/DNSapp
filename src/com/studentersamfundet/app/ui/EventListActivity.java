@@ -1,18 +1,12 @@
 package com.studentersamfundet.app.ui;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.text.SimpleDateFormat;
 
 import org.w3c.dom.NodeList;
 
 import android.app.Dialog;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Html;
@@ -36,6 +30,7 @@ import com.studentersamfundet.app.Event;
 import com.studentersamfundet.app.FeedFetcher;
 import com.studentersamfundet.app.R;
 import com.studentersamfundet.app.RSSParserProgram;
+import com.studentersamfundet.app.network.ImageLoader;
 import com.studentersamfundet.app.ui.ChooseCategoryDialog.Callback;
 
 public class EventListActivity extends BaseDnsActivity {
@@ -114,19 +109,8 @@ public class EventListActivity extends BaseDnsActivity {
     			
     			/* Set images: */
     			ImageView imageView = (ImageView) row.findViewById(R.id.event_list_row_image);
-    			try {
-    			    String urlStr = e.getImageUri(imageSize).toString();
-    			    URL ulrn = new URL(urlStr);
-    			    HttpURLConnection con = (HttpURLConnection)ulrn.openConnection();
-    			    InputStream is = con.getInputStream();
-    			    Bitmap bmp = BitmapFactory.decodeStream(is);
-    			    
-    			    if (null != bmp) {
-    			        imageView.setImageBitmap(bmp);
-    			    }
-
-			    } catch (MalformedURLException ex1){ /* TODO: Default image */
-			    } catch (IOException ex2) { /* TODO: Default image */ }
+    			ImageLoader loader = new ImageLoader(imageView);
+				loader.execute(e.getImageUri(imageSize).toString());
     			
     			
     			/* Set text: */
