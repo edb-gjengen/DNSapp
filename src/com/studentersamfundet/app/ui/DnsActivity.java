@@ -12,10 +12,15 @@ import android.view.animation.Animation;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.studentersamfundet.app.FeedFetcher;
 import com.studentersamfundet.app.R;
 
 public class DnsActivity extends BaseDnsActivity {
-	String[] openingHoursHouse = {
+	public static final String feedURL = "http://studentersamfundet.no/rss/lars_program_feed.php";
+	
+	private FeedFetcher feedFetcher;
+	
+	private String[] openingHoursHouse = {
 		"10.00 - 01.00",
 		"10.00 - 01.00",
 		"10.00 - 01.00",
@@ -24,7 +29,7 @@ public class DnsActivity extends BaseDnsActivity {
 		"12.00 - 03.00",
 		"12.00 - 20.00"};
 	
-	String[] openingHoursGB = {
+	private String[] openingHoursGB = {
 		"13.00 - 01.00",
 		"13.00 - 01.00",
 		"13.00 - 01.00",
@@ -33,7 +38,7 @@ public class DnsActivity extends BaseDnsActivity {
 		"16.00 - 03.00",
 		"Stengt"};	
 	
-	String[] openingHoursBC = {
+	private String[] openingHoursBC = {
 		"19.00 - 00.00",
 		"19.00 - 00.00",
 		"19.00 - 00.00",
@@ -47,6 +52,9 @@ public class DnsActivity extends BaseDnsActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
+		
+		/* Initialize necessary variables: */
+		feedFetcher = new FeedFetcher(feedURL);
 		
 		/* Set opening hours: */
 		TextView tvNeuf = (TextView)findViewById(R.id.main_menu_hours_neuf);
@@ -138,22 +146,12 @@ public class DnsActivity extends BaseDnsActivity {
 	}
 	
 	public void programButton(View v) {
-		Intent intent = new Intent();
-
-		intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
-				| Intent.FLAG_ACTIVITY_SINGLE_TOP);
-		intent.setClass(this, EventListActivity.class);
-
+		Intent intent = setupNewIntent(EventListActivity.class);
 		startActivity(intent);
 	}
 
 	public void ticketButton(View v) {
-		Intent intent = new Intent();
-
-		intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
-				| Intent.FLAG_ACTIVITY_SINGLE_TOP);
-		intent.setClass(this, EventListTicketsActivity.class);
-
+		Intent intent = setupNewIntent(EventListTicketsActivity.class);
 		startActivity(intent);
 	}
 
@@ -162,12 +160,15 @@ public class DnsActivity extends BaseDnsActivity {
 	}
 
 	public void joinButton(View v) {
-		Intent intent = new Intent();
-		
-		intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-		intent.setClass(this, JoinUsActivity.class);
-		
+		Intent intent = setupNewIntent(JoinUsActivity.class);
 		startActivity(intent);
 
+	}
+	
+	protected Intent setupNewIntent(Class<?> cl) {
+		Intent intent = super.setupNewIntent(cl);
+		intent.putExtra("feed", feedFetcher);
+		
+		return intent;
 	}
 }

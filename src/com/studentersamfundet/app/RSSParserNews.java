@@ -4,7 +4,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-public class RSSParserNews {
+public class RSSParserNews implements IRSSParser {
 	private final DataHandler dh;
 	
 	public RSSParserNews() {

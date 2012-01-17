@@ -8,10 +8,10 @@ import java.util.Date;
 import android.net.Uri;
 
 public class Event implements Serializable {
-	private static final long serialVersionUID = 1L;
-	public static final String ALL = "Alle";
-	
+	private static final long serialVersionUID = -5222901012434000257L;
 	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+	
+	public static final String ALL = "Alle";
 	
 	public final int id;
 	public final String title;
@@ -117,5 +117,17 @@ public class Event implements Serializable {
 		this.regularPrice = regularPrice;
 		this.memberPrice = memberPrice;
 		this.ticketUriStr = ticketUri;
+	}
+	
+	public int hashCode() {
+		return this.id;
+	}
+	
+	public boolean equals(Object o2) {
+		if (o2 instanceof Event) {
+			Event e2 = (Event)o2;
+			return this.id == e2.id;
+		}
+		return false;
 	}
 }
