@@ -18,7 +18,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -108,8 +107,7 @@ public class EventListActivity extends BaseDnsActivity {
     			final Event e = getItem(position);
     			
     			/* Set images: */
-    			ImageView imageView = (ImageView) row.findViewById(R.id.event_list_row_image);
-    			ImageLoader loader = new ImageLoader(imageView);
+    			ImageLoader loader = new ImageLoader(parent, position, R.id.event_list_row_image);
 				loader.execute(e.getImageUri(imageSize).toString());
     			
     			

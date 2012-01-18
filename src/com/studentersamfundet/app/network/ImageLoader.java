@@ -5,24 +5,25 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.security.InvalidParameterException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 
 public class ImageLoader extends AsyncTask<String, Void, Drawable> {
-	public final static Map<String, Drawable> cache = new HashMap<String, Drawable>();
-	private final ImageView view;
+	private final static ConcurrentMap<String, Drawable> cache = new ConcurrentHashMap<String, Drawable>();
+	private final ViewGroup parent;
+	private final int position;
+	private final int imageId;
 	
-	public ImageLoader(ImageView... views)  {
-		if (views.length > 1)
-			throw new InvalidParameterException("Too many arguments to the function!");
-		
-		this.view = views[0];
+	public ImageLoader(ViewGroup parent, int position, int imageId)  {
+		this.parent = parent;
+		this.position = position;
+		this.imageId = imageId;
 	}
 		
 	@Override
@@ -50,8 +51,13 @@ public class ImageLoader extends AsyncTask<String, Void, Drawable> {
 	protected void onPostExecute(Drawable result) {
 		super.onPostExecute(result);
 		
-		if (result != null && view != null) {
-			view.setImageDrawable(result);
+		if (result != null && parent != null) {
+			ViewGroup row = (ViewGroup)parent.getChildAt(position);
+			
+			if (row != null) {
+				ImageView image = (ImageView)row.findViewById(imageId);
+				image.setImageDrawable(result);
+			}
 		}
 	}
 }
