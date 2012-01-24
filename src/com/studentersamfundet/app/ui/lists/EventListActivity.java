@@ -1,4 +1,4 @@
-package com.studentersamfundet.app.ui;
+package com.studentersamfundet.app.ui.lists;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -29,6 +29,8 @@ import android.widget.Toast;
 
 import com.studentersamfundet.app.Event;
 import com.studentersamfundet.app.R;
+import com.studentersamfundet.app.ui.ChooseCategoryDialog;
+import com.studentersamfundet.app.ui.EventViewActivity;
 import com.studentersamfundet.app.ui.ChooseCategoryDialog.Callback;
 
 public class EventListActivity extends BaseListActivity {
@@ -169,7 +171,7 @@ public class EventListActivity extends BaseListActivity {
 
  
     
-    protected <T> ListCreator<?> getListCreator(Context context, int idList, int idProgressBar) {
+    protected ListCreator<Event> getListCreator(Context context, int idList, int idProgressBar) {
     	return new ListCreator<Event>(context, idList, idProgressBar) {
 
 			@Override

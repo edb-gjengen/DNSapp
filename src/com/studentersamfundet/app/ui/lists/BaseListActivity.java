@@ -1,4 +1,4 @@
-package com.studentersamfundet.app.ui;
+package com.studentersamfundet.app.ui.lists;
 
 import java.io.IOException;
 
@@ -10,11 +10,13 @@ import com.studentersamfundet.app.FeedFetcher;
 import com.studentersamfundet.app.IRSSParser;
 import com.studentersamfundet.app.R;
 import com.studentersamfundet.app.RSSParserProgram;
+import com.studentersamfundet.app.ui.BaseDnsActivity;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -22,7 +24,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 public abstract class BaseListActivity extends BaseDnsActivity {
-	private DataHandler dataHandler;
+	private DataHandler datahandler;
 	private FeedFetcher feed;
 	private IRSSParser parser;
 	
@@ -45,14 +47,18 @@ public abstract class BaseListActivity extends BaseDnsActivity {
 	}
 
 	protected final DataHandler getDataHandler() {
-		if (!isUpdated && dataHandler == null)
+		if (!isUpdated && datahandler == null)
 			throw new RuntimeException("You have to create and run list creator first!");
 		
-		return this.dataHandler;
+		return this.datahandler;
 	}
 	
+	/**
+	 * Creates list adapter used by listview. 
+	 * @param objects
+	 * @return
+	 */
 	protected abstract <T> ListAdapter createAdapter(T[] objects);
-	protected abstract <T> ListCreator<?> getListCreator(Context c, int idList, int idProgressBar);
 	
 	protected abstract class ListCreator<T> extends AsyncTask<Void, Void, Boolean> {
 		private String category = Event.ALL;
@@ -87,14 +93,15 @@ public abstract class BaseListActivity extends BaseDnsActivity {
 		@Override 
 		protected void onPreExecute() {
 			if (forcedUpdate) {
-				dataHandler = null;
+				datahandler = null;
 			}
 
 			ListView list = (ListView)findViewById(idList);
 			list.setVisibility(View.GONE);
 
 			ProgressBar pb = (ProgressBar)findViewById(idProgressBar);
-			pb.setVisibility(View.VISIBLE);
+			if (pb != null)
+				pb.setVisibility(View.VISIBLE);
 		}
 
 		@Override
@@ -103,9 +110,9 @@ public abstract class BaseListActivity extends BaseDnsActivity {
 					// YAY = Fetch the feed.
 					// NAY = Inform about no connection.
 					try {
-						if (dataHandler == null) {
+						if (datahandler == null) {
 							NodeList itemNodes = feed.fetch(BaseListActivity.this, this.forcedUpdate);
-							dataHandler = parser.parse(itemNodes);
+							datahandler = parser.parse(itemNodes);
 						}
 						return true;
 
@@ -121,12 +128,15 @@ public abstract class BaseListActivity extends BaseDnsActivity {
 			if (result) {
 				ListView list = (ListView)findViewById(idList);
 				T[] objects = getObjects();
+				
+				Log.i("DNSapp", "Showing " +objects.length +" objects.");
 				ListAdapter adapter = createAdapter(objects);
 				list.setAdapter(adapter);
 				list.setVisibility(View.VISIBLE);
 
 				ProgressBar pb = (ProgressBar)findViewById(idProgressBar);
-				pb.setVisibility(View.GONE);
+				if (pb != null)
+					pb.setVisibility(View.GONE);
 			} else {
 				Toast toast = Toast.makeText(context, R.string.error_noconnection_noupdate, Toast.LENGTH_LONG);
 				toast.show();

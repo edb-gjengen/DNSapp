@@ -10,10 +10,12 @@ import android.view.View.OnTouchListener;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.studentersamfundet.app.FeedFetcher;
 import com.studentersamfundet.app.R;
+import com.studentersamfundet.app.ui.lists.EventListActivity;
+import com.studentersamfundet.app.ui.lists.EventListTicketsActivity;
+import com.studentersamfundet.app.ui.lists.NewsListActivity;
 
 public class DnsActivity extends BaseDnsActivity {
 	public static final String feedURL = "http://studentersamfundet.no/rss/lars_program_feed.php";
@@ -156,7 +158,8 @@ public class DnsActivity extends BaseDnsActivity {
 	}
 
 	public void newsButton(View v) {
-		Toast.makeText(this, "Not implemented (yet!)", Toast.LENGTH_SHORT).show();
+		Intent intent = setupNewIntent(NewsListActivity.class);
+		startActivity(intent);
 	}
 
 	public void joinButton(View v) {

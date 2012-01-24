@@ -1,4 +1,4 @@
-package com.studentersamfundet.app.ui;
+package com.studentersamfundet.app.ui.lists;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,7 +10,7 @@ import com.studentersamfundet.app.Event;
 
 public class EventListTicketsActivity extends EventListActivity {
 	@Override
-	protected ListCreator<?> getListCreator(Context context, int idList, int idProgressBar) {
+	protected ListCreator<Event> getListCreator(Context context, int idList, int idProgressBar) {
 		return new ListCreator<Event>(context, idList, idProgressBar) {
 			@Override
 			protected Event[] getObjects() {

@@ -1,6 +1,7 @@
 package com.studentersamfundet.app.ui;
 
 import com.studentersamfundet.app.R;
+import com.studentersamfundet.app.ui.lists.EventListActivity;
 
 import android.app.Activity;
 import android.content.Intent;
