@@ -22,11 +22,12 @@ import android.content.Context;
 
 public class FeedFetcher implements Serializable {
 	private static final long serialVersionUID = 3408406671996232103L;
-	private static final String LOCAL_FILENAME = "dns_events";
+	private final String localFilename;
 	private String url;
 	
-	public FeedFetcher(String url) {
+	public FeedFetcher(String url, String localFilename) {
 		this.url = url;
+		this.localFilename = localFilename;
 	}
 	
 	private InputStream openHttpConnection() throws IOException {
@@ -86,7 +87,7 @@ public class FeedFetcher implements Serializable {
 		return itemNodes;
 	}
 	
-	public static NodeList loadLocalData(Context c) throws IOException {
+	public NodeList loadLocalData(Context c) throws IOException {
 		NodeList nodes;
 		
 		InputStream is = loadFile(c);
@@ -120,11 +121,11 @@ public class FeedFetcher implements Serializable {
         return doc.getElementsByTagName("item");
 	}
 	
-	private static boolean doesFileNeedUpdate(Context c) throws IOException {
+	private boolean doesFileNeedUpdate(Context c) throws IOException {
 		/** Maximum amount of time before the file needs updating, in ms: */
 		final long maxInterval = 1000 * 60 * 60; // one hour
 			
-		File file = c.getFileStreamPath(LOCAL_FILENAME);
+		File file = c.getFileStreamPath(localFilename);
 		if (! file.exists()) return true;
 		
 		long now = System.currentTimeMillis();
@@ -133,10 +134,10 @@ public class FeedFetcher implements Serializable {
 		return now - lastMod > maxInterval;
 	}
 	
-	private static void saveFile(InputStream in, Context c) throws IOException, FileNotFoundException {
+	private void saveFile(InputStream in, Context c) throws IOException, FileNotFoundException {
 		final int BUFFER_SIZE = 128;
 		
-		OutputStream os = c.openFileOutput(LOCAL_FILENAME, Context.MODE_PRIVATE);
+		OutputStream os = c.openFileOutput(localFilename, Context.MODE_PRIVATE);
 		byte[] inputBuffer = new byte[BUFFER_SIZE];
 		
 		int bytes = 0;
@@ -147,7 +148,7 @@ public class FeedFetcher implements Serializable {
 		os.close();
 	}
 	
-	private static InputStream loadFile(Context c) throws FileNotFoundException {
-		return c.openFileInput(LOCAL_FILENAME);
+	private InputStream loadFile(Context c) throws FileNotFoundException {
+		return c.openFileInput(localFilename);
 	}
 }

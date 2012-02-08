@@ -56,7 +56,7 @@ public class DnsActivity extends BaseDnsActivity {
 		setContentView(R.layout.main);
 		
 		/* Initialize necessary variables: */
-		feedFetcher = new FeedFetcher(feedURL);
+		feedFetcher = new FeedFetcher(feedURL, "local_events");
 		
 		/* Set opening hours: */
 		TextView tvNeuf = (TextView)findViewById(R.id.main_menu_hours_neuf);
