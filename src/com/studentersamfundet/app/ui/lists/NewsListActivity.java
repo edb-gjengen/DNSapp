@@ -31,14 +31,14 @@ public class NewsListActivity extends BaseListActivity {
 	@Override
 	protected <T> ListAdapter createAdapter(T[] objects) {
 		final News[] news = (News[])objects;
-		ListAdapter adapter = new ArrayAdapter<News>(this, 0, 0, news) {
+		ListAdapter adapter = new ArrayAdapter<News>(this, R.layout.news_list_row, R.id.news_list_row_desc, news) {
 			@Override
 			public View getView(int position, View convertView, ViewGroup parent) {
     			ViewGroup row;
     			
     			if (null == convertView) {
     				LayoutInflater inflater = getLayoutInflater();
-    				row = (ViewGroup)inflater.inflate(0, null);
+    				row = (ViewGroup)inflater.inflate(R.layout.news_list_row, null);
     			} else {
     				row = (ViewGroup)convertView;
     			}

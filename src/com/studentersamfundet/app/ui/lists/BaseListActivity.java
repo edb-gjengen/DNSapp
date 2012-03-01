@@ -9,7 +9,6 @@ import com.studentersamfundet.app.Event;
 import com.studentersamfundet.app.FeedFetcher;
 import com.studentersamfundet.app.IRSSParser;
 import com.studentersamfundet.app.R;
-import com.studentersamfundet.app.RSSParserProgram;
 import com.studentersamfundet.app.ui.BaseDnsActivity;
 
 import android.content.Context;
@@ -41,7 +40,9 @@ public abstract class BaseListActivity extends BaseDnsActivity {
 			throw new RuntimeException("This activity must be fed a feed feeder.");
 
 		/* Create the parser: */
-		this.parser = new RSSParserProgram();
+		this.parser = (IRSSParser)i.getExtras().get("parser");
+		if (this.parser == null)
+			throw new RuntimeException("This activity requires feed parser");
 
 		/* DataHandler will be set later. */
 	}

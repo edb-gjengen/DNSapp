@@ -5,6 +5,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 public class RSSParserProgram implements IRSSParser {
+	private static final long serialVersionUID = 3364287016121595334L;
 	private final DataHandler dh;
 	
 	public RSSParserProgram() {
