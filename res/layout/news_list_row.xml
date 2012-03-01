@@ -10,12 +10,14 @@
     	android:layout_height="wrap_content" 
     	android:layout_width="match_parent" 
     	android:layout_alignParentLeft="true"
-    	android:layout_alignParentTop="true" />
+    	android:layout_alignParentTop="true" 
+    	android:textSize="16sp" />
     	
     <TextView android:id="@+id/news_list_row_desc"
      	android:layout_height="wrap_content" 
     	android:layout_width="match_parent"
     	android:layout_alignParentLeft="true" 
-    	android:layout_below="@id/news_list_row_title" />
+    	android:layout_below="@id/news_list_row_title" 
+    	android:textSize="12sp" />
        
 </RelativeLayout>
