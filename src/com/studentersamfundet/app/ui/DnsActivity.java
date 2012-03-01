@@ -20,7 +20,7 @@ import com.studentersamfundet.app.ui.lists.EventListTicketsActivity;
 import com.studentersamfundet.app.ui.lists.NewsListActivity;
 
 public class DnsActivity extends BaseDnsActivity {
-	public static final String eventFeedURL = "http://studentersamfundet.no/rss/lars_program_feed.php";
+	public static final String eventFeedURL = "http://studentersamfundet.no/rss/robert_program_feed.php";
 	public static final String newsFeedURL = "http://studentersamfundet.no/rss/nyheter_feed.php";
 	
 	private FeedFetcher eventFeedFetcher;
