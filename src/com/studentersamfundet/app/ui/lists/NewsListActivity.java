@@ -1,5 +1,7 @@
 package com.studentersamfundet.app.ui.lists;
 
+import java.text.SimpleDateFormat;
+
 import com.studentersamfundet.app.News;
 import com.studentersamfundet.app.R;
 
@@ -47,9 +49,13 @@ public class NewsListActivity extends BaseListActivity {
     			
     			TextView title = (TextView)row.findViewById(R.id.news_list_row_title);
     			TextView description = (TextView)row.findViewById(R.id.news_list_row_desc);
+    			TextView footer = (TextView)row.findViewById(R.id.news_list_row_byline);
     			
     			title.setText(article.title);
     			description.setText(article.description);
+    			
+    			SimpleDateFormat sdf = new SimpleDateFormat("HH:mm, d. MMMM y");
+    			footer.setText(sdf.format(article.pubDate));
     			
 				return row;
 			}
