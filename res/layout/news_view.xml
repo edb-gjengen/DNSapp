@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
+    
+	<!-- Header -->
+    <include layout="@layout/header" 
+		android:layout_height="wrap_content" 
+		android:layout_width="fill_parent" 
+		android:layout_alignParentTop="true"/>
+    
+    <!-- The event -->
+    <TextView android:id="@+id/news_view_title" 
+    	style="@style/BigHeader"
+    	android:layout_width="match_parent"
+		android:layout_height="wrap_content" 
+		android:layout_below="@id/header" />
+		
+	<TextView android:id="@+id/news_view_datetime" 
+    	android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_below="@id/news_view_title" 
+		android:paddingLeft="5dp"
+		android:paddingRight="5dp" />		
+		
+	<ScrollView 
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_below="@id/news_view_datetime">
+		
+		<TextView android:id="@+id/news_view_description" 
+	    	android:layout_width="match_parent"
+			android:layout_height="wrap_content" />
+	</ScrollView>
+    
+</RelativeLayout>

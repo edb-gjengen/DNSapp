@@ -4,10 +4,13 @@ import java.text.SimpleDateFormat;
 
 import com.studentersamfundet.app.News;
 import com.studentersamfundet.app.R;
+import com.studentersamfundet.app.ui.NewsViewActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
@@ -45,17 +48,26 @@ public class NewsListActivity extends BaseListActivity {
     				row = (ViewGroup)convertView;
     			}
     			
-    			News article = news[position];
+    			final News article = news[position];
     			
     			TextView title = (TextView)row.findViewById(R.id.news_list_row_title);
     			TextView description = (TextView)row.findViewById(R.id.news_list_row_desc);
     			TextView footer = (TextView)row.findViewById(R.id.news_list_row_byline);
     			
-    			title.setText(article.title);
-    			description.setText(article.description);
+    			title.setText(article.getTitle());
+    			description.setText(article.getDescription());
     			
     			SimpleDateFormat sdf = new SimpleDateFormat("HH:mm, d. MMMM y");
-    			footer.setText(sdf.format(article.pubDate));
+    			footer.setText(sdf.format(article.getPubDate()));
+    			
+    			row.setOnClickListener(new OnClickListener() {
+					public void onClick(View v) {
+						Intent intent = new Intent(NewsListActivity.this, NewsViewActivity.class);
+						intent.putExtra("news", article);
+						
+						startActivity(intent);
+					}
+				});
     			
 				return row;
 			}
