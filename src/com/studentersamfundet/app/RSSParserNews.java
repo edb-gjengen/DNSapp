@@ -4,7 +4,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-public class RSSParserNews {
+public class RSSParserNews implements IRSSParser {
+	private static final long serialVersionUID = -2654591623794449527L;
 	private final DataHandler dh;
 	
 	public RSSParserNews() {
@@ -37,7 +38,7 @@ public class RSSParserNews {
                 NodeList titleNodes = (itemElement).getElementsByTagName("title");
                 NodeList descriptionNodes = (itemElement).getElementsByTagName("description");
                 NodeList linkNodes = (itemElement).getElementsByTagName("link");
-                NodeList textNodes = (itemElement).getElementsByTagName("content");
+                NodeList textNodes = (itemElement).getElementsByTagName("content:encoded");
                 NodeList dateNodes = (itemElement).getElementsByTagName("pubDate");
                 
                 // Convert a Node into an Element.

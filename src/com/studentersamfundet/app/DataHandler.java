@@ -1,13 +1,17 @@
 package com.studentersamfundet.app;
 
+import java.io.Serializable;
+import java.util.Collection;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class DataHandler {
-	private List<Event> events = new LinkedList<Event>();
-	private List<News> news = new LinkedList<News>();
+public class DataHandler implements Serializable {
+	private static final long serialVersionUID = 6787541405689146002L;
+	
+	private Collection<Event> events = new LinkedHashSet<Event>();
+	private Collection<News> news = new LinkedList<News>();
 	private Set<String> eventCategories = new TreeSet<String>();
 	
 	public void insertEvent(String id, 
@@ -22,8 +26,6 @@ public class DataHandler {
 			String priceMem,
 			String ticketUriStr) {
 		int intId = Integer.parseInt(id);
-		if (getEvent(intId) != null)
-			return;
 		
 		Event event = new Event(intId, title, description, date, location, text, category, imageUri);
 		

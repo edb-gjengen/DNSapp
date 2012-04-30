@@ -10,12 +10,23 @@ import android.view.View.OnTouchListener;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.studentersamfundet.app.FeedFetcher;
 import com.studentersamfundet.app.R;
+import com.studentersamfundet.app.RSSParserNews;
+import com.studentersamfundet.app.RSSParserProgram;
+import com.studentersamfundet.app.ui.lists.EventListActivity;
+import com.studentersamfundet.app.ui.lists.EventListTicketsActivity;
+import com.studentersamfundet.app.ui.lists.NewsListActivity;
 
 public class DnsActivity extends BaseDnsActivity {
-	String[] openingHoursHouse = {
+	public static final String eventFeedURL = "http://studentersamfundet.no/rss/robert_program_feed.php";
+	public static final String newsFeedURL = "http://studentersamfundet.no/rss/nyheter_feed.php";
+	
+	private FeedFetcher eventFeedFetcher;
+	private FeedFetcher newsFeedFetcher;
+	
+	private String[] openingHoursHouse = {
 		"10.00 - 01.00",
 		"10.00 - 01.00",
 		"10.00 - 01.00",
@@ -24,7 +35,7 @@ public class DnsActivity extends BaseDnsActivity {
 		"12.00 - 03.00",
 		"12.00 - 20.00"};
 	
-	String[] openingHoursGB = {
+	private String[] openingHoursGB = {
 		"13.00 - 01.00",
 		"13.00 - 01.00",
 		"13.00 - 01.00",
@@ -33,7 +44,7 @@ public class DnsActivity extends BaseDnsActivity {
 		"16.00 - 03.00",
 		"Stengt"};	
 	
-	String[] openingHoursBC = {
+	private String[] openingHoursBC = {
 		"19.00 - 00.00",
 		"19.00 - 00.00",
 		"19.00 - 00.00",
@@ -47,6 +58,10 @@ public class DnsActivity extends BaseDnsActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
+		
+		/* Initialize necessary variables: */
+		eventFeedFetcher = new FeedFetcher(eventFeedURL, "local_events");
+		newsFeedFetcher = new FeedFetcher(newsFeedURL, "local_news");
 		
 		/* Set opening hours: */
 		TextView tvNeuf = (TextView)findViewById(R.id.main_menu_hours_neuf);
@@ -138,36 +153,28 @@ public class DnsActivity extends BaseDnsActivity {
 	}
 	
 	public void programButton(View v) {
-		Intent intent = new Intent();
-
-		intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
-				| Intent.FLAG_ACTIVITY_SINGLE_TOP);
-		intent.setClass(this, EventListActivity.class);
-
+		Intent intent = setupNewIntent(EventListActivity.class);
+		intent.putExtra("feed", eventFeedFetcher);
+		intent.putExtra("parser", new RSSParserProgram());
 		startActivity(intent);
 	}
 
 	public void ticketButton(View v) {
-		Intent intent = new Intent();
-
-		intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
-				| Intent.FLAG_ACTIVITY_SINGLE_TOP);
-		intent.setClass(this, EventListTicketsActivity.class);
-
+		Intent intent = setupNewIntent(EventListTicketsActivity.class);
+		intent.putExtra("feed", eventFeedFetcher);
+		intent.putExtra("parser", new RSSParserProgram());
 		startActivity(intent);
 	}
 
 	public void newsButton(View v) {
-		Toast.makeText(this, "Not implemented (yet!)", Toast.LENGTH_SHORT).show();
+		Intent intent = setupNewIntent(NewsListActivity.class);
+		intent.putExtra("feed", newsFeedFetcher);
+		intent.putExtra("parser", new RSSParserNews());
+		startActivity(intent);
 	}
 
 	public void joinButton(View v) {
-		Intent intent = new Intent();
-		
-		intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-		intent.setClass(this, JoinUsActivity.class);
-		
+		Intent intent = setupNewIntent(JoinUsActivity.class);
 		startActivity(intent);
-
 	}
 }

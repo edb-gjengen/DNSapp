@@ -18,9 +18,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.EventViewActivity"></activity>
+        <activity android:name=".ui.NewsViewActivity"></activity>
         <activity android:name=".ui.JoinUsActivity"></activity>
-        <activity android:name=".ui.EventListActivity"></activity>
-        <activity android:name=".ui.EventListTicketsActivity"></activity>
+        <activity android:name=".ui.lists.EventListActivity"></activity>
+        <activity android:name=".ui.lists.EventListTicketsActivity"></activity>
+        <activity android:name=".ui.lists.NewsListActivity"></activity>
 
     </application>
 </manifest>

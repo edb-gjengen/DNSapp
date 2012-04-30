@@ -1,13 +1,10 @@
-package com.studentersamfundet.app.ui;
+package com.studentersamfundet.app.ui.lists;
 
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 
-import org.w3c.dom.NodeList;
-
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -15,30 +12,22 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
-import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.studentersamfundet.app.DataHandler;
 import com.studentersamfundet.app.Event;
-import com.studentersamfundet.app.FeedFetcher;
 import com.studentersamfundet.app.R;
-import com.studentersamfundet.app.RSSParserProgram;
 import com.studentersamfundet.app.network.ImageLoader;
+import com.studentersamfundet.app.ui.ChooseCategoryDialog;
+import com.studentersamfundet.app.ui.EventViewActivity;
 import com.studentersamfundet.app.ui.ChooseCategoryDialog.Callback;
 
-public class EventListActivity extends BaseDnsActivity {
-	public static final String feedURL = "http://studentersamfundet.no/rss/lars_program_feed.php";
+public class EventListActivity extends BaseListActivity {
 	public static final int imageSize = 80;
-	
-	protected FeedFetcher feed;
-	protected RSSParserProgram parser;
-	protected DataHandler dataHandler;
 	
 	private String currentCategory = Event.ALL; 
 	
@@ -47,10 +36,7 @@ public class EventListActivity extends BaseDnsActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.event_list);
         
-        this.feed = new FeedFetcher(this, feedURL);
-        this.parser = new RSSParserProgram();
-        
-        ListCreator lc = getListCreator(Event.ALL, false);
+		ListCreator<?> lc = getListCreator(this, R.id.event_list, R.id.event_list_progress_bar);
         lc.execute();
     }
     
@@ -66,7 +52,8 @@ public class EventListActivity extends BaseDnsActivity {
 
         switch (item.getItemId()) {
         case R.id.menu_refresh:
-            ListCreator lc = getListCreator(Event.ALL, true);
+            ListCreator<?> lc = getListCreator(this, R.id.event_list, R.id.event_list_progress_bar);
+            lc.setForcedUpdate(true);
             lc.execute();
             return true;
         
@@ -84,13 +71,13 @@ public class EventListActivity extends BaseDnsActivity {
     	if (currentCategory.equals(Event.ALL)) {
     		super.onBackPressed();
     	} else {
-    		ListCreator lc = getListCreator(Event.ALL, false);
+    		ListCreator<?> lc = getListCreator(this, R.id.event_list, R.id.event_list_progress_bar);
     		lc.execute();
     	}
     }
-    
-    
-    protected ListAdapter createAdapter(Event[] events) {
+        
+    protected <T> ListAdapter createAdapter(T[] objects) {
+    	Event[] events = (Event[])objects;
     	
     	ListAdapter adapter = new ArrayAdapter<Event>(this, R.layout.event_list_row, R.id.event_list_row_text, events) {
     		@Override
@@ -149,84 +136,30 @@ public class EventListActivity extends BaseDnsActivity {
 				if (message.length < 1) 
 					message = new String[] { Event.ALL };
 				
-				ListCreator lc = getListCreator(message[0], false);
+				ListCreator<?> lc = getListCreator(EventListActivity.this, R.id.event_list, R.id.event_list_progress_bar);
+				lc.setCategory(message[0]);
 				lc.execute();
 			}
 		};
 		
-    	if (dataHandler != null) {
-	    	Dialog dialog = new ChooseCategoryDialog(this, callback, dataHandler.getEventCategories());
+    	if (getDataHandler() != null) {
+	    	Dialog dialog = new ChooseCategoryDialog(this, callback, getDataHandler().getEventCategories());
 	    	dialog.show();
     	} else {
     		Toast.makeText(this, R.string.error_loading, Toast.LENGTH_SHORT);
     	}
     }
 
-    protected class ListCreator extends AsyncTask<Void, Void, Boolean> {
-    	protected String category;
-    	protected boolean forcedUpdate;
-    	
-    	public ListCreator(String category, boolean forcedUpdate) {
-    		this.category = category;
-    		this.forcedUpdate = forcedUpdate;
-    	}
-    	
-    	@Override 
-    	protected void onPreExecute() {
-    		if (forcedUpdate) {
-    			dataHandler = null;
-    		}
-    	
-    		ListView list = (ListView)findViewById(R.id.event_list);
-	        list.setVisibility(View.GONE);
-	        
-	        ProgressBar pb = (ProgressBar)findViewById(R.id.event_list_progress_bar);
-	        pb.setVisibility(View.VISIBLE);
-    	}
-    	
-		@Override
-		protected Boolean doInBackground(Void ... v) {
-			// Do we have intarwebs?
-	        // YAY = Fetch the feed.
-	        // NAY = Inform about no connection.
-	        try {
-	        	if (dataHandler == null) {
-			        NodeList itemNodes = feed.fetch(this.forcedUpdate);
-			        dataHandler = parser.parse(itemNodes);
-	        	}
-			    return true;
-		        
-	        } catch (IOException e) {
-	        	return false;
-	        }
-		}
-    	
-		@Override
-		protected void onPostExecute(Boolean result) {
-			if (result) {
-				ListView list = (ListView)findViewById(R.id.event_list);
-				Event[] events = getEvents();
-		        ListAdapter adapter = createAdapter(events);
-		        list.setAdapter(adapter);
-		        list.setVisibility(View.VISIBLE);
-		        
-		        ProgressBar pb = (ProgressBar)findViewById(R.id.event_list_progress_bar);
-		        pb.setVisibility(View.GONE);
-		        
-		        currentCategory = category;
-			} else {
-				Toast toast = Toast.makeText(EventListActivity.this, R.string.error_noconnection_noupdate, Toast.LENGTH_LONG);
-	        	toast.show();
-			}
-		}
-		
-		protected Event[] getEvents() {
-			return dataHandler.getEvents(this.category);
-		}
-    }
+ 
     
-    protected ListCreator getListCreator(String category, boolean forcedUpdate) {
-    	return new ListCreator(category, forcedUpdate);
+    protected ListCreator<Event> getListCreator(Context context, int idList, int idProgressBar) {
+    	return new ListCreator<Event>(context, idList, idProgressBar) {
+
+			@Override
+			protected Event[] getObjects() {
+				return getDataHandler().getEvents(Event.ALL);
+			}
+    	};
     }
     
     protected OnClickListener getShortClickListener (final Event e) {

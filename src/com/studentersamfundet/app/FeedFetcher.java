@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
@@ -19,15 +20,14 @@ import org.xml.sax.SAXException;
 
 import android.content.Context;
 
-public class FeedFetcher {
-	private final String LOCAL_FILENAME = "dns_events";
-	
-	private Context context;
+public class FeedFetcher implements Serializable {
+	private static final long serialVersionUID = 3408406671996232103L;
+	private final String localFilename;
 	private String url;
 	
-	public FeedFetcher(Context context, String url) {
-		this.context = context;
+	public FeedFetcher(String url, String localFilename) {
 		this.url = url;
+		this.localFilename = localFilename;
 	}
 	
 	private InputStream openHttpConnection() throws IOException {
@@ -61,58 +61,71 @@ public class FeedFetcher {
 	 * @throws IOException Is thrown if the app cannot download the file from
 	 * the internet and there is no local copy.
 	 */
-	public NodeList fetch(boolean forcedUpdate) throws IOException {
-	       InputStream in = null;
-	       NodeList itemNodes = null;
-	       
-        	/* Update the local file if possible. */
-        	try {
-        		if (forcedUpdate || doesFileNeedUpdate(context)) {
-	        		in = openHttpConnection();
-	            	saveFile(in, context);
-        		}
-            	
-        	} catch(IOException e) {
-        		/* OK, so we failed to update it. It doesn't matter yet, because we can try to... */
-        	} finally {
-        		if (in != null) 
-        			in.close();
-        	}
-        	
-    		/* ...load local file: */
-        	in = loadFile(context); // if we fail here, we fail ultimately. Throw the Exception! 
-        	
-            Document doc = null;
-            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-            DocumentBuilder db;
-            
-            try {
-                db = dbf.newDocumentBuilder();
-                doc = db.parse(in);
-            } catch (ParserConfigurationException e) {
-            	/* This should never happen. */
-            } catch (SAXException e) {
-            	/* This shouldn't happen unless the xml returned by the server
-            	 * is somehow invalid. If it happens, the best course of action 
-            	 * is to pretend we failed to download the event list (it's 
-            	 * close enough and it simplifies exception-handling). */
-            	throw new IOException("Bad response from server.");
-            }        
-            
-            doc.getDocumentElement().normalize(); 
-            
-            // Retrieve all the <item> nodes.
-            itemNodes = doc.getElementsByTagName("item");
-            in.close();
-
-	        return itemNodes;
+	public NodeList fetch(Context context, boolean forcedUpdate) throws IOException {
+		NodeList itemNodes = null;
+		InputStream in = null;
+		   
+			/* Update the local file if possible. */
+		try {
+			if (forcedUpdate || doesFileNeedUpdate(context)) {
+				in = openHttpConnection();
+		    	saveFile(in, context);
+			}
+			
+		} catch(IOException e) {
+			/* OK, so we failed to update it. It doesn't matter yet, because we can try to... */
+		} finally {
+			if (in != null) 
+				in.close();
+		}
+		
+		/* ...load local file: */
+		in = loadFile(context); // if we fail here, we fail ultimately. Throw the Exception! 
+		itemNodes = parseInputStream(in);            
+		in.close();
+		
+		return itemNodes;
+	}
+	
+	public NodeList loadLocalData(Context c) throws IOException {
+		NodeList nodes;
+		
+		InputStream is = loadFile(c);
+		nodes = parseInputStream(is);
+		is.close();
+		
+		return nodes;
+	}
+	
+	private static NodeList parseInputStream(InputStream iStream) throws IOException {
+		Document doc = null;
+        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+        DocumentBuilder db;
+        
+        try {
+            db = dbf.newDocumentBuilder();
+            doc = db.parse(iStream);
+        } catch (ParserConfigurationException e) {
+        	/* This should never happen. */
+        } catch (SAXException e) {
+        	/* This shouldn't happen unless the xml returned by the server
+        	 * is somehow invalid. If it happens, the best course of action 
+        	 * is to pretend we failed to download the event list (it's 
+        	 * close enough and it simplifies exception-handling). */
+        	throw new IOException("Bad response from server.");
+        }        
+        
+        doc.getDocumentElement().normalize(); 
+        
+        // Retrieve all the <item> nodes.
+        return doc.getElementsByTagName("item");
 	}
 	
 	private boolean doesFileNeedUpdate(Context c) throws IOException {
 		/** Maximum amount of time before the file needs updating, in ms: */
 		final long maxInterval = 1000 * 60 * 60; // one hour
 			
-		File file = c.getFileStreamPath(LOCAL_FILENAME);
+		File file = c.getFileStreamPath(localFilename);
 		if (! file.exists()) return true;
 		
 		long now = System.currentTimeMillis();
@@ -124,7 +137,7 @@ public class FeedFetcher {
 	private void saveFile(InputStream in, Context c) throws IOException, FileNotFoundException {
 		final int BUFFER_SIZE = 128;
 		
-		OutputStream os = c.openFileOutput(LOCAL_FILENAME, Context.MODE_PRIVATE);
+		OutputStream os = c.openFileOutput(localFilename, Context.MODE_PRIVATE);
 		byte[] inputBuffer = new byte[BUFFER_SIZE];
 		
 		int bytes = 0;
@@ -136,6 +149,6 @@ public class FeedFetcher {
 	}
 	
 	private InputStream loadFile(Context c) throws FileNotFoundException {
-		return c.openFileInput(LOCAL_FILENAME);
+		return c.openFileInput(localFilename);
 	}
 }
