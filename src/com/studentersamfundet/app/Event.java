@@ -1,15 +1,12 @@
 package com.studentersamfundet.app;
 
 import java.io.Serializable;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import android.net.Uri;
 
 public class Event implements Serializable {
 	private static final long serialVersionUID = -5222901012434000257L;
-	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	
 	public static final String ALL = "Alle";
 	
@@ -44,8 +41,8 @@ public class Event implements Serializable {
 		this.image = image;
 		
 		try {
-			this.date = (date == null) ? null : dateFormat.parse(date.trim());
-		} catch (ParseException e) {
+			this.date = (date == null) ? null : new Date(1000 * Long.parseLong(date.trim()));
+		} catch (NumberFormatException e) {
 			this.date = null;
 		}
 	}
