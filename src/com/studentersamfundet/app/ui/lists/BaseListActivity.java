@@ -7,7 +7,7 @@ import org.w3c.dom.NodeList;
 import com.studentersamfundet.app.DataHandler;
 import com.studentersamfundet.app.Event;
 import com.studentersamfundet.app.FeedFetcher;
-import com.studentersamfundet.app.IRSSParser;
+import com.studentersamfundet.app.IParser;
 import com.studentersamfundet.app.R;
 import com.studentersamfundet.app.ui.BaseDnsActivity;
 
@@ -25,7 +25,7 @@ import android.widget.Toast;
 public abstract class BaseListActivity extends BaseDnsActivity {
 	private DataHandler datahandler;
 	private FeedFetcher feed;
-	private IRSSParser parser;
+	private IParser parser;
 	
 	private boolean isUpdated = false;
 
@@ -40,7 +40,7 @@ public abstract class BaseListActivity extends BaseDnsActivity {
 			throw new RuntimeException("This activity must be fed a feed feeder.");
 
 		/* Create the parser: */
-		this.parser = (IRSSParser)i.getExtras().get("parser");
+		this.parser = (IParser)i.getExtras().get("parser");
 		if (this.parser == null)
 			throw new RuntimeException("This activity requires feed parser");
 
