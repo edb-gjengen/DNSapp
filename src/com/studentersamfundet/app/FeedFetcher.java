@@ -10,14 +10,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
-
 import android.content.Context;
 
 public class FeedFetcher implements Serializable {
@@ -61,8 +53,7 @@ public class FeedFetcher implements Serializable {
 	 * @throws IOException Is thrown if the app cannot download the file from
 	 * the internet and there is no local copy.
 	 */
-	public NodeList fetch(Context context, boolean forcedUpdate) throws IOException {
-		NodeList itemNodes = null;
+	public InputStream fetch(Context context, boolean forcedUpdate) throws IOException {
 		InputStream in = null;
 		   
 			/* Update the local file if possible. */
@@ -80,46 +71,16 @@ public class FeedFetcher implements Serializable {
 		}
 		
 		/* ...load local file: */
-		in = loadFile(context); // if we fail here, we fail ultimately. Throw the Exception! 
-		itemNodes = parseInputStream(in);            
-		in.close();
+		in = loadFile(context); // if we fail here, we fail ultimately. Throw the Exception!
 		
-		return itemNodes;
+		return in;
 	}
 	
-	public NodeList loadLocalData(Context c) throws IOException {
-		NodeList nodes;
-		
+	public InputStream loadLocalData(Context c) throws IOException {
 		InputStream is = loadFile(c);
-		nodes = parseInputStream(is);
-		is.close();
-		
-		return nodes;
+		return is;
 	}
 	
-	private static NodeList parseInputStream(InputStream iStream) throws IOException {
-		Document doc = null;
-        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-        DocumentBuilder db;
-        
-        try {
-            db = dbf.newDocumentBuilder();
-            doc = db.parse(iStream);
-        } catch (ParserConfigurationException e) {
-        	/* This should never happen. */
-        } catch (SAXException e) {
-        	/* This shouldn't happen unless the xml returned by the server
-        	 * is somehow invalid. If it happens, the best course of action 
-        	 * is to pretend we failed to download the event list (it's 
-        	 * close enough and it simplifies exception-handling). */
-        	throw new IOException("Bad response from server.");
-        }        
-        
-        doc.getDocumentElement().normalize(); 
-        
-        // Retrieve all the <item> nodes.
-        return doc.getElementsByTagName("item");
-	}
 	
 	private boolean doesFileNeedUpdate(Context c) throws IOException {
 		/** Maximum amount of time before the file needs updating, in ms: */

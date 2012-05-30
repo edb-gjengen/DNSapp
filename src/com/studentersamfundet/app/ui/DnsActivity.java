@@ -12,9 +12,9 @@ import android.view.animation.Animation;
 import android.widget.TextView;
 
 import com.studentersamfundet.app.FeedFetcher;
+import com.studentersamfundet.app.JSONParserNews;
 import com.studentersamfundet.app.R;
-import com.studentersamfundet.app.RSSParserNews;
-import com.studentersamfundet.app.RSSParserProgram;
+import com.studentersamfundet.app.JSONParserProgram;
 import com.studentersamfundet.app.ui.lists.EventListActivity;
 import com.studentersamfundet.app.ui.lists.EventListTicketsActivity;
 import com.studentersamfundet.app.ui.lists.NewsListActivity;
@@ -155,21 +155,21 @@ public class DnsActivity extends BaseDnsActivity {
 	public void programButton(View v) {
 		Intent intent = setupNewIntent(EventListActivity.class);
 		intent.putExtra("feed", eventFeedFetcher);
-		intent.putExtra("parser", new RSSParserProgram());
+		intent.putExtra("parser", new JSONParserProgram());
 		startActivity(intent);
 	}
 
 	public void ticketButton(View v) {
 		Intent intent = setupNewIntent(EventListTicketsActivity.class);
 		intent.putExtra("feed", eventFeedFetcher);
-		intent.putExtra("parser", new RSSParserProgram());
+		intent.putExtra("parser", new JSONParserProgram());
 		startActivity(intent);
 	}
 
 	public void newsButton(View v) {
 		Intent intent = setupNewIntent(NewsListActivity.class);
 		intent.putExtra("feed", newsFeedFetcher);
-		intent.putExtra("parser", new RSSParserNews());
+		intent.putExtra("parser", new JSONParserNews());
 		startActivity(intent);
 	}
 

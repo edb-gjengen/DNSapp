@@ -1,8 +1,7 @@
 package com.studentersamfundet.app.ui.lists;
 
 import java.io.IOException;
-
-import org.w3c.dom.NodeList;
+import java.io.InputStream;
 
 import com.studentersamfundet.app.DataHandler;
 import com.studentersamfundet.app.Event;
@@ -112,8 +111,8 @@ public abstract class BaseListActivity extends BaseDnsActivity {
 					// NAY = Inform about no connection.
 					try {
 						if (datahandler == null) {
-							NodeList itemNodes = feed.fetch(BaseListActivity.this, this.forcedUpdate);
-							datahandler = parser.parse(itemNodes);
+							InputStream in = feed.fetch(BaseListActivity.this, this.forcedUpdate);
+							datahandler = parser.parse(in);
 						}
 						return true;
 
