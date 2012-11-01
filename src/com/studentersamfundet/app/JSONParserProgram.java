@@ -38,6 +38,7 @@ public class JSONParserProgram implements IParser {
 		String priceReg = "";
 		String priceMem = "";
 		String ticketUrl = "";
+		String fbUrl = "";
 		
 		try {
 			String jString = Utils.convertStreamToString(in);
@@ -59,9 +60,10 @@ public class JSONParserProgram implements IParser {
 				
 				tempJSON = tempJSON.getJSONObject("custom_fields");
 				ticketUrl = tempJSON.getJSONArray("_neuf_events_bs_url").getString(0);
+				fbUrl = tempJSON.getJSONArray("_neuf_events_fb_url").getString(0);
 				location = tempJSON.getJSONArray("_neuf_events_venue").getString(0);
 				priceReg = tempJSON.getJSONArray("_neuf_events_price_regular").getString(0);
-				priceMem = priceReg;
+				priceMem = tempJSON.getJSONArray("_neuf_events_price_member").getString(0);
 				date = tempJSON.getJSONArray("_neuf_events_starttime").getString(0);
 				
 				
@@ -76,7 +78,8 @@ public class JSONParserProgram implements IParser {
 						image,
 						priceReg,
 						priceMem,
-						ticketUrl);
+						ticketUrl,
+						fbUrl);
 			}
 
 

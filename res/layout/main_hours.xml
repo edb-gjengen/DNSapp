@@ -50,7 +50,7 @@
             android:layout_width="fill_parent"
             android:layout_weight="0.5"
             android:layout_marginLeft="20px"
-            android:text="Bokcaféen" />
+            android:text="BokCaféen" />
             
         <!-- This is set in Java: -->
         <TextView android:id="@+id/main_menu_hours_bc"

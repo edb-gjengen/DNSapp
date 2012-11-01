@@ -24,7 +24,8 @@ public class DataHandler implements Serializable {
 			String imageUri,
 			String priceReg,
 			String priceMem,
-			String ticketUriStr) {
+			String ticketUriStr,
+			String fbUriStr) {
 		int intId = Integer.parseInt(id);
 		
 		Event event = new Event(intId, title, description, date, location, text, category, imageUri);
@@ -33,6 +34,7 @@ public class DataHandler implements Serializable {
 			int regularPrice = Integer.parseInt(priceReg);
 			int memberPrice = Integer.parseInt(priceMem);
 			
+			event.setFbUriStr(fbUriStr);
 			event.setTicketsInfo(regularPrice, memberPrice, ticketUriStr);
 		} catch (NumberFormatException e1) { /* Do nothing. */ } 
 		

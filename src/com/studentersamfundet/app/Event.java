@@ -22,6 +22,7 @@ public class Event implements Serializable {
 	private int regularPrice;
 	private int memberPrice;
 	private String ticketUriStr;
+	private String fbUriStr;
 	
 	public Event(
 			int id, 
@@ -114,6 +115,14 @@ public class Event implements Serializable {
 		this.regularPrice = regularPrice;
 		this.memberPrice = memberPrice;
 		this.ticketUriStr = ticketUri;
+	}
+	
+	public void setFbUriStr(String uri) {
+		this.fbUriStr = uri;
+	}
+	
+	public String getFbUriStr() {
+		return this.fbUriStr;
 	}
 	
 	public int hashCode() {
