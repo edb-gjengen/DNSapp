@@ -106,7 +106,7 @@ public abstract class BaseListActivity extends BaseDnsActivity {
 
 		@Override
 		protected Boolean doInBackground(Void ... v) {
-			// Do we have intarwebs?
+					// Do we have intarwebs?
 					// YAY = Fetch the feed.
 					// NAY = Inform about no connection.
 					try {
@@ -129,7 +129,7 @@ public abstract class BaseListActivity extends BaseDnsActivity {
 				ListView list = (ListView)findViewById(idList);
 				T[] objects = getObjects();
 				
-				Log.i("DNSapp", "Showing " +objects.length +" objects.");
+				Log.i("DNSapp", "Showing " + objects.length +" objects.");
 				ListAdapter adapter = createAdapter(objects);
 				list.setAdapter(adapter);
 				list.setVisibility(View.VISIBLE);

@@ -57,6 +57,7 @@ public class JSONParserProgram implements IParser {
 				date = tempJSON.getString("date");
 				text = tempJSON.getString("content");
 				image = tempJSON.getString("thumbnail");
+				category = tempJSON.getString("event");
 				
 				tempJSON = tempJSON.getJSONObject("custom_fields");
 				ticketUrl = tempJSON.getJSONArray("_neuf_events_bs_url").getString(0);
