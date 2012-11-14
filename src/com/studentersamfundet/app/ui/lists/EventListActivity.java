@@ -136,6 +136,7 @@ public class EventListActivity extends BaseListActivity {
 				if (message.length < 1) 
 					message = new String[] { Event.ALL };
 				
+				currentCategory = message[0];
 				ListCreator<?> lc = getListCreator(EventListActivity.this, R.id.event_list, R.id.event_list_progress_bar);
 				lc.setCategory(message[0]);
 				lc.execute();
@@ -146,7 +147,7 @@ public class EventListActivity extends BaseListActivity {
 	    	Dialog dialog = new ChooseCategoryDialog(this, callback, getDataHandler().getEventCategories());
 	    	dialog.show();
     	} else {
-    		Toast.makeText(this, R.string.error_loading, Toast.LENGTH_SHORT);
+    		Toast.makeText(this, R.string.error_loading, Toast.LENGTH_SHORT).show();
     	}
     }
 
@@ -157,7 +158,7 @@ public class EventListActivity extends BaseListActivity {
 
 			@Override
 			protected Event[] getObjects() {
-				return getDataHandler().getEvents(Event.ALL);
+				return getDataHandler().getEvents(currentCategory);
 			}
     	};
     }

@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/main_menu_tickets"
     style="@style/MetroTile"
-    android:background="@drawable/ex3"
+    android:background="@drawable/gris"
     android:onClick="ticketButton" >
 
     <TextView

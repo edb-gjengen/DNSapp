@@ -8,6 +8,7 @@
 		android:layout_width="match_parent" 
 		android:layout_alignParentTop="true"/>
 	
+	<!-- Picture size for buttons: 425x350 -->
 	<!-- MENU: --> 
 	<LinearLayout 
 	    android:layout_height="match_parent"

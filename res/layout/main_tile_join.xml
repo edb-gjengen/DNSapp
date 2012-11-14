@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/main_menu_join"
     style="@style/MetroTile"
-    android:background="@drawable/ex4"
+    android:background="@drawable/gris"
     android:onClick="joinButton" >
 
     <TextView

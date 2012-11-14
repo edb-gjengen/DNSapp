@@ -27,7 +27,6 @@ public abstract class BaseListActivity extends BaseDnsActivity {
 	private IParser parser;
 	
 	private boolean isUpdated = false;
-
 	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
