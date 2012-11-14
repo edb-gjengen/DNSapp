@@ -58,13 +58,6 @@
 		
 		<TextView android:id="@+id/event_view_description" 
 	    	android:layout_width="match_parent"
-			android:layout_height="wrap_content" />
-		
-		<ImageView 
-		    android:id="@+id/event_fb_icon"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:src="@drawable/fbicon" />
-		
+			android:layout_height="wrap_content" />	
 	</ScrollView>
 </RelativeLayout>

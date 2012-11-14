@@ -39,7 +39,6 @@ public class EventViewActivity extends BaseDnsActivity {
         TextView location = (TextView) findViewById(R.id.event_view_location);
         TextView datetime = (TextView) findViewById(R.id.event_view_datetime);
         Button link = (Button) findViewById(R.id.event_view_link);
-        ImageView fblink = (ImageView) findViewById(R.id.event_fb_icon);
         
         title.setText(Html.fromHtml(e.title));
         location.setText(Html.fromHtml(e.getLocation()));

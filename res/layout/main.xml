@@ -38,13 +38,13 @@
       	        android:layout_weight="1"
 				android:layout_height="wrap_content" 
 				android:layout_width="match_parent" 
-				android:layout_margin="5px" />
+				android:layout_margin="10px" />
        	    
        	    <include layout="@layout/main_tile_news" 
       	        android:layout_weight="1"
 				android:layout_height="wrap_content" 
 				android:layout_width="match_parent" 
-				android:layout_margin="5px" />
+				android:layout_margin="10px" />
         </LinearLayout>
 	        
 	    <!-- Row nr 2: -->
@@ -59,13 +59,13 @@
       	        android:layout_weight="1"
 				android:layout_height="wrap_content" 
 				android:layout_width="match_parent" 
-			    android:layout_margin="5px" />
+			    android:layout_margin="10px" />
        	    
        	    <include layout="@layout/main_tile_join" 
       	        android:layout_weight="1"
 				android:layout_height="wrap_content" 
 				android:layout_width="match_parent" 
-				android:layout_margin="5px" />    
+				android:layout_margin="10px" />    
    	    </LinearLayout>
    	    
 	</LinearLayout>
