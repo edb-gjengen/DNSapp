@@ -64,5 +64,54 @@ public class Utils {
         }
     }
 	
+	// Gets the opening hours for a specific place on this day.
+	public static String getOpeningHours(String get, int day) {
+		// Chateau Neuf
+		if (get.compareTo("cn")==0) {
+			 String[] cn = {
+				"10.00 - 01.00",
+				"10.00 - 01.00",
+				"10.00 - 01.00",
+				"10.00 - 03.00",
+				"10.00 - 03.00",
+				"12.00 - 03.00",
+				"12.00 - 20.00"};
+			 return cn[day];
+		// Glassbaren
+		} else if (get.compareTo("gb")==0) {
+			String[] gb = {
+				"11.00 - 01.00",
+				"11.00 - 01.00",
+				"11.00 - 01.00",
+				"11.00 - 03.00",
+				"11.00 - 03.00",
+				"16.00 - 03.00",
+				"Stengt"};
+			return gb[day];
+		// BokCaféen
+		} else if (get.compareTo("bc")==0) {
+			String[] bc = {
+				"19.00 - 00.00",
+				"19.00 - 00.00",
+				"19.00 - 00.00",
+				"19.00 - 02.00",
+				"19.00 - 03.00",
+				"21.00 - 03.00",
+				"Stengt"};
+			return bc[day];
+		// Billettluka
+		} else if (get.compareTo("to")==0) {
+			String[] to = {
+					"15.30 - 20.30",
+					"15.30 - 20.30",
+					"15.30 - 20.30",
+					"15.30 - 20.30",
+					"15.30 - 20.30",
+					"Stengt",
+					"Stengt"};
+			return to[day];
+		} else
+			return null; // Shouldn't happen.
+	}
 }
 

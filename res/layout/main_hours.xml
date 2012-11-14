@@ -82,4 +82,27 @@
             android:layout_width="fill_parent"
             android:layout_weight="0.5" />
     </LinearLayout>
+    
+    <LinearLayout android:id="@+id/main_menu_hours_to_header"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_marginTop="10px"
+        android:layout_marginBottom="10px"
+        android:orientation="horizontal">
+        
+        <TextView
+            style="@style/OpeningHoursText"
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:layout_weight="0.5"
+            android:layout_marginLeft="20px"
+            android:text="Billettluka" />
+            
+        <!-- This is set in Java: -->
+        <TextView android:id="@+id/main_menu_hours_to"
+            style="@style/OpeningHoursText"
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:layout_weight="0.5" />
+    </LinearLayout>
 </LinearLayout>

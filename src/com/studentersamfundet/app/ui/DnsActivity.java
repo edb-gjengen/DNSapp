@@ -15,6 +15,7 @@ import com.studentersamfundet.app.FeedFetcher;
 import com.studentersamfundet.app.JSONParserNews;
 import com.studentersamfundet.app.R;
 import com.studentersamfundet.app.JSONParserProgram;
+import com.studentersamfundet.app.Utils;
 import com.studentersamfundet.app.ui.lists.EventListActivity;
 import com.studentersamfundet.app.ui.lists.EventListTicketsActivity;
 import com.studentersamfundet.app.ui.lists.NewsListActivity;
@@ -25,33 +26,6 @@ public class DnsActivity extends BaseDnsActivity {
 	
 	private FeedFetcher eventFeedFetcher;
 	private FeedFetcher newsFeedFetcher;
-	
-	private String[] openingHoursHouse = {
-		"10.00 - 01.00",
-		"10.00 - 01.00",
-		"10.00 - 01.00",
-		"10.00 - 03.00",
-		"10.00 - 03.00",
-		"12.00 - 03.00",
-		"12.00 - 20.00"};
-	
-	private String[] openingHoursGB = {
-		"13.00 - 01.00",
-		"13.00 - 01.00",
-		"13.00 - 01.00",
-		"13.00 - 03.00",
-		"13.00 - 03.00",
-		"16.00 - 03.00",
-		"Stengt"};	
-	
-	private String[] openingHoursBC = {
-		"19.00 - 00.00",
-		"19.00 - 00.00",
-		"19.00 - 00.00",
-		"19.00 - 03.00",
-		"19.00 - 03.00",
-		"20.00 - 03.00",
-		"Stengt"};
 	
 	/** Called when the activity is first created. */
 	@Override
@@ -67,11 +41,13 @@ public class DnsActivity extends BaseDnsActivity {
 		TextView tvNeuf = (TextView)findViewById(R.id.main_menu_hours_neuf);
 		TextView tvBC = (TextView)findViewById(R.id.main_menu_hours_bc);
 		TextView tvGB = (TextView)findViewById(R.id.main_menu_hours_gb);
+		TextView tvTO = (TextView)findViewById(R.id.main_menu_hours_to);
 		int day = (Calendar.getInstance().get(Calendar.DAY_OF_WEEK) + 5) % 7;
 		
-		tvNeuf.setText(openingHoursHouse[day]);
-		tvBC.setText(openingHoursBC[day]);
-		tvGB.setText(openingHoursGB[day]);
+		tvNeuf.setText(Utils.getOpeningHours("cn", day));
+		tvBC.setText(Utils.getOpeningHours("bc", day));
+		tvGB.setText(Utils.getOpeningHours("gb", day));
+		tvTO.setText(Utils.getOpeningHours("to", day));
 		
 		setupFocus();
 	}
