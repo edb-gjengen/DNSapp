@@ -97,7 +97,8 @@ public class Event implements Serializable {
 		Uri ticketUri = null;
 		
 		if (ticketUriStr != null 
-				&& ticketUriStr.startsWith("http://") 
+				&& (ticketUriStr.startsWith("http://") 
+					|| ticketUriStr.startsWith("https://"))
 				&& ticketUriStr.length() > 7) {
 			ticketUri = Uri.parse(ticketUriStr);
 		}

@@ -22,10 +22,10 @@ public class ImageLoader extends AsyncTask<String, Void, Drawable> {
 	private final int imageId;
 	private int progressbarId = -1;
 	
-	public ImageLoader(ViewGroup parent, int position, int imageId)  {
+	public ImageLoader(ViewGroup parent, int position, int imageViewId)  {
 		this.parent = parent;
 		this.position = position;
-		this.imageId = imageId;
+		this.imageId = imageViewId;
 	}
 		
 	@Override

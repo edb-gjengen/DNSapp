@@ -61,7 +61,7 @@ public class JSONParserProgram implements IParser {
 					category = tempJSON.getString("event");
 					
 					tempJSON = tempJSON.getJSONObject("custom_fields");
-					ticketUrl = tempJSON.getJSONArray("_neuf_events_bs_url").getString(0);
+					ticketUrl = tempJSON.getJSONArray("_neuf_events_bs_url").getString(0);					
 					fbUrl = tempJSON.getJSONArray("_neuf_events_fb_url").getString(0);
 					location = tempJSON.getJSONArray("_neuf_events_venue").getString(0);
 					priceReg = tempJSON.getJSONArray("_neuf_events_price_regular").getString(0);

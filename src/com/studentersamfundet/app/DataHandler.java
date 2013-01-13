@@ -7,6 +7,8 @@ import java.util.LinkedList;
 import java.util.Set;
 import java.util.TreeSet;
 
+import android.util.Log;
+
 public class DataHandler implements Serializable {
 	private static final long serialVersionUID = 6787541405689146002L;
 	
@@ -30,13 +32,18 @@ public class DataHandler implements Serializable {
 		
 		Event event = new Event(intId, title, description, date, location, text, category, imageUri);
 		
+		int regularPrice = 0;
+		int memberPrice = 0;
 		try {
-			int regularPrice = Integer.parseInt(priceReg);
-			int memberPrice = Integer.parseInt(priceMem);
-			
-			event.setFbUriStr(fbUriStr);
-			event.setTicketsInfo(regularPrice, memberPrice, ticketUriStr);
-		} catch (NumberFormatException e1) { /* Do nothing. */ } 
+			regularPrice = Integer.parseInt(priceReg);
+			memberPrice = Integer.parseInt(priceMem);
+		} catch (NumberFormatException e1) { 
+			/* Do nothing. */
+			Log.w("TAG", e1.toString());
+		} 
+		event.setFbUriStr(fbUriStr);
+		event.setTicketsInfo(regularPrice, memberPrice, ticketUriStr);
+		
 		
 		
 		events.add(event);
