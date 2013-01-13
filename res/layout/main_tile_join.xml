@@ -2,9 +2,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/main_menu_join"
     style="@style/MetroTile"
-    android:background="@drawable/blimed"
     android:onClick="joinButton" >
 
+    <ImageView 
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/blimed"
+        android:layout_centerInParent="true"
+        android:scaleType="fitCenter" />
+    
     <TextView
         style="@style/MetroTileText_bg"
         android:layout_width="fill_parent"

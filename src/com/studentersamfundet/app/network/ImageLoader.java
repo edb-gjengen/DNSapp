@@ -40,11 +40,18 @@ public class ImageLoader extends AsyncTask<String, Void, Drawable> {
 		try {
 			HttpURLConnection con = (HttpURLConnection)new URL(params[0]).openConnection();
 		    InputStream is = con.getInputStream();
-		    		
-			d = Drawable.createFromStream(is, params[0].toString());
+		    
+		    // 
+		    if (is == null) 
+		    	return null;
+	    	d = Drawable.createFromStream(is, params[0].toString());
+			
+			if (d == null) 
+				return null;
 			cache.put(params[0], d);
+			
 		} catch (IOException e) {
-			Log.e("DNSapp", "An exception has occured while downloading images!", e);
+			Log.e("DNSapp", "An exception has occured while downloading images!");
 		}
 		return d;
 	}

@@ -50,51 +50,47 @@ public class JSONParserProgram implements IParser {
 
 			for (int i = 0;i < count;i++) { 
 				// Variables directly from the JSONObject
-				tempJSON = eventArray.getJSONObject(i);
-				id = tempJSON.getString("id");
-				title = tempJSON.getString("title");
-				description = tempJSON.getString("excerpt");
-				date = tempJSON.getString("date");
-				text = tempJSON.getString("content");
-				image = tempJSON.getString("thumbnail");
-				Log.d("TMB", image);
-				category = tempJSON.getString("event");
-				
-				tempJSON = tempJSON.getJSONObject("custom_fields");
-				ticketUrl = tempJSON.getJSONArray("_neuf_events_bs_url").getString(0);
-				fbUrl = tempJSON.getJSONArray("_neuf_events_fb_url").getString(0);
-				location = tempJSON.getJSONArray("_neuf_events_venue").getString(0);
-				priceReg = tempJSON.getJSONArray("_neuf_events_price_regular").getString(0);
-				priceMem = tempJSON.getJSONArray("_neuf_events_price_member").getString(0);
-				date = tempJSON.getJSONArray("_neuf_events_starttime").getString(0);
-				
-				// This is as ugly as it gets. Refactor?
-				dh.insertEvent(id, 
-						title, 
-						description, 
-						date,
-						location, 
-						text, 
-						category, 
-						image,
-						priceReg,
-						priceMem,
-						ticketUrl,
-						fbUrl);
+				try {
+					tempJSON = eventArray.getJSONObject(i);
+					id = tempJSON.getString("id");
+					title = tempJSON.getString("title");
+					description = tempJSON.getString("excerpt");
+					date = tempJSON.getString("date");
+					text = tempJSON.getString("content");
+					image = tempJSON.getString("thumbnail");
+					category = tempJSON.getString("event");
+					
+					tempJSON = tempJSON.getJSONObject("custom_fields");
+					ticketUrl = tempJSON.getJSONArray("_neuf_events_bs_url").getString(0);
+					fbUrl = tempJSON.getJSONArray("_neuf_events_fb_url").getString(0);
+					location = tempJSON.getJSONArray("_neuf_events_venue").getString(0);
+					priceReg = tempJSON.getJSONArray("_neuf_events_price_regular").getString(0);
+					priceMem = tempJSON.getJSONArray("_neuf_events_price_member").getString(0);
+					date = tempJSON.getJSONArray("_neuf_events_starttime").getString(0);
+					
+					// This is as ugly as it gets. Refactor?
+					dh.insertEvent(id, 
+							title, 
+							description, 
+							date,
+							location, 
+							text, 
+							category, 
+							image,
+							priceReg,
+							priceMem,
+							ticketUrl,
+							fbUrl);
+				} catch (JSONException e) {
+					Log.e("json-parser", e.getMessage());
+					continue;
+				} 
 			}
-
-
 		} catch (IOException e) {
 			Log.e("json-parser", e.getMessage());
-			return dh;
 		} catch (JSONException e) {
 			Log.e("json-parser", e.getMessage());
-			return dh;
 		}
-
-
-
-		
 		return dh;
 	}
 }
