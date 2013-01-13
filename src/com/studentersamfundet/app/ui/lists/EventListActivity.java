@@ -71,6 +71,7 @@ public class EventListActivity extends BaseListActivity {
     	if (currentCategory.equals(Event.ALL)) {
     		super.onBackPressed();
     	} else {
+    		currentCategory = Event.ALL;
     		ListCreator<?> lc = getListCreator(this, R.id.event_list, R.id.event_list_progress_bar);
     		lc.execute();
     	}

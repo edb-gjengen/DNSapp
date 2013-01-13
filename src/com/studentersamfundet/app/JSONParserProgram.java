@@ -67,7 +67,6 @@ public class JSONParserProgram implements IParser {
 				priceMem = tempJSON.getJSONArray("_neuf_events_price_member").getString(0);
 				date = tempJSON.getJSONArray("_neuf_events_starttime").getString(0);
 				
-				
 				// This is as ugly as it gets. Refactor?
 				dh.insertEvent(id, 
 						title, 
