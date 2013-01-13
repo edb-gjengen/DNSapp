@@ -96,6 +96,7 @@ public class EventListActivity extends BaseListActivity {
     			
     			/* Set images: */
     			ImageLoader loader = new ImageLoader(parent, position, R.id.event_list_row_image);
+    			loader.setProgressbar(R.id.event_list_row_image_pb);
 				loader.execute(e.getImageUri(imageSize).toString());
     			
     			

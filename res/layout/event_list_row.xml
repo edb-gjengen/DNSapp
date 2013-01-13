@@ -6,23 +6,35 @@
 	android:paddingTop="3px"
 	android:paddingBottom="3px">
     
-    <ImageView android:id="@+id/event_list_row_image" 
-        android:layout_height="wrap_content" 
-    	android:layout_width="wrap_content"
+    <FrameLayout android:id="@+id/event_list_row_image_fl"
+        android:layout_height="40dp" 
+    	android:layout_width="40dp"
     	android:layout_alignParentLeft="true" 
-    	android:padding="5px"
-    	android:layout_marginRight="5px" />
+    	android:padding="5dp"
+	    android:layout_marginRight="5dp" >
+        <ProgressBar android:id="@+id/event_list_row_image_pb"
+            android:layout_width="match_parent"
+	        android:layout_height="match_parent"
+	        android:visibility="visible"
+	        />
+        
+	    <ImageView android:id="@+id/event_list_row_image"
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent"
+	        android:visibility="gone"
+	        android:scaleType="fitXY"/>
+    </FrameLayout>
     
     <TextView android:id="@+id/event_list_row_text"
     	android:layout_height="wrap_content" 
     	android:layout_width="wrap_content" 
-    	android:layout_toRightOf="@id/event_list_row_image"
+    	android:layout_toRightOf="@id/event_list_row_image_fl"
     	android:layout_alignParentTop="true" />
     	
     <TextView android:id="@+id/event_list_row_date"
      	android:layout_height="wrap_content" 
     	android:layout_width="wrap_content" 
-    	android:layout_toRightOf="@id/event_list_row_image"
+    	android:layout_toRightOf="@id/event_list_row_image_fl"
     	android:layout_below="@id/event_list_row_text" />
     
     <TextView android:id="@+id/event_list_row_price"

@@ -83,13 +83,7 @@ public class Event implements Serializable {
 		if (this.id <= 0) {
 			return null;
 		}
-		
-		String imageUri = "http://studentersamfundet.no/imageResize.php?pic=bilder/program/{img}&maxwidth={width}&maxheight={height}&crop=1";
-		imageUri = imageUri.replace("{img}", this.image);
-		imageUri = imageUri.replace("{width}", Integer.toString(size));
-		imageUri = imageUri.replace("{height}", Integer.toString(size));
-
-		return Uri.parse(imageUri);
+		return Uri.parse(image);
 	}
 	
 	public String getPriceString() {

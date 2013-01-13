@@ -11,6 +11,7 @@ import java.util.concurrent.ConcurrentMap;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
@@ -19,6 +20,7 @@ public class ImageLoader extends AsyncTask<String, Void, Drawable> {
 	private final ViewGroup parent;
 	private final int position;
 	private final int imageId;
+	private int progressbarId = -1;
 	
 	public ImageLoader(ViewGroup parent, int position, int imageId)  {
 		this.parent = parent;
@@ -30,7 +32,7 @@ public class ImageLoader extends AsyncTask<String, Void, Drawable> {
 	protected Drawable doInBackground(String... params) {
 		if (params.length > 1)
 			throw new InvalidParameterException("Too many arguments to the function!");
-				
+		
 		Drawable d = cache.get(params[0]);
 		if (d != null)
 			return d;
@@ -55,9 +57,18 @@ public class ImageLoader extends AsyncTask<String, Void, Drawable> {
 			ViewGroup row = (ViewGroup)parent.getChildAt(position);
 			
 			if (row != null) {
+				if (progressbarId > 0) {
+					View pb = row.findViewById(progressbarId);
+					pb.setVisibility(View.GONE);
+				}
 				ImageView image = (ImageView)row.findViewById(imageId);
 				image.setImageDrawable(result);
+				image.setVisibility(View.VISIBLE);
 			}
 		}
+	}
+	
+	public void setProgressbar(int id) {
+		this.progressbarId = id;
 	}
 }
