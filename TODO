@@ -2,10 +2,10 @@ Prioriteringer fra 0-100.
 
 Før lansering:
 [0] Dersom ingen billetter tilgjengelig for online kjøp, si ifra om dette.
-[5] Skrive om "bli med" til om oss, ha med bli med tekst, evt. egen BLI MED KNAPP som går til JoinUsActivity.
 
 Etter:
 [0] Ha med link til FB-event.
-[5] Fikse legg til i kalender
+[5] Fikse legg til i kalender.
+[10] Skrive om alt "join us"-ting til "about".
 [20] Kampanjer: vis app - få gratis kaffe
 [50] Kunne knytte app mot medlemskap -> vise app i baren som gyldig bevis. 
