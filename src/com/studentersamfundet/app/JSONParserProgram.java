@@ -47,7 +47,7 @@ public class JSONParserProgram implements IParser {
 			JSONObject tempJSON;
 			JSONArray eventArray = jObject.getJSONArray("events");
 			int count = jObject.getInt("count");
-
+			
 			for (int i = 0;i < count;i++) { 
 				// Variables directly from the JSONObject
 				try {
