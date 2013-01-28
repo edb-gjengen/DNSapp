@@ -2,10 +2,14 @@ Prioriteringer fra 0-100.
 
 Før lansering:
 [0] Dersom ingen billetter tilgjengelig for online kjøp, si ifra om dette.
+[0] FÅ appen til å laste ned hele programmet. Løses nok med egen feed.
+[0] EventList bør vise hvilken dag arrangementet er, mandag, tirsdag osv.
 
 Etter:
 [0] Ha med link til FB-event.
+[5] Åpningstidene er snodig plassert på større skjermer. Midtstille?
 [5] Fikse legg til i kalender.
-[10] Skrive om alt "join us"-ting til "about".
+[10] Skrive om alt "join us"-ting til "about" i koden.
+[20] Header har noe dårlig oppløsning på større skjermer.
 [20] Kampanjer: vis app - få gratis kaffe
 [50] Kunne knytte app mot medlemskap -> vise app i baren som gyldig bevis. 
