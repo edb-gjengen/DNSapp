@@ -1,6 +1,7 @@
 package com.studentersamfundet.app.ui.lists;
 
 import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -104,7 +105,7 @@ public class EventListActivity extends BaseListActivity {
     			TextView titleView = (TextView) row.findViewById(R.id.event_list_row_text);
     			titleView.setText(Html.fromHtml(e.title));
     	 
-    			SimpleDateFormat dateFormat = new SimpleDateFormat("d. MMMM");
+    			SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE d. MMMM", Locale.getDefault());
     			TextView dateView = (TextView) row.findViewById(R.id.event_list_row_date);
     			dateView.setText(dateFormat.format(e.getDate()));
     			
