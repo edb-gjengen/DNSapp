@@ -3,3 +3,5 @@ gen
 doc
 project.properties
 .classpath
+.project
+.settings
