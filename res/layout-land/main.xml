@@ -1,60 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="match_parent" android:layout_height="match_parent">
+
+<!-- MENU, no header, because there is no space: --> 
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+	android:layout_width="match_parent" 
+	android:layout_below="@id/header"
+	android:layout_alignParentBottom="true"
+	android:layout_marginTop="20dp"
+	android:layout_marginBottom="20dp"
+	android:orientation="vertical"
+	android:gravity="center">
     
-    <!-- Header -->
-    <include layout="@layout/header" 
+    <!-- Opening hours: -->
+    <include layout="@layout/main_hours" 
 		android:layout_height="wrap_content" 
+		android:layout_width="match_parent" />
+    
+       <!-- Row nr 1: -->
+    <LinearLayout
+        android:layout_height="wrap_content"
 		android:layout_width="match_parent" 
-		android:layout_alignParentTop="true"/>
-	
-	<!-- MENU: --> 
-	<LinearLayout 
-	    android:layout_height="match_parent"
-		android:layout_width="match_parent" 
-		android:layout_below="@id/header"
-		android:layout_alignParentBottom="true"
-		android:layout_marginTop="20px"
-		android:layout_marginBottom="20px"
-		android:orientation="vertical"
+		android:orientation="horizontal"
 		android:gravity="center">
 	    
-	    <!-- Opening hours: -->
-	    <include layout="@layout/main_hours" 
+      	    <include layout="@layout/main_tile_program" 
+     	        android:layout_weight="1"
 			android:layout_height="wrap_content" 
 			android:layout_width="match_parent" 
-			android:layout_alignParentTop="true"/>
-	    
-        <!-- Row nr 1: -->
-	    <LinearLayout
-	        android:layout_height="wrap_content"
+			android:layout_margin="5dp" />
+      	    
+      	    <include layout="@layout/main_tile_news" 
+     	        android:layout_weight="1"
+			android:layout_height="wrap_content" 
 			android:layout_width="match_parent" 
-			android:orientation="horizontal"
-			android:gravity="center">
-		    
-       	    <include layout="@layout/main_tile_program" 
-      	        android:layout_weight="1"
-				android:layout_height="wrap_content" 
-				android:layout_width="match_parent" 
-				android:layout_margin="5px" />
-       	    
-       	    <include layout="@layout/main_tile_news" 
-      	        android:layout_weight="1"
-				android:layout_height="wrap_content" 
-				android:layout_width="match_parent" 
-				android:layout_margin="5px" />
-		    
-         	<include layout="@layout/main_tile_tickets" 
-      	        android:layout_weight="1"
-				android:layout_height="wrap_content" 
-				android:layout_width="match_parent" 
-			    android:layout_margin="5px" />
-       	    
-       	    <include layout="@layout/main_tile_join" 
-      	        android:layout_weight="1"
-				android:layout_height="wrap_content" 
-				android:layout_width="match_parent" 
-				android:layout_margin="5px" />   
-   	    </LinearLayout>
-	</LinearLayout>
-</RelativeLayout>
+			android:layout_margin="5dp" />
+	    
+        	<include layout="@layout/main_tile_tickets" 
+     	        android:layout_weight="1"
+			android:layout_height="wrap_content" 
+			android:layout_width="match_parent" 
+		    android:layout_margin="5dp" />
+      	    
+      	    <include layout="@layout/main_tile_join" 
+     	        android:layout_weight="1"
+			android:layout_height="wrap_content" 
+			android:layout_width="match_parent" 
+			android:layout_margin="5dp" />   
+  	    </LinearLayout>
+</LinearLayout>

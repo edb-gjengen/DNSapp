@@ -15,4 +15,8 @@
     <string name="main_menu_tickets">BILLETTER</string><string name="main_menu_join">OM DNS</string>
     <string name="main_menu_news">NYHETER</string>
     <string name="calendar_not_found">Kunne ikke finne kalender-app. Avbryter.</string>
+    <string name="chateau_neuf">Chateau Neuf</string>
+    <string name="BC">BokCaféen</string>
+    <string name="GB">Glassbaren</string>
+    <string name="billettluka">Billettluka</string>
 </resources>

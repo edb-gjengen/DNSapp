@@ -2,7 +2,7 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
     android:id="@+id/main_menu_hours"
-   	android:layout_marginBottom="20px"
+   	android:layout_marginBottom="20dp"
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
     android:orientation="vertical">
@@ -17,8 +17,8 @@
     <LinearLayout android:id="@+id/main_menu_hours_neuf_header"
         android:layout_height="wrap_content"
         android:layout_width="fill_parent"
-        android:layout_marginTop="10px"
-        android:layout_marginBottom="10px"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
         android:orientation="horizontal">
         
         <TextView 
@@ -26,8 +26,8 @@
             android:layout_height="wrap_content"
             android:layout_width="fill_parent"
             android:layout_weight="0.5"
-            android:layout_marginLeft="20px"
-            android:text="Chateau Neuf" />
+            android:layout_marginLeft="20dp"
+            android:text="@string/chateau_neuf" />
             
         <!-- This is set in Java: -->
         <TextView android:id="@+id/main_menu_hours_neuf"
@@ -40,8 +40,8 @@
     <LinearLayout android:id="@+id/main_menu_hours_bc_header"
         android:layout_height="wrap_content"
         android:layout_width="fill_parent"
-        android:layout_marginTop="10px"
-        android:layout_marginBottom="10px"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
         android:orientation="horizontal">
         
         <TextView
@@ -49,8 +49,8 @@
             android:layout_height="wrap_content"
             android:layout_width="fill_parent"
             android:layout_weight="0.5"
-            android:layout_marginLeft="20px"
-            android:text="BokCaféen" />
+            android:layout_marginLeft="20dp"
+            android:text="@string/BC" />
             
         <!-- This is set in Java: -->
         <TextView android:id="@+id/main_menu_hours_bc"
@@ -63,8 +63,8 @@
     <LinearLayout android:id="@+id/main_menu_hours_gb_header"
         android:layout_height="wrap_content"
         android:layout_width="fill_parent"
-        android:layout_marginTop="10px"
-        android:layout_marginBottom="10px"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
         android:orientation="horizontal">
         
         <TextView
@@ -72,8 +72,8 @@
             android:layout_height="wrap_content"
             android:layout_width="fill_parent"
             android:layout_weight="0.5"
-            android:layout_marginLeft="20px"
-            android:text="Glassbaren" />
+            android:layout_marginLeft="20dp"
+            android:text="@string/GB" />
             
         <!-- This is set in Java: -->
         <TextView android:id="@+id/main_menu_hours_gb"
@@ -86,8 +86,8 @@
     <LinearLayout android:id="@+id/main_menu_hours_to_header"
         android:layout_height="wrap_content"
         android:layout_width="fill_parent"
-        android:layout_marginTop="10px"
-        android:layout_marginBottom="10px"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
         android:orientation="horizontal">
         
         <TextView
@@ -95,8 +95,8 @@
             android:layout_height="wrap_content"
             android:layout_width="fill_parent"
             android:layout_weight="0.5"
-            android:layout_marginLeft="20px"
-            android:text="Billettluka" />
+            android:layout_marginLeft="20dp"
+            android:text="@string/billettluka" />
             
         <!-- This is set in Java: -->
         <TextView android:id="@+id/main_menu_hours_to"
