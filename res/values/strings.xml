@@ -12,8 +12,8 @@
     <string name="choose_category">Velg kategori</string>
     <string name="error_loading">Vent til oppdateringen fullfører</string><string name="main_menu_program">PROGRAM</string>
     <string name="main_menu_opening_hours">ÅPNINGSTIDER I DAG</string>
-    <string name="main_menu_tickets">BILLETTER</string><string name="main_menu_join">OM DNS</string>
-    <string name="main_menu_news">NYHETER</string>
+    <string name="main_menu_tickets">KJØP BILLETT</string><string name="main_menu_join">OM DNS</string>
+    <string name="main_menu_news">AKTUELT</string>
     <string name="calendar_not_found">Kunne ikke finne kalender-app. Avbryter.</string>
     <string name="chateau_neuf">Chateau Neuf</string>
     <string name="BC">BokCaféen</string>
