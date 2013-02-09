@@ -127,15 +127,20 @@ public abstract class BaseListActivity extends BaseDnsActivity {
 			if (result) {
 				ListView list = (ListView)findViewById(idList);
 				T[] objects = getObjects();
-				
-				Log.i("DNSapp", "Showing " + objects.length +" objects.");
-				ListAdapter adapter = createAdapter(objects);
-				list.setAdapter(adapter);
-				list.setVisibility(View.VISIBLE);
 
 				ProgressBar pb = (ProgressBar)findViewById(idProgressBar);
 				if (pb != null)
 					pb.setVisibility(View.GONE);
+				
+				Log.i("DNSapp", "Showing " + objects.length +" objects.");
+				ListAdapter adapter = createAdapter(objects);
+				if (adapter == null) {
+					return;
+				}
+				
+				list.setAdapter(adapter);
+				list.setVisibility(View.VISIBLE);
+
 			} else {
 				Toast toast = Toast.makeText(context, R.string.error_noconnection_noupdate, Toast.LENGTH_LONG);
 				toast.show();

@@ -20,4 +20,7 @@
     <string name="GB">Glassbaren</string>
     <string name="billettluka">Billettluka</string>
     <string name="event_image">Event-bilde</string>
+    <string name="empty"/>
+    <string name="no_events">Vi har ingen planlagte arrangementer akkurat nå. Prøv igjen senere. </string>
+    <string name="no_ticket_events">Vi har ingen billetter liggende ute på Billettservice. Alle billetter kan kjøpes i billettluka.</string>
 </resources>

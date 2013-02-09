@@ -81,6 +81,19 @@ public class EventListActivity extends BaseListActivity {
     protected <T> ListAdapter createAdapter(T[] objects) {
     	Event[] events = (Event[])objects;
     	
+    	if (events.length == 0) {
+    		setContentView(R.layout.event_list_empty);
+    		TextView text = (TextView)findViewById(R.id.event_list_empty_text);
+    		
+    		// Fuck it:
+    		if (this instanceof EventListTicketsActivity) {
+    			text.setText(R.string.no_ticket_events);
+    		} else {
+    			text.setText(R.string.no_events);
+    		}
+    		return null;
+    	}
+    	
     	ListAdapter adapter = new ArrayAdapter<Event>(this, R.layout.event_list_row, R.id.event_list_row_text, events) {
     		@Override
     		public View getView(int position, View convertView, ViewGroup parent) {
