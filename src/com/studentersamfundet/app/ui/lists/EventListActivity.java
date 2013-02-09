@@ -84,23 +84,27 @@ public class EventListActivity extends BaseListActivity {
     	ListAdapter adapter = new ArrayAdapter<Event>(this, R.layout.event_list_row, R.id.event_list_row_text, events) {
     		@Override
     		public View getView(int position, View convertView, ViewGroup parent) {
-    			View row;
+    			ViewGroup row;
     			
     			if (null == convertView) {
     				LayoutInflater inflater = getLayoutInflater();
-    				row = inflater.inflate(R.layout.event_list_row, null);
+    				row = (ViewGroup)inflater.inflate(R.layout.event_list_row, null);
     			} else {
-    				row = convertView;
+    				row = (ViewGroup)convertView;
     			}
     			
     			final Event e = getItem(position);
+
+				/* Set hidden text: */
+				TextView hiddenView = (TextView) row.findViewById(R.id.event_list_row_hidden_text);
+				hiddenView.setText(Integer.toString(e.id));
     			
     			/* Set images: */
     			String thumbnailUri = e.getThumbnail().toString();
-    			ImageLoader loader = new ImageLoader(parent, position, R.id.event_list_row_image);
+    			ImageLoader loader = new ImageLoader(row, R.id.event_list_row_image);
     			loader.setProgressbar(R.id.event_list_row_image_pb);
+    			loader.setHiddenId(R.id.event_list_row_hidden_text, Integer.toString(e.id));
 				loader.execute(thumbnailUri);
-    			
     			
     			/* Set text: */
     			TextView titleView = (TextView) row.findViewById(R.id.event_list_row_text);

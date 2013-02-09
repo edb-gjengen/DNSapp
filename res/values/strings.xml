@@ -19,4 +19,5 @@
     <string name="BC">BokCaféen</string>
     <string name="GB">Glassbaren</string>
     <string name="billettluka">Billettluka</string>
+    <string name="event_image">Event-bilde</string>
 </resources>

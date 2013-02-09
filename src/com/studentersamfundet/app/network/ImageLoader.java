@@ -15,18 +15,46 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class ImageLoader extends AsyncTask<String, Void, Drawable> {
+	private final static String TAG = ImageLoader.class.getName();
 	private final static ConcurrentMap<String, Drawable> cache = new ConcurrentHashMap<String, Drawable>();
-	private final ViewGroup parent;
-	private final int position;
+	private final ViewGroup row;
 	private final int imageId;
 	private int progressbarId = -1;
 	
-	public ImageLoader(ViewGroup parent, int position, int imageViewId)  {
-		this.parent = parent;
-		this.position = position;
+	private int hiddenTextViewId = -1;
+	private String correctText = "";
+	
+	public ImageLoader(ViewGroup row, int imageViewId)  {
+		this.row = row;
 		this.imageId = imageViewId;
+	}
+	
+	public void setHiddenId(int hiddenTextViewId, String correctText) {
+		if (hiddenTextViewId < 0 || correctText == null) {
+			Log.w(TAG, "Invalid parameters to Imageloader.setHiddenId()");
+			return;
+		}
+		
+		this.hiddenTextViewId = hiddenTextViewId;
+		this.correctText = correctText;
+	}
+	
+	private boolean isHiddenIdCorrect(ViewGroup row) {
+		if (hiddenTextViewId < 0) {
+			return true;
+		}
+		
+		TextView hiddenIdView = (TextView) row.findViewById(hiddenTextViewId);		
+		CharSequence hiddenId = hiddenIdView.getText();
+		
+		if (hiddenId != null) {
+			return this.correctText.equals(hiddenId.toString());
+		}
+		
+		return false;
 	}
 	
 	@Override
@@ -63,18 +91,15 @@ public class ImageLoader extends AsyncTask<String, Void, Drawable> {
 	protected void onPostExecute(Drawable result) {
 		super.onPostExecute(result);
 		
-		if (result != null && parent != null) {
-			ViewGroup row = (ViewGroup)parent.getChildAt(position);
-			
-			if (row != null) {
-				if (progressbarId > 0) {
-					View pb = row.findViewById(progressbarId);
-					pb.setVisibility(View.GONE);
-				}
-				ImageView image = (ImageView)row.findViewById(imageId);
-				image.setImageDrawable(result);
-				image.setVisibility(View.VISIBLE);
+		if (result != null && row != null && isHiddenIdCorrect(row)) {
+			if (progressbarId > 0) {
+				View pb = row.findViewById(progressbarId);
+				pb.setVisibility(View.GONE);
 			}
+			
+			ImageView image = (ImageView)row.findViewById(imageId);
+			image.setImageDrawable(result);
+			image.setVisibility(View.VISIBLE);
 		}
 	}
 	
