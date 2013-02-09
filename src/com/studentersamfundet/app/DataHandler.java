@@ -37,11 +37,16 @@ public class DataHandler implements Serializable {
 		int regularPrice = 0;
 		int memberPrice = 0;
 		try {
-			regularPrice = Integer.parseInt(priceReg);
-			memberPrice = Integer.parseInt(priceMem);
-		} catch (NumberFormatException e1) { 
+			if (false == "".equals(regularPrice)) {
+				regularPrice = Integer.parseInt(priceReg);
+			}
+			
+			if (false == "".equals(memberPrice)) {
+				memberPrice = Integer.parseInt(priceMem);
+			}
+		} catch (NumberFormatException e) { 
 			/* Do nothing. */
-			Log.w(TAG, e1.toString());
+			Log.w(TAG, "Couldn't parse price: " +e.toString());
 		} 
 		event.setFbUriStr(fbUriStr);
 		event.setTicketsInfo(regularPrice, memberPrice, ticketUriStr);
