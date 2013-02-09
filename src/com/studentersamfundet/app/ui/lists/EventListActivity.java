@@ -96,9 +96,10 @@ public class EventListActivity extends BaseListActivity {
     			final Event e = getItem(position);
     			
     			/* Set images: */
+    			String thumbnailUri = e.getThumbnail().toString();
     			ImageLoader loader = new ImageLoader(parent, position, R.id.event_list_row_image);
     			loader.setProgressbar(R.id.event_list_row_image_pb);
-				loader.execute(e.getImageUri(imageSize).toString());
+				loader.execute(thumbnailUri);
     			
     			
     			/* Set text: */

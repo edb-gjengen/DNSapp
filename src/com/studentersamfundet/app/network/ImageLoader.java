@@ -3,6 +3,7 @@ package com.studentersamfundet.app.network;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
+import java.net.URI;
 import java.net.URL;
 import java.security.InvalidParameterException;
 import java.util.concurrent.ConcurrentHashMap;
@@ -27,7 +28,7 @@ public class ImageLoader extends AsyncTask<String, Void, Drawable> {
 		this.position = position;
 		this.imageId = imageViewId;
 	}
-		
+	
 	@Override
 	protected Drawable doInBackground(String... params) {
 		if (params.length > 1)
@@ -37,21 +38,23 @@ public class ImageLoader extends AsyncTask<String, Void, Drawable> {
 		if (d != null)
 			return d;
 		
+		
 		try {
-			HttpURLConnection con = (HttpURLConnection)new URL(params[0]).openConnection();
+			String url = URI.create(params[0]).toASCIIString();
+			HttpURLConnection con = (HttpURLConnection)new URL(url).openConnection();
 		    InputStream is = con.getInputStream();
 		    
 		    // 
 		    if (is == null) 
 		    	return null;
-	    	d = Drawable.createFromStream(is, params[0].toString());
+	    	d = Drawable.createFromStream(is, url);
 			
 			if (d == null) 
 				return null;
 			cache.put(params[0], d);
 			
 		} catch (IOException e) {
-			Log.e("DNSapp", "An exception has occured while downloading images!");
+			Log.e("DNSapp", "An exception has occured while downloading images: " +e.getLocalizedMessage());
 		}
 		return d;
 	}

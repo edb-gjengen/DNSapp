@@ -11,6 +11,7 @@ import android.util.Log;
 
 public class DataHandler implements Serializable {
 	private static final long serialVersionUID = 6787541405689146002L;
+	private static final String TAG = DataHandler.class.getName();
 	
 	private Collection<Event> events = new LinkedHashSet<Event>();
 	private Collection<News> news = new LinkedList<News>();
@@ -24,13 +25,14 @@ public class DataHandler implements Serializable {
 			String text, 
 			String category,
 			String imageUri,
+			String thumbUri,
 			String priceReg,
 			String priceMem,
 			String ticketUriStr,
 			String fbUriStr) {
 		int intId = Integer.parseInt(id);
 		
-		Event event = new Event(intId, title, description, date, location, text, category, imageUri);
+		Event event = new Event(intId, title, description, date, location, text, category);
 		
 		int regularPrice = 0;
 		int memberPrice = 0;
@@ -39,12 +41,11 @@ public class DataHandler implements Serializable {
 			memberPrice = Integer.parseInt(priceMem);
 		} catch (NumberFormatException e1) { 
 			/* Do nothing. */
-			Log.w("TAG", e1.toString());
+			Log.w(TAG, e1.toString());
 		} 
 		event.setFbUriStr(fbUriStr);
 		event.setTicketsInfo(regularPrice, memberPrice, ticketUriStr);
-		
-		
+		event.setImage(imageUri, thumbUri);
 		
 		events.add(event);
 		eventCategories.add(category);

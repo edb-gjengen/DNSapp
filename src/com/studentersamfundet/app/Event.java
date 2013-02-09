@@ -17,7 +17,9 @@ public class Event implements Serializable {
 	private String location;
 	private String text;
 	private String category;
+	
 	private String image;
+	private String thumb;
 	
 	private int regularPrice;
 	private int memberPrice;
@@ -31,15 +33,13 @@ public class Event implements Serializable {
 			String date, 
 			String location,
 			String text,
-			String category,
-			String image) {
+			String category) {
 		this.id = id;
 		this.title = title.trim();
 		this.description = (description == null) ? "" : description.trim();
 		this.location = (location == null) ? "" : location.trim();
 		this.text = (text == null) ? "" : text.trim();
 		this.category = (category == null) ? "" : category.trim();
-		this.image = image;
 		
 		try {
 			this.date = (date == null) ? null : new Date(1000 * Long.parseLong(date.trim()));
@@ -79,11 +79,15 @@ public class Event implements Serializable {
 		return Uri.parse("http://studentersamfundet.no/vis.php?ID=" + this.id);
 	}
 	
-	public Uri getImageUri(int size) {
+	public Uri getImageUri() {
 		if (this.id <= 0) {
 			return null;
 		}
-		return Uri.parse(image);
+		return Uri.parse(this.image);
+	}
+	
+	public Uri getThumbnail() {
+		return Uri.parse(this.thumb);
 	}
 	
 	public String getPriceString() {
@@ -104,6 +108,11 @@ public class Event implements Serializable {
 		}
 		
 		return ticketUri;
+	}
+	
+	public void setImage(String imageUri, String thumbUri) {
+		this.image = imageUri;
+		this.thumb = thumbUri;
 	}
 	
 	public void setTicketsInfo(int regularPrice, int memberPrice, String ticketUri) {

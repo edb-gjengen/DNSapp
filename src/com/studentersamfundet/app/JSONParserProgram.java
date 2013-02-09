@@ -31,6 +31,7 @@ public class JSONParserProgram implements IParser {
 		String description = "";
 		String text = "";
 		String image = "";
+		String thumb = "";
 		
 		String date = "";
 		String location = "";
@@ -57,16 +58,21 @@ public class JSONParserProgram implements IParser {
 					description = tempJSON.getString("excerpt");
 					date = tempJSON.getString("date");
 					text = tempJSON.getString("content");
-					image = tempJSON.getString("thumbnail");
 					category = tempJSON.getString("event");
 					
-					tempJSON = tempJSON.getJSONObject("custom_fields");
-					ticketUrl = tempJSON.getJSONArray("_neuf_events_bs_url").getString(0);					
-					fbUrl = tempJSON.getJSONArray("_neuf_events_fb_url").getString(0);
-					location = tempJSON.getJSONArray("_neuf_events_venue").getString(0);
-					priceReg = tempJSON.getJSONArray("_neuf_events_price_regular").getString(0);
-					priceMem = tempJSON.getJSONArray("_neuf_events_price_member").getString(0);
-					date = tempJSON.getJSONArray("_neuf_events_starttime").getString(0);
+					JSONObject custom = tempJSON.getJSONObject("custom_fields");
+					ticketUrl = custom.getJSONArray("_neuf_events_bs_url").getString(0);					
+					fbUrl = custom.getJSONArray("_neuf_events_fb_url").getString(0);
+					location = custom.getJSONArray("_neuf_events_venue").getString(0);
+					priceReg = custom.getJSONArray("_neuf_events_price_regular").getString(0);
+					priceMem = custom.getJSONArray("_neuf_events_price_member").getString(0);
+					date = custom.getJSONArray("_neuf_events_starttime").getString(0);
+					
+					JSONArray attachments = tempJSON.getJSONArray("attachments");
+					JSONObject images = attachments.getJSONObject(0).getJSONObject("images");
+					
+					image = images.getJSONObject("full").getString("url");
+					thumb = images.getJSONObject("thumbnail").getString("url");
 					
 					// This is as ugly as it gets. Refactor?
 					dh.insertEvent(id, 
@@ -77,6 +83,7 @@ public class JSONParserProgram implements IParser {
 							text, 
 							category, 
 							image,
+							thumb,
 							priceReg,
 							priceMem,
 							ticketUrl,
