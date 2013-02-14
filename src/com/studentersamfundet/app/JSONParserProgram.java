@@ -93,7 +93,7 @@ public class JSONParserProgram implements IParser {
 							ticketUrl,
 							fbUrl);
 				} catch (JSONException e) {
-					Log.e("json-parser", e.getMessage());
+					Log.e("json-parser", "In event: '" +title +"': " +e.getMessage());
 					continue;
 				} 
 			}
