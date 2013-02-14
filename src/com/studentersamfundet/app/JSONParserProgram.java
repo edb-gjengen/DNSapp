@@ -69,11 +69,15 @@ public class JSONParserProgram implements IParser {
 					date = custom.getJSONArray("_neuf_events_starttime").getString(0);
 					
 					JSONArray attachments = tempJSON.getJSONArray("attachments");
-					JSONObject images = attachments.getJSONObject(0).getJSONObject("images");
-					
-					image = images.getJSONObject("full").getString("url");
-					thumb = images.getJSONObject("thumbnail").getString("url");
-					
+					if (attachments == null || attachments.length() == 0) {
+						image = tempJSON.getString("thumbnail");
+						thumb = tempJSON.getString("thumbnail");
+					} else {
+						JSONObject images = attachments.getJSONObject(0).getJSONObject("images");	
+						image = images.getJSONObject("full").getString("url");
+						thumb = images.getJSONObject("thumbnail").getString("url");
+					}
+						
 					// This is as ugly as it gets. Refactor?
 					dh.insertEvent(id, 
 							title, 
