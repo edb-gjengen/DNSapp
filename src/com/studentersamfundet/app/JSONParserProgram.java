@@ -58,7 +58,13 @@ public class JSONParserProgram implements IParser {
 					description = tempJSON.getString("excerpt");
 					date = tempJSON.getString("date");
 					text = tempJSON.getString("content");
-					category = tempJSON.getString("event");
+					
+					/* FIXME is category used? */
+					JSONArray categories = tempJSON.getJSONArray("event_type_parents");
+					category = categories.getString(0);
+					for (int j=1; j > categories.length(); j++) {
+						category += " "+categories.getString(j);
+					} 
 					
 					JSONObject custom = tempJSON.getJSONObject("custom_fields");
 					ticketUrl = custom.getJSONArray("_neuf_events_bs_url").getString(0);					
@@ -74,7 +80,7 @@ public class JSONParserProgram implements IParser {
 						thumb = tempJSON.getString("thumbnail");
 					} else {
 						JSONObject images = attachments.getJSONObject(0).getJSONObject("images");	
-						image = images.getJSONObject("full").getString("url");
+						image = images.getJSONObject("large").getString("url");
 						thumb = images.getJSONObject("thumbnail").getString("url");
 					}
 						
